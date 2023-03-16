@@ -1,0 +1,41 @@
+//colors
+$white: #ffffff;
+$black: #000000;
+$black800: #181d1f;
+$black900: #131313;
+$green400: #8affb9;
+$green500: #00b28e;
+$green600: #4faf54;
+$orange400: #ff8d70;
+$orange500: #ff6333;
+$blue50: #eef3f5;
+$blue100: #edf4f7;
+$gray50: #f5f5f5;
+$gray100: #f0f0f0;
+$gray200: #e1e1e1;
+$gray300: #cccccc;
+$gray400: #babcbc;
+$gray500: #a8abac;
+$gray600: #989a9c;
+$gray700: #858585;
+$greenAlpha300: rgba(138, 255, 185, 0.16);
+$greenAlpha400: rgba(138, 255, 185, 0.24);
+$orangeAlpha300: rgba(255, 141, 112, 0.16);
+$orangeAlpha400: rgba(255, 141, 112, 0.24);
+$whiteAlpha300: rgba(255, 255, 255, 0.16);
+$whiteAlpha400: rgba(255, 255, 255, 0.24);
+$whiteAlpha500: rgba(255, 255, 255, 0.36);
+$whiteAlpha600: rgba(255, 255, 255, 0.5);
+$whiteAlpha900: rgba(196, 196, 196, 0.16);
+$blackAlpha600: rgba(0, 0, 0, 0.48);
+$blackAlpha900: rgba(0, 0, 0, 0.87);
+$green-gradient: linear-gradient(88.88deg, #7fdef5 0%, #7ef5ad 100%);
+$orange-gradient: linear-gradient(88.88deg, #ff9d85 0%, #ffd585 100%);
+$black-gradient: linear-gradient(88.88deg, #000000 0%, #3d3d3d 100%);
+$box-shadow: 0 4px 32px rgb(0 0 0 / 16%);
+
+//breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$laptop: 992px;
+$desktop: 1200px;

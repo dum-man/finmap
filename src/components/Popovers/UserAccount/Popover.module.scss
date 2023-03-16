@@ -1,0 +1,39 @@
+@import "../../../assets/sass/variables.scss";
+
+.container {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: $box-shadow;
+  z-index: 10;
+}
+
+.name {
+  padding: 23px;
+}
+
+.divider {
+  display: block;
+  border-bottom: 1px solid $gray200;
+}
+
+.buttonWrapper {
+  padding: 8px;
+}
+
+.editButton {
+  width: 100%;
+  padding: 15px;
+  font-size: 15px;
+  color: $green500;
+  text-align: left;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $blue100;
+  }
+}

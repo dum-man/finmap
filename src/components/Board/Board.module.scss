@@ -1,0 +1,67 @@
+@use "../../assets/sass/button";
+@import "../../assets/sass/variables.scss";
+
+.wrapper {
+  position: relative;
+  overflow: auto;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px 20px 0 0;
+  @media (max-width: $laptop) {
+    flex: 4;
+  }
+}
+
+.filterMenuWrapper {
+  overflow: hidden;
+  transition: max-height 0.5s;
+  @media (min-width: $laptop) {
+    overflow: unset;
+  }
+}
+
+.bar {
+  margin: 0 100px;
+  @media (min-width: $laptop) {
+    display: none;
+  }
+  button {
+    background-color: $gray300;
+    height: 5px;
+    border-radius: 5px;
+    width: 100%;
+  }
+}
+
+.visible {
+  max-height: 300px;
+  @media (min-width: $laptop) {
+    max-height: unset;
+  }
+}
+
+.hidden {
+  max-height: 0;
+  @media (min-width: $laptop) {
+    max-height: unset;
+  }
+}
+
+.notFound {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  p:first-of-type {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  p:last-of-type {
+    font-size: 16px;
+    color: $gray700;
+  }
+}

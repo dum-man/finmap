@@ -1,0 +1,56 @@
+@import "./variables.scss";
+
+@mixin input {
+  font-family: inherit;
+  width: 100%;
+  height: 100%;
+  min-height: 30px;
+  max-height: 55px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 15px;
+  color: $blackAlpha900;
+  border: none;
+  outline: none;
+  background-color: $blue50;
+  border-radius: 12px;
+  transition: box-shadow 0.2s;
+  &:focus {
+    box-shadow: 0 0 0 1px $green600;
+  }
+  &::placeholder {
+    color: $gray600;
+  }
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+@mixin label {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 10px;
+  color: $gray600;
+  user-select: none;
+}
+
+@mixin length {
+  position: absolute;
+  top: 35%;
+  right: 20px;
+  color: $gray600;
+  user-select: none;
+}
+
+@mixin currency {
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $blackAlpha900;
+  background-color: $blue50;
+  border-radius: 12px;
+  user-select: none;
+}

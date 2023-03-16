@@ -1,0 +1,66 @@
+@import "../../assets/sass/variables.scss";
+
+.wrapper {
+  padding: 0 30px;
+  @media (max-width: $laptop) {
+    padding: 0 15px;
+  }
+}
+
+.menuList {
+  display: grid;
+  grid-template-columns: 1fr repeat(5, 2fr);
+  padding: 5px 0;
+  border-bottom: 0.5px solid $gray200;
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr repeat(4, 2fr);
+  }
+  @media (max-width: $laptop) {
+    display: flex;
+    gap: 5px;
+  }
+}
+
+.menuItem {
+  display: flex;
+  padding: 5px 0;
+  font-size: 14px;
+  color: $gray700;
+  &:hover button:nth-child(2) {
+    opacity: 1;
+  }
+  &:last-child {
+    @media (max-width: $desktop) {
+      display: none;
+    }
+  }
+  &:nth-child(n + 4):nth-child(-n + 6) {
+    @media (max-width: $laptop) {
+      display: none;
+    }
+  }
+}
+
+.menuButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding-left: 0;
+  font-size: 14px;
+  color: inherit;
+  svg {
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  &:hover svg {
+    opacity: 1;
+  }
+  @media (max-width: $laptop) {
+    padding-right: 0;
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+}

@@ -1,0 +1,125 @@
+@use "../../assets/sass/button";
+@import "../../assets/sass/variables.scss";
+
+.container {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: $blue100;
+  border-top-left-radius: 20px;
+  transition: transform 0.3s;
+  @media (max-width: $tablet) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 300px;
+    height: 100%;
+  }
+}
+
+.closed {
+  transform: translateX(-300px);
+  @media (min-width: $tablet) {
+    transform: unset;
+  }
+}
+
+.opened {
+  transform: translateX(0);
+}
+
+.divider {
+  display: block;
+  margin: 5px 0;
+  margin-bottom: 20px;
+  border-bottom: 0.5px solid $gray400;
+}
+
+.totalAmountWrapper {
+  padding: 22px 25px 0 25px;
+}
+
+.totalAmountTitle {
+  margin-bottom: 8px;
+  font-size: 12px;
+  color: $gray700;
+}
+
+.totalAmount {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: $black900;
+}
+
+.accountsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 20px;
+  padding: 0 20px 0 25px;
+}
+
+.title {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  color: $green500;
+  font-size: 20px;
+  border-radius: 50%;
+  transition: transform 0.1s;
+  &:first-of-type {
+    margin-left: auto;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.accountListWrapper {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 25px 10px 25px;
+}
+
+.accountList {
+  font-size: 14px;
+  color: $gray700;
+}
+
+.accountItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 2px 0;
+  cursor: pointer;
+}
+
+.selected {
+  padding-left: 10px;
+  font-weight: 700;
+  border-left: 3px solid $green500;
+}
+
+.selectedAccounts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $gray700;
+}
+
+.selectedAccountsTotalSum {
+  font-size: 13px;
+  font-weight: 700;
+  color: $black;
+}

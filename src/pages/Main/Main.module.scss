@@ -1,0 +1,11 @@
+@import "../../assets/sass/variables.scss";
+
+.wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+  display: flex;
+  background-color: $white;
+  border-radius: 20px 20px 0 0;
+}

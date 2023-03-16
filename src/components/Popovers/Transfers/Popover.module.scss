@@ -1,0 +1,106 @@
+@import "../../../assets/sass/variables.scss";
+
+.container {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  z-index: 10;
+  width: 350px;
+  height: 500px;
+  display: flex;
+  padding: 10px;
+  padding-bottom: 0;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: $box-shadow;
+  @media (max-width: $mobile) {
+    right: 15px;
+    width: 320px;
+  }
+}
+
+.wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.title {
+  padding: 15px;
+  padding-bottom: 10px;
+  font-size: 26px;
+}
+
+.transferList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 15px;
+}
+
+.transferItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  color: $black;
+  font-size: 20px;
+  background-color: $gray50;
+  border-radius: 50%;
+}
+
+.amount {
+  font-weight: 700;
+}
+
+.date {
+  color: $gray700;
+  font-size: 13px;
+}
+
+.accounts {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cancelButton {
+  margin-left: auto;
+  padding: 6px 8px;
+  color: $gray700;
+  font-size: 12px;
+  border: 1px solid $gray200;
+  border-radius: 8px;
+  &:active {
+    transform: scale(0.9);
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.notFound {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  p:first-of-type {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  p:last-of-type {
+    font-size: 14px;
+    color: $gray700;
+  }
+}
