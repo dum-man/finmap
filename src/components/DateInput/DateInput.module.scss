@@ -1,0 +1,22 @@
+@use "../../assets/sass/input";
+@import "../../assets/sass/variables.scss";
+
+.inputWrapper {
+  position: relative;
+  height: 55px;
+  margin-bottom: 15px;
+}
+
+.input {
+  @include input.input;
+  padding-top: 25px;
+  color: $blackAlpha900;
+}
+
+.label {
+  @include input.label;
+}
+
+.focused {
+  box-shadow: 0 0 0 1px $green600;
+}

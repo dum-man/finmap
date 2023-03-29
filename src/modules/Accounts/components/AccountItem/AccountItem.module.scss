@@ -1,0 +1,26 @@
+@import "../../../../assets/sass/variables.scss";
+
+.account {
+  padding: 5px 0;
+  &:not(:last-child) {
+    border-bottom: 1px solid $gray200;
+  }
+}
+
+.wrapper {
+  padding: 20px 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 16px;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $blue50;
+  }
+}
+
+.icon {
+  font-size: 18px;
+  color: $gray700;
+}

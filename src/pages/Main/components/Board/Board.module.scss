@@ -1,0 +1,13 @@
+@import "../../../../assets/sass/variables.scss";
+
+.wrapper {
+  position: relative;
+  overflow: auto;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px 20px 0 0;
+  @media (max-width: $laptop) {
+    flex: 4;
+  }
+}

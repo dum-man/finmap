@@ -1,4 +1,4 @@
-import { sortByDate } from "../utils/dateUtils";
+import { sortByDate } from "../utils";
 import { SortState, Transaction } from "../types";
 
 const sortTransactionsByType = (type: string, transactions: Transaction[]) => {

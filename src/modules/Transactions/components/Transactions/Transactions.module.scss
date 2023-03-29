@@ -1,0 +1,10 @@
+@import "../../../../assets/sass/variables.scss";
+
+.transactionsList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 30px;
+  @media (max-width: $laptop) {
+    padding: 0 15px;
+  }
+}

@@ -1,0 +1,18 @@
+@import "../../../../assets/sass/variables.scss";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 18px;
+  color: $gray700;
+  background-color: $blue100;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.logoutButton {
+  padding: 5px;
+  font-size: 14px;
+  color: $orange500;
+}

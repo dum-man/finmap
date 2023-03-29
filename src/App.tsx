@@ -1,22 +1,19 @@
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { toast } from "react-hot-toast";
-import { auth } from "./app/firebase";
-import Main from "./pages/Main/Main";
-import Signup from "./pages/Signup/Signup";
-import Login from "./pages/Login/Login";
-import ProtectedRoute from "./app/ProtectedRoute";
-import AuthRoute from "./app/AuthRoute";
 import { useSetRecoilState } from "recoil";
+import { toast } from "react-hot-toast";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Main from "./pages/Main";
+import ProtectedRoute from "./app/routes/ProtectedRoute";
+import AuthRoute from "./app/routes/AuthRoute";
+import { auth } from "./firebase";
 import { accountsState } from "./app/atoms/accountsAtom";
 import { transactionsState } from "./app/atoms/transactionsAtom";
 import { transfersState } from "./app/atoms/transfersAtom";
 import { categoriesState } from "./app/atoms/categoriesAtom";
-import { getAccounts } from "./app/service/accountsService";
-import { getTransactions } from "./app/service/transactionsService";
-import { getTransfers } from "./app/service/transfersService";
-import { getCategories } from "./app/service/categoriesService";
+import { getAccounts, getTransactions, getTransfers, getCategories } from "./app/api";
 
 const App: React.FC = () => {
   let vh = window.innerHeight * 0.01;

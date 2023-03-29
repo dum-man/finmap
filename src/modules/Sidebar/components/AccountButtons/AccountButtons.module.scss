@@ -1,0 +1,30 @@
+@import "../../../../assets/sass/variables.scss";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
+  padding-left: 25px;
+}
+
+.title {
+  font-size: 15px;
+}
+
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  color: $green500;
+  font-size: 20px;
+  border-radius: 50%;
+  transition: transform 0.1s;
+  &:first-of-type {
+    margin-left: auto;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+}

@@ -1,0 +1,18 @@
+@import "../../../../assets/sass/variables.scss";
+
+.container {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: $box-shadow;
+  z-index: 10;
+}
+
+.divider {
+  display: block;
+  border-bottom: 1px solid $gray200;
+}

@@ -1,0 +1,26 @@
+@import "../../assets/sass/variables.scss";
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: 2px solid;
+  animation: spin 0.6s infinite linear;
+}
+@keyframes spin {
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+.light {
+  border-color: $whiteAlpha600;
+  border-left-color: $white;
+  border-top-color: $white;
+}
+
+.dark {
+  border-color: $blackAlpha600;
+  border-left-color: $black;
+  border-top-color: $black;
+}

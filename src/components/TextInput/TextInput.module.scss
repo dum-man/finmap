@@ -1,0 +1,24 @@
+@use "../../assets/sass/input";
+
+.inputWrapper {
+  position: relative;
+  height: 55px;
+  margin-bottom: 15px;
+}
+
+.active {
+  padding-top: 15px;
+}
+
+.input {
+  @include input.input;
+  padding-right: 40px;
+}
+
+.label {
+  @include input.label;
+}
+
+.inputLength {
+  @include input.length;
+}

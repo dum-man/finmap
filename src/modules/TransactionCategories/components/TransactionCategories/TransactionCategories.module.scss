@@ -1,0 +1,25 @@
+@import "../../../../assets/sass/variables.scss";
+
+.container {
+  position: relative;
+  width: 420px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  @media (max-width: $mobile) {
+    width: 320px;
+  }
+}
+
+.title {
+  margin-bottom: 20px;
+  padding: 0 20px;
+  font-size: 26px;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+  @media (max-width: $mobile) {
+    padding: 0 15px;
+  }
+}

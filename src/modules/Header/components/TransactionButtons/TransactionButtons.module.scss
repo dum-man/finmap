@@ -1,0 +1,61 @@
+@import "../../../../assets/sass/variables.scss";
+
+.buttonsList {
+  display: flex;
+  gap: 25px;
+  @media (max-width: $tablet) {
+    flex-basis: 100%;
+    justify-content: center;
+    order: 2;
+    gap: 15px;
+    margin: 0 auto;
+  }
+}
+
+.button {
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  transition: background-color 0.2s, transform 0.1s;
+  &:active {
+    transform: scale(0.9);
+  }
+  @media (max-width: $laptop) {
+    width: 100px;
+    span {
+      display: none;
+    }
+  }
+  @media (max-width: $tablet) {
+    width: 80px;
+  }
+}
+
+.buttonIncome {
+  color: $green400;
+  background-color: $greenAlpha300;
+  &:hover {
+    background-color: $greenAlpha400;
+  }
+}
+
+.buttonExpense {
+  color: $orange400;
+  background-color: $orangeAlpha300;
+  &:hover {
+    background-color: $orangeAlpha400;
+  }
+}
+
+.buttonTransfer {
+  color: $white;
+  background-color: $whiteAlpha300;
+  &:hover {
+    background-color: $whiteAlpha400;
+  }
+}

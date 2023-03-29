@@ -1,0 +1,130 @@
+@use "../../../../assets/sass/input";
+@use "../../../../assets/sass/button";
+@import "../../../../assets/sass/variables.scss";
+
+.container {
+  display: flex;
+  gap: 10px;
+  padding: 0 30px;
+  margin-bottom: 10px;
+  transition: max-height 0.5s;
+  overflow: unset;
+  @media (max-width: $laptop) {
+    flex-direction: column;
+    padding: 0 15px;
+    margin-bottom: 5px;
+    overflow: hidden;
+  }
+}
+
+.visible {
+  max-height: unset;
+  @media (max-width: $laptop) {
+    max-height: 300px;
+  }
+}
+
+.hidden {
+  max-height: unset;
+  @media (max-width: $laptop) {
+    max-height: 0;
+  }
+}
+
+.datepickerWrapper {
+  position: relative;
+  border-radius: 12px;
+  height: 40px;
+}
+
+.selectWrapper {
+  width: 290px;
+  height: 40px;
+  div span {
+    font-weight: 700;
+    font-size: 14px;
+  }
+  @media (max-width: $laptop) {
+    display: none;
+  }
+}
+
+.datepicker {
+  @include input.input;
+  display: flex;
+  align-items: center;
+  margin-top: 1px;
+  padding-left: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  @media (min-width: $laptop) {
+    display: none;
+  }
+}
+
+.focused {
+  box-shadow: 0 0 0 1px $green600;
+}
+
+.placeholder {
+  font-weight: 400;
+  color: $gray600;
+}
+
+.iconButtons {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 5px;
+  right: 40px;
+  @media (max-width: $laptop) {
+    top: 4px;
+    right: 10px;
+  }
+}
+
+.iconButton {
+  @include button.icon;
+  font-size: 18px;
+  color: $gray600;
+}
+
+.clearButton {
+  font-size: 20px;
+  @media (min-width: $laptop) {
+    display: none;
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 1px;
+}
+
+.input {
+  @include input.input;
+  padding-left: 35px;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 27%;
+  left: 10px;
+  font-size: 18px;
+  color: $gray600;
+}
+
+.bar {
+  margin: 0 100px;
+  @media (min-width: $laptop) {
+    display: none;
+  }
+  button {
+    background-color: $gray300;
+    height: 5px;
+    border-radius: 5px;
+    width: 100%;
+  }
+}

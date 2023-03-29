@@ -1,0 +1,35 @@
+@import "../../../../assets/sass/variables.scss";
+
+.wrapper {
+  flex: 7;
+  padding: 10px;
+}
+
+.title {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: $gray300;
+  text-transform: uppercase;
+}
+
+.itemButton {
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 15px;
+  text-align: left;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $blue50;
+  }
+  @media (max-width: $tablet) {
+    padding: 13px 10px;
+  }
+}
+
+.currentLanguage {
+  text-transform: uppercase;
+  padding-left: 5px;
+}

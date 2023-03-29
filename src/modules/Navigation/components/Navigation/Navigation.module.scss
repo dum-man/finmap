@@ -1,0 +1,21 @@
+@import "../../../../assets/sass/variables.scss";
+
+.wrapper {
+  padding: 30px;
+  padding-bottom: 15px;
+  overflow-x: auto;
+  @media (max-width: $tablet) {
+    padding: 15px;
+    padding-bottom: 10px;
+  }
+}
+
+.tabList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @media (max-width: $laptop) {
+    justify-content: space-between;
+    gap: 5px;
+  }
+}

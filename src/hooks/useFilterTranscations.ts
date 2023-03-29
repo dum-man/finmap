@@ -1,4 +1,4 @@
-import { filterByDate, filterByWeek, filterByMonth } from "../utils/dateUtils";
+import { filterByDate, filterByWeek, filterByMonth } from "../utils";
 import { Account, DatepickerDate, Transaction } from "../types";
 
 interface DateOptions {

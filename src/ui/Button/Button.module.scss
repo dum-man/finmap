@@ -1,0 +1,19 @@
+@use "../../assets/sass/button";
+@import "../../assets/sass/variables.scss";
+
+.button {
+  @include button.submit;
+}
+
+.green {
+  background: $green-gradient;
+}
+
+.orange {
+  background: $orange-gradient;
+}
+
+.black {
+  background: $black-gradient;
+  color: $white;
+}

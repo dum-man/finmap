@@ -1,0 +1,40 @@
+@use "../../../../assets/sass/button";
+@import "../../../../assets/sass/variables.scss";
+
+.categoriesList {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding: 0 20px;
+  padding-bottom: 10px;
+  @media (max-width: $mobile) {
+    padding: 0 15px;
+  }
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 13px 10px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $blue50;
+  }
+}
+
+.iconButton {
+  @include button.icon;
+  font-size: 24px;
+  &:active:not(:disabled) {
+    transform: scale(0.9);
+  }
+}
+
+.editButton {
+  margin-left: auto;
+  color: $gray400;
+}

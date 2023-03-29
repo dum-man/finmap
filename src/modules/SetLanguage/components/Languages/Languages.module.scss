@@ -1,0 +1,24 @@
+@import "../../../../assets/sass/variables.scss";
+
+.languages {
+  padding: 20px 0;
+}
+
+.languageItem {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+  svg {
+    margin-left: auto;
+    transform: scale(2);
+    color: $green600;
+  }
+  &:hover {
+    background-color: $blue50;
+  }
+}

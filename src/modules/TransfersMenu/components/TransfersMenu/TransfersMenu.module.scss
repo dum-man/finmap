@@ -1,0 +1,33 @@
+@import "../../../../assets/sass/variables.scss";
+
+.container {
+  position: absolute;
+  top: 70px;
+  right: 0;
+  z-index: 10;
+  width: 350px;
+  height: 500px;
+  display: flex;
+  padding: 10px;
+  padding-bottom: 0;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: $box-shadow;
+  @media (max-width: $mobile) {
+    width: 320px;
+  }
+}
+
+.wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.title {
+  padding: 15px;
+  padding-bottom: 10px;
+  font-size: 26px;
+}

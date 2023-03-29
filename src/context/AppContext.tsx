@@ -23,8 +23,6 @@ export interface Context {
   selectedAccounts: Account[];
   setSelectedAccounts: (accounts: SetStateAction<Account[]>) => void;
   sortState: SortState;
-  filterMenuOpen: boolean;
-  setFilterMenuOpen: (open: SetStateAction<boolean>) => void;
   sortDispatch: (type: string) => void;
   selectedOption: SelectOption;
   setSelectedOption: (option: SetStateAction<SelectOption>) => void;
@@ -47,7 +45,6 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [selectedTab, setSelectedTab] = useState("actions");
   const [selectedAccounts, setSelectedAccounts] = useState<Account[]>([]);
 
-  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<SelectOption>({
     id: "5",
     group: "base",
@@ -80,10 +77,10 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     }
   }
 
-  const [sortState, sortDispatch] = useReducer(sortReducer, initialFilterState);
+  const [sortState, dispatch] = useReducer(sortReducer, initialFilterState);
 
-  const customSortDispatch = (type: string) => {
-    sortDispatch({
+  const sortDispatch = (type: string) => {
+    dispatch({
       type:
         sortState[type as keyof typeof sortState] === "up"
           ? SortActionType.DOWN
@@ -105,9 +102,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         selectedAccounts,
         setSelectedAccounts,
         sortState,
-        filterMenuOpen,
-        setFilterMenuOpen,
-        sortDispatch: customSortDispatch,
+        sortDispatch,
         selectedOption,
         setSelectedOption,
         searchQuery,

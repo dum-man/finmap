@@ -21,18 +21,6 @@
   }
 }
 
-@mixin show {
-  position: absolute;
-  top: 15%;
-  right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  font-size: 28px;
-  color: $gray400;
-}
-
 @mixin icon {
   display: flex;
   justify-content: center;

@@ -1,0 +1,33 @@
+@import "../../../../assets/sass/variables.scss";
+
+.buttonsList {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  margin-left: 105px;
+  @media (max-width: $tablet) {
+    gap: 10px;
+    margin-left: 0;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+  font-size: 24px;
+  color: $gray400;
+  background-color: $whiteAlpha300;
+  border-radius: 50%;
+  transition: transform 0.1s, background-color 0.2s;
+  &:hover {
+    background-color: $whiteAlpha400;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  @media (max-width: $tablet) {
+    font-size: 22px;
+  }
+}

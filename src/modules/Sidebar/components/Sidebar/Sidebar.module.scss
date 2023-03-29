@@ -1,0 +1,31 @@
+@import "../../../../assets/sass/variables.scss";
+
+.container {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: $blue100;
+  border-top-left-radius: 20px;
+  transition: transform 0.3s;
+  @media (max-width: $tablet) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 300px;
+    height: 100%;
+  }
+}
+
+.close {
+  transform: translateX(-300px);
+  @media (min-width: $tablet) {
+    transform: unset;
+  }
+}
+
+.open {
+  transform: translateX(0);
+}
