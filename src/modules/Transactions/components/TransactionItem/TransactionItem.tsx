@@ -11,7 +11,8 @@ interface TransactionItemProps {
 }
 
 const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
-  const { type, createdAt, amount, accountName, category, comment } = transaction;
+  const { type, createdAt, amount, accountName, accountAmount, category, comment } =
+    transaction;
 
   const { t } = useTranslation();
 
@@ -35,7 +36,7 @@ const TransactionItem: React.FC<TransactionItemProps> = ({ transaction }) => {
       </p>
       <p className={styles.account}>
         <span>{t(accountName) || accountName}</span>
-        <span>{setFormattedAmount(amount)}</span>
+        <span>{setFormattedAmount(accountAmount)}</span>
       </p>
       <p className={styles.category}>{t(category) || category}</p>
       <p className={styles.comment}>{comment}</p>
