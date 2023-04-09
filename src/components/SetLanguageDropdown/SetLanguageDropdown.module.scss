@@ -1,6 +1,6 @@
 @import "../../assets/sass/variables.scss";
 
-.language {
+.wrapper {
   position: absolute;
   top: -80px;
   right: 20px;
@@ -24,7 +24,7 @@
   transform: rotate(180deg);
 }
 
-.languageList {
+.languages {
   position: absolute;
   left: 0;
   top: 40px;

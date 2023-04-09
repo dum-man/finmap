@@ -17,8 +17,12 @@ const Sidebar: React.FC<SidebarProps> = () => {
         setDeleteAccountOpen={setDeleteAccountOpen}
       />
       <AnimatePresence>
-        {createAccountOpen && <CreateAccount setOpen={setCreateAccountOpen} />}
-        {deleteAccountOpen && <DeleteAccount setOpen={setDeleteAccountOpen} />}
+        {createAccountOpen && (
+          <CreateAccount onClose={() => setCreateAccountOpen(false)} />
+        )}
+        {deleteAccountOpen && (
+          <DeleteAccount onClose={() => setDeleteAccountOpen(false)} />
+        )}
       </AnimatePresence>
     </>
   );

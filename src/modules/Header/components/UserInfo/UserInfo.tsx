@@ -18,24 +18,22 @@ const UserInfo: React.FC<UserInfoProps> = ({ parentRef, open, setOpen }) => {
   const { t } = useTranslation();
 
   return (
-    <>
-      <div className={styles.wrapper}>
-        <div className={styles.avatar}>
-          <img src={finmapLogoShort} alt="finmap logo" />
-        </div>
-        <div>
-          <p className={styles.name}>Finmap</p>
-          <button
-            className={styles.account}
-            ref={parentRef}
-            onClick={() => setOpen((prev) => !prev)}
-          >
-            {currentUser?.displayName || t("accountType")}
-            <TiArrowSortedDown className={open ? styles.rotate : ""} size={18} />
-          </button>
-        </div>
+    <div className={styles.wrapper}>
+      <div className={styles.avatar}>
+        <img src={finmapLogoShort} alt="finmap logo" />
       </div>
-    </>
+      <div>
+        <p className={styles.name}>Finmap</p>
+        <button
+          className={styles.account}
+          ref={parentRef}
+          onClick={() => setOpen((prev) => !prev)}
+        >
+          {currentUser?.displayName || t("accountType")}
+          <TiArrowSortedDown className={open ? styles.rotate : ""} size={18} />
+        </button>
+      </div>
+    </div>
   );
 };
 

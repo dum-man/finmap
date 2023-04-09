@@ -33,7 +33,7 @@ const SetLanguageDropdown: React.FC = () => {
   };
 
   return (
-    <div className={styles.language}>
+    <div className={styles.wrapper}>
       <button
         className={styles.openButton}
         ref={parentRef}
@@ -45,7 +45,7 @@ const SetLanguageDropdown: React.FC = () => {
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {open && (
           <motion.ul
-            className={styles.languageList}
+            className={styles.languages}
             variants={LANGUAGE_VARIANTS}
             initial="hidden"
             animate="visible"

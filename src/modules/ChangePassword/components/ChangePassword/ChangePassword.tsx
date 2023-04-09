@@ -6,18 +6,18 @@ import { CloseButton, Modal } from "../../../../ui";
 import styles from "./ChangePassword.module.scss";
 
 interface ChangePasswordProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
 }
 
-const ChangePassword: React.FC<ChangePasswordProps> = ({ setOpen }) => {
+const ChangePassword: React.FC<ChangePasswordProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
   const [success, setSuccess] = useState(false);
 
   return (
-    <Modal onClose={() => setOpen(false)}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
-        <CloseButton onClick={() => setOpen(false)} />
+        <CloseButton onClick={onClose} />
         {success ? (
           <Success />
         ) : (

@@ -10,7 +10,7 @@ interface AccountItemProps {
 
 const AccountItem: React.FC<AccountItemProps> = ({ account }) => {
   return (
-    <li className={styles.account}>
+    <li className={styles.accountItem}>
       <div className={styles.wrapper}>
         <AiOutlineMenu className={styles.icon} />
         <BsCurrencyDollar className={styles.icon} />

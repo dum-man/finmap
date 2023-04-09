@@ -4,18 +4,18 @@ import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
 import styles from "./CreateAccount.module.scss";
 
 interface CreateAccountProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
 }
 
-const CreateAccount: React.FC<CreateAccountProps> = ({ setOpen }) => {
+const CreateAccount: React.FC<CreateAccountProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
   return (
-    <Modal onClose={() => setOpen(false)}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("addAccount")}</h2>
-        <CloseButton onClick={() => setOpen(false)} />
-        <CreateAccountForm onClose={() => setOpen(false)} />
+        <CloseButton onClick={onClose} />
+        <CreateAccountForm onClose={onClose} />
       </div>
     </Modal>
   );

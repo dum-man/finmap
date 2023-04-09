@@ -6,7 +6,7 @@ describe("Component: UserAccountMenu", () => {
   it("should render", async () => {
     render(
       <UserAccountMenu
-        setOpen={() => {}}
+        onClose={() => {}}
         setSetUsernameOpen={() => {}}
         parentRef={null}
         children={null}

@@ -4,7 +4,7 @@ import CreateAccount from "./CreateAccount";
 
 describe("Component: CreateAccount", () => {
   it("should render", async () => {
-    render(<CreateAccount setOpen={() => {}} />);
+    render(<CreateAccount onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
@@ -15,7 +15,7 @@ describe("Component: CreateAccount", () => {
   });
 
   it("should enter account name", async () => {
-    render(<CreateAccount setOpen={() => {}} />);
+    render(<CreateAccount onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/name/i);
     fireEvent.change(input, { target: { value: "Bank account" } });
     await waitFor(() => {
@@ -24,7 +24,7 @@ describe("Component: CreateAccount", () => {
   });
 
   it("should enter account balance", async () => {
-    render(<CreateAccount setOpen={() => {}} />);
+    render(<CreateAccount onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/startingBalance/i);
     fireEvent.change(input, { target: { value: "1000" } });
     await waitFor(() => {

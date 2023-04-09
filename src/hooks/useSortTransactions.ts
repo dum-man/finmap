@@ -38,7 +38,13 @@ const sortTransactionsByAmount = (type: string, transactions: Transaction[]) => 
   }
 };
 
-export const useSortTransactions = (state: SortState, transactions: Transaction[]) => {
+export const useSortTransactions = (
+  state: SortState,
+  transactions: Transaction[] | undefined
+) => {
+  if (!transactions) {
+    return [];
+  }
   if (state.transcationType) {
     return sortTransactionsByType(state.transcationType, transactions);
   } else if (state.dateType) {

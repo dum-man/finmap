@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 import { FcGoogle } from "react-icons/fc";
 import { PasswordInput, TextInput } from "../../../../components";
 import { Button, Spinner } from "../../../../ui";
 import ResetPassword from "../../../../modules/ResetPassword";
-import signInWithGoogle from "../../api";
+import {
+  useCreateUserDocumentMutation,
+  useLazyCheckUserExistsQuery,
+} from "../../../../app/services/userApi";
 import { auth } from "../../../../firebase";
 import { EMAIL_FORMAT } from "../../../../app/constants";
 import { FIREBASE_LOGIN_ERRORS } from "../../constants";
@@ -16,6 +23,9 @@ import styles from "./LoginForm.module.scss";
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
+
+  const [checkUserExists] = useLazyCheckUserExistsQuery();
+  const [createUserDocument] = useCreateUserDocumentMutation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,10 +71,20 @@ const LoginForm: React.FC = () => {
     }
     setSignInWithEmailLoading(false);
   };
+
   const handleSignInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
     setSignInWithGoogleLoading(true);
     try {
-      await signInWithGoogle();
+      const data = await signInWithPopup(auth, provider);
+      if (!data) {
+        throw new Error("Account creation failed");
+      }
+      const { uid, email } = data.user;
+      const userExists = await checkUserExists(uid);
+      if (!userExists.data) {
+        await createUserDocument({ userId: uid, email }).unwrap();
+      }
     } catch (error: any) {
       console.log(error.message);
       toast.error(error.message);
@@ -120,7 +140,7 @@ const LoginForm: React.FC = () => {
         </button>
       </form>
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {modalOpen && <ResetPassword setOpen={setModalOpen} />}
+        {modalOpen && <ResetPassword onClose={() => setModalOpen(false)} />}
       </AnimatePresence>
     </>
   );

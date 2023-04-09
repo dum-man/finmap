@@ -8,7 +8,7 @@ import { MENU_VARIANTS } from "../../../../app/constants";
 import styles from "./SettingsMenu.module.scss";
 
 interface SettingsMenuProps {
-  setSettingsMenuOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
   parentRef: MutableRefObject<null> | null;
   setAccountsOpen: (open: React.SetStateAction<boolean>) => void;
   setTransactionCategoriesOpen: (open: React.SetStateAction<boolean>) => void;
@@ -21,7 +21,7 @@ interface SettingsMenuProps {
 }
 
 const SettingsMenu: React.FC<SettingsMenuProps> = ({
-  setSettingsMenuOpen,
+  onClose,
   parentRef,
   setAccountsOpen,
   setTransactionCategoriesOpen,
@@ -32,11 +32,7 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({
 }) => {
   const containerRef = useRef(null);
 
-  const handleClickOutside = () => {
-    setSettingsMenuOpen(false);
-  };
-
-  useOnClickOutside(containerRef, parentRef, handleClickOutside);
+  useOnClickOutside(containerRef, parentRef, onClose);
 
   return (
     <motion.div

@@ -4,18 +4,18 @@ import CreateTransferForm from "../CreateTransferForm/CreateTransferForm";
 import styles from "./CreateTransfer.module.scss";
 
 interface CreateTransferProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
 }
 
-const CreateTransfer: React.FC<CreateTransferProps> = ({ setOpen }) => {
+const CreateTransfer: React.FC<CreateTransferProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
   return (
-    <Modal onClose={() => setOpen(false)}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("newTransfer")}</h2>
-        <CloseButton onClick={() => setOpen(false)} />
-        <CreateTransferForm onClose={() => setOpen(false)} />
+        <CloseButton onClick={onClose} />
+        <CreateTransferForm onClose={onClose} />
       </div>
     </Modal>
   );

@@ -4,7 +4,7 @@ import TransfersMenu from "./TransfersMenu";
 
 describe("Component: TransfersMenu", () => {
   it("should render", async () => {
-    render(<TransfersMenu setOpen={() => {}} parentRef={null} />);
+    render(<TransfersMenu onClose={() => {}} parentRef={null} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {

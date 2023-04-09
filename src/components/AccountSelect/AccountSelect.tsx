@@ -1,8 +1,9 @@
 import { useMemo } from "react";
-import { useRecoilValue } from "recoil";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { motion } from "framer-motion";
 import { Select } from "../../ui";
-import { accountsState } from "../../app/atoms/accountsAtom";
+import { useGetAccountsQuery } from "../../app/services/accountApi";
+import { auth } from "../../firebase";
 import { INPUT_LABEL_VARIANTS } from "../../app/constants";
 import { SelectOption } from "../../types";
 import styles from "./AccountSelect.module.scss";
@@ -18,7 +19,9 @@ const AccountSelect: React.FC<AccountSelectProps> = ({
   value,
   onChange,
 }) => {
-  const { accounts } = useRecoilValue(accountsState);
+  const [currentUser] = useAuthState(auth);
+
+  const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
 
   const accountOptions = useMemo(() => {
     return accounts.map((account) => ({
@@ -29,7 +32,7 @@ const AccountSelect: React.FC<AccountSelectProps> = ({
   }, [accounts]);
 
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.wrapper}>
       <Select
         placeholder={placeholder}
         active={!!value}
@@ -37,6 +40,7 @@ const AccountSelect: React.FC<AccountSelectProps> = ({
         options={accountOptions}
         onChange={onChange}
       />
+
       {value && (
         <motion.span
           className={styles.label}

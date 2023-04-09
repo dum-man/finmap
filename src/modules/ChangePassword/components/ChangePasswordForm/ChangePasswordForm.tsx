@@ -11,7 +11,7 @@ interface ChangePasswordFormProps {
 }
 
 const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ setSuccess }) => {
-  const [updatePassword, updating] = useUpdatePassword(auth);
+  const [updatePassword, isLoading] = useUpdatePassword(auth);
 
   const { t } = useTranslation();
 
@@ -62,7 +62,7 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ setSuccess }) =
         value={newPassword}
         onChange={onNewPasswordChange}
       />
-      <Button type="submit" loading={updating}>
+      <Button type="submit" loading={isLoading}>
         {t("save")}
       </Button>
     </form>

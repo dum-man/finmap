@@ -4,7 +4,7 @@ import CreateExpense from "./CreateExpense";
 
 describe("Component: CreateExpense", () => {
   it("should render", async () => {
-    render(<CreateExpense setOpen={() => {}} />);
+    render(<CreateExpense onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
@@ -15,7 +15,7 @@ describe("Component: CreateExpense", () => {
   });
 
   it("should enter transaction amount", async () => {
-    render(<CreateExpense setOpen={() => {}} />);
+    render(<CreateExpense onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>("sum, $");
     fireEvent.change(input, { target: { value: "1000" } });
     await waitFor(() => {
@@ -24,7 +24,7 @@ describe("Component: CreateExpense", () => {
   });
 
   it("should enter transaction comment", async () => {
-    render(<CreateExpense setOpen={() => {}} />);
+    render(<CreateExpense onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/leaveComment/i);
     fireEvent.change(input, { target: { value: "comment" } });
     await waitFor(() => {

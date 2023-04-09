@@ -4,7 +4,7 @@ import SetLanguage from "./SetLanguage";
 
 describe("Component: SetLanguage", () => {
   it("should render", async () => {
-    render(<SetLanguage setOpen={() => {}} />);
+    render(<SetLanguage onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {

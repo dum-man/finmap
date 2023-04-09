@@ -4,18 +4,18 @@ import CreateExpenseForm from "../CreateExpenseForm/CreateExpenseForm";
 import styles from "./CreateExpense.module.scss";
 
 interface CreateExpenseProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
 }
 
-const CreateExpense: React.FC<CreateExpenseProps> = ({ setOpen }) => {
+const CreateExpense: React.FC<CreateExpenseProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
   return (
-    <Modal onClose={() => setOpen(false)}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("newExpense")}</h2>
-        <CloseButton onClick={() => setOpen(false)} />
-        <CreateExpenseForm onClose={() => setOpen(false)} />
+        <CloseButton onClick={onClose} />
+        <CreateExpenseForm onClose={onClose} />
       </div>
     </Modal>
   );

@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { NumberFormatValues } from "react-number-format";
 import { AccountSelect, AmountInput, DateInput, TextInput } from "../../../../components";
 import { Button } from "../../../../ui";
+import { useCreateTransferMutation } from "../../../../app/services/transferApi";
+import { useGetAccountsQuery } from "../../../../app/services/accountApi";
 import { auth } from "../../../../firebase";
-import { accountsState } from "../../../../app/atoms/accountsAtom";
-import { transfersState } from "../../../../app/atoms/transfersAtom";
-import { createTransfer } from "../../api";
 import { SelectOption, Transfer } from "../../../../types";
 
 interface CreateTransferFormProps {
@@ -23,8 +21,8 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
 
   const { t } = useTranslation();
 
-  const setTransfersStateValue = useSetRecoilState(transfersState);
-  const [{ accounts }, setAccountStateValue] = useRecoilState(accountsState);
+  const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
+  const [createTransfer, { isLoading }] = useCreateTransferMutation();
 
   const [transferDate, setTransferDate] = useState(new Date());
   const [selectedFromAccount, setSelectedFromAccount] = useState<SelectOption | null>(
@@ -33,7 +31,6 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
   const [selectedToAccount, setSelectedToAccount] = useState<SelectOption | null>(null);
   const [transferAmount, setTransferAmount] = useState("");
   const [transferComment, setTransferComment] = useState("");
-  const [transferCreating, setTransferCreating] = useState(false);
 
   const onSelectFromAccount = (option: SelectOption) => {
     setSelectedFromAccount(option);
@@ -57,7 +54,11 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
 
-    const fromAccount = accounts.find(
+    if (!currentUser) {
+      return;
+    }
+
+    const fromAccount = accounts?.find(
       (account) => account.id === selectedFromAccount?.id
     );
     const toAccount = accounts.find((account) => account.id === selectedToAccount?.id);
@@ -101,45 +102,13 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
         balance: toAccount.balance + formattedTransferAmount,
       },
     };
-    setTransferCreating(true);
-
     try {
-      await createTransfer(currentUser?.uid, transfer);
-      setTransfersStateValue((prev) => ({
-        ...prev,
-        transfers: [transfer, ...prev.transfers],
-      }));
-      setAccountStateValue((prev) => {
-        const updatedAccounts = [...prev.accounts];
-        const fromUpdatedAccountIndex = updatedAccounts.findIndex(
-          (account) => account.id === fromAccount.id
-        );
-        const toUpdatedAccountIndex = updatedAccounts.findIndex(
-          (account) => account.id === toAccount.id
-        );
-
-        const fromUpdatedAccount = updatedAccounts[fromUpdatedAccountIndex];
-        const toUpdatedAccount = updatedAccounts[toUpdatedAccountIndex];
-
-        updatedAccounts[fromUpdatedAccountIndex] = {
-          ...fromUpdatedAccount,
-          balance: fromUpdatedAccount.balance - formattedTransferAmount,
-        };
-        updatedAccounts[toUpdatedAccountIndex] = {
-          ...toUpdatedAccount,
-          balance: toUpdatedAccount.balance + formattedTransferAmount,
-        };
-        return {
-          ...prev,
-          accounts: updatedAccounts,
-        };
-      });
+      await createTransfer({ userId: currentUser.uid, transfer }).unwrap();
       onClose();
     } catch (error: any) {
-      console.log(error);
+      console.log(error.message);
       toast.error(error.message);
     }
-    setTransferCreating(false);
   };
 
   return (
@@ -171,7 +140,7 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
         value={transferComment}
         onChange={onCommentChange}
       />
-      <Button type="submit" variant="black" loading={transferCreating}>
+      <Button type="submit" variant="black" loading={isLoading}>
         {t("addTransfer")}
       </Button>
     </form>

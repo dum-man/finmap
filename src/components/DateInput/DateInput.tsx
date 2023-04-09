@@ -15,7 +15,7 @@ const DateInput: React.FC<DateInputProps> = ({ placeholder, date, setDate }) => 
   const [datepickerOpen, setDatepickerOpen] = useState(false);
 
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.wrapper}>
       <div
         className={`${styles.input} ${datepickerOpen ? styles.focused : ""}`}
         onClick={() => setDatepickerOpen(true)}

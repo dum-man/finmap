@@ -17,7 +17,7 @@ const TransactionButtons: React.FC<TransactionButtonsProps> = ({
   const { t } = useTranslation();
 
   return (
-    <ul className={styles.buttonsList}>
+    <ul className={styles.transactionButtons}>
       <li>
         <button
           className={`${styles.button} ${styles.buttonIncome}`}

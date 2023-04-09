@@ -17,15 +17,12 @@ const SettingItems: React.FC<SettingItemsProps> = ({
       <h3 className={styles.title}>{t("settings")}</h3>
       <ul>
         <li>
-          <button
-            className={styles.itemButton}
-            onClick={() => setChangePasswordOpen(true)}
-          >
+          <button className={styles.button} onClick={() => setChangePasswordOpen(true)}>
             {t("changePassword")}
           </button>
         </li>
         <li>
-          <button className={styles.itemButton} onClick={() => setSetLanguageOpen(true)}>
+          <button className={styles.button} onClick={() => setSetLanguageOpen(true)}>
             🌎 {t("language")}:
             <span className={styles.currentLanguage}>{i18n.resolvedLanguage}</span>
           </button>

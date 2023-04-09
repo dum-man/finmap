@@ -4,7 +4,7 @@ import ResetPassword from "./ResetPassword";
 
 describe("Component: ResetPassword", () => {
   it("should render", async () => {
-    render(<ResetPassword setOpen={() => {}} />);
+    render(<ResetPassword onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
@@ -15,7 +15,7 @@ describe("Component: ResetPassword", () => {
   });
 
   it("should enter email", async () => {
-    render(<ResetPassword setOpen={() => {}} />);
+    render(<ResetPassword onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>("email");
     fireEvent.change(input, { target: { value: "test@mail.com" } });
     await waitFor(() => {

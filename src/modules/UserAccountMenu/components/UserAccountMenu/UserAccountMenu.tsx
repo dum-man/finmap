@@ -7,25 +7,21 @@ import { VARIANTS } from "../../constants";
 import styles from "./UserAccountMenu.module.scss";
 
 interface UserAccountMenuProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
   parentRef: MutableRefObject<null> | null;
   setSetUsernameOpen: (open: React.SetStateAction<boolean>) => void;
   children: React.ReactNode;
 }
 
 const UserAccountMenu: React.FC<UserAccountMenuProps> = ({
-  setOpen,
+  onClose,
   parentRef,
   setSetUsernameOpen,
   children,
 }) => {
   const containerRef = useRef(null);
 
-  const handleClickOutside = () => {
-    setOpen(false);
-  };
-
-  useOnClickOutside(containerRef, parentRef, handleClickOutside);
+  useOnClickOutside(containerRef, parentRef, onClose);
 
   return (
     <motion.div

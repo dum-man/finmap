@@ -6,18 +6,18 @@ import ResetSuccess from "../ResetSuccess/ResetSuccess";
 import styles from "./ResetPassword.module.scss";
 
 interface ResetPasswordProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
 }
 
-const ResetPassword: React.FC<ResetPasswordProps> = ({ setOpen }) => {
+const ResetPassword: React.FC<ResetPasswordProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
   const [success, setSuccess] = useState(false);
 
   return (
-    <Modal onClose={() => setOpen(false)}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
-        <CloseButton onClick={() => setOpen(false)} />
+        <CloseButton onClick={onClose} />
         {success ? (
           <ResetSuccess />
         ) : (

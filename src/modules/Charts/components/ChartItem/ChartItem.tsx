@@ -30,12 +30,12 @@ const ChartItem: React.FC<ChartItemProps> = ({ type, transactions }) => {
     <div className={styles.wrapper}>
       <span className={`${styles.totalSum} ${styles[type]}`}>{totalSum}</span>
       <Doughnut {...getChartData(transactions, type)} />
-      <ul className={styles.categoryList}>
+      <ul className={styles.categories}>
         {labels.map((label) => (
           <li key={label.category} className={styles.categoryItem}>
             <p>
               <span
-                className={styles.categoryColor}
+                className={styles.color}
                 style={{
                   backgroundColor: setCategoryColor(type, label.category),
                 }}

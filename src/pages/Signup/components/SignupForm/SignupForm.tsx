@@ -5,14 +5,16 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
 import { PasswordInput, TextInput } from "../../../../components";
 import { Button } from "../../../../ui";
+import { useCreateUserDocumentMutation } from "../../../../app/services/userApi";
 import { auth } from "../../../../firebase";
-import createUserDocument from "../../api";
 import { EMAIL_FORMAT } from "../../../../app/constants";
 import { FIREBASE_REGISTER_ERROR } from "../../constants";
 import styles from "./SignupForm.module.scss";
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation();
+
+  const [createUserDocument] = useCreateUserDocumentMutation();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,7 +59,8 @@ const SignupForm: React.FC = () => {
       setUserCreating(true);
       const data = await createUserWithEmailAndPassword(auth, email, password);
       if (data) {
-        await createUserDocument(data.user.uid, data.user.email);
+        const { uid, email } = data.user;
+        await createUserDocument({ userId: uid, email }).unwrap();
       } else {
         throw new Error(t("accountCreationFailed").toString());
       }

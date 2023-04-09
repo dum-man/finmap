@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { useSetRecoilState } from "recoil";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
 import { NumberFormatValues } from "react-number-format";
 import { AmountInput, TextInput } from "../../../../components";
 import { Button } from "../../../../ui";
+import {
+  useCreateAccountMutation,
+  useLazyCheckAccountExistsQuery,
+} from "../../../../app/services/accountApi";
 import { auth } from "../../../../firebase";
-import { accountsState } from "../../../../app/atoms/accountsAtom";
-import { createAccount } from "../../api";
 import { Account } from "../../../../types";
 
 interface CreateAccountFormProps {
@@ -22,10 +23,12 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
 
   const { t } = useTranslation();
 
-  const setAccountState = useSetRecoilState(accountsState);
+  const [checkAccountExists] = useLazyCheckAccountExistsQuery();
+  const [createAccount] = useCreateAccountMutation();
 
   const [accountName, setAccountName] = useState("");
   const [accountBalance, setAccountBalance] = useState("0");
+
   const [accountCreating, setAccountCreating] = useState(false);
 
   const onAccountNameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,9 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
 
+    if (!currentUser) {
+      return;
+    }
     if (!accountName) {
       toast.error(t("accountError"));
       return;
@@ -58,13 +64,15 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       createdAt: Timestamp.now(),
     };
     setAccountCreating(true);
-
     try {
-      await createAccount(currentUser?.uid, account);
-      setAccountState((prev) => ({
-        ...prev,
-        accounts: [...prev.accounts, account],
-      }));
+      const accountExists = await checkAccountExists({
+        userId: currentUser.uid,
+        name: account.name,
+      }).unwrap();
+      if (accountExists) {
+        throw new Error(`You already have "${account.name}" account`);
+      }
+      await createAccount({ userId: currentUser.uid, account }).unwrap();
       onClose();
     } catch (error: any) {
       console.log(error.message);

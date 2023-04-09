@@ -9,7 +9,7 @@ import HeaderModule from "../../../../modules/Header";
 import SetLanguage from "../../../../modules/SetLanguage";
 import SettingsMenu from "../../../../modules/SettingsMenu";
 import SetUsername from "../../../../modules/SetUsername";
-import TransactionCategories from "../../../../modules/TransactionCategories";
+import Categories from "../../../../modules/Categories";
 import TransfersMenu from "../../../../modules/TransfersMenu";
 import UserAccountMenu from "../../../../modules/UserAccountMenu";
 
@@ -48,24 +48,33 @@ const Header: React.FC = () => {
       <AnimatePresence initial={false} onExitComplete={() => null}>
         {userAccountMenuOpen && (
           <UserAccountMenu
-            setOpen={setUserAccountMenuOpen}
+            onClose={() => setUserAccountMenuOpen(false)}
             parentRef={userAccountMenuRef}
             setSetUsernameOpen={setSetUsernameOpen}
           >
             <AnimatePresence initial={false} onExitComplete={() => null}>
-              {setUsernameOpen && <SetUsername setOpen={setSetUsernameOpen} />}
+              {setUsernameOpen && (
+                <SetUsername onClose={() => setSetUsernameOpen(false)} />
+              )}
             </AnimatePresence>
           </UserAccountMenu>
         )}
-        {createIncomeOpen && <CreateIncome setOpen={setCreateIncomeOpen} />}
-        {createExpenseOpen && <CreateExpense setOpen={setCreateExpenseOpen} />}
-        {createTransferOpen && <CreateTransfer setOpen={setCreateTransferOpen} />}
+        {createIncomeOpen && <CreateIncome onClose={() => setCreateIncomeOpen(false)} />}
+        {createExpenseOpen && (
+          <CreateExpense onClose={() => setCreateExpenseOpen(false)} />
+        )}
+        {createTransferOpen && (
+          <CreateTransfer onClose={() => setCreateTransferOpen(false)} />
+        )}
         {transfersMeunOpen && (
-          <TransfersMenu setOpen={setTransfersMenuOpen} parentRef={transfersMenuRef} />
+          <TransfersMenu
+            onClose={() => setTransfersMenuOpen(false)}
+            parentRef={transfersMenuRef}
+          />
         )}
         {settingsMenuOpen && (
           <SettingsMenu
-            setSettingsMenuOpen={setSettingsMenuOpen}
+            onClose={() => setSettingsMenuOpen(false)}
             parentRef={settingsMenuRef}
             setAccountsOpen={setAccountsOpen}
             setTransactionCategoriesOpen={setTransactionCategoriesOpen}
@@ -74,15 +83,19 @@ const Header: React.FC = () => {
             setSetLanguageOpen={setSetLanguageOpen}
           >
             <AnimatePresence initial={false} onExitComplete={() => null}>
-              {accountsOpen && <Accounts setOpen={setAccountsOpen} />}
+              {accountsOpen && <Accounts onClose={() => setAccountsOpen(false)} />}
               {transactionCategoriesOpen && categoryType && (
-                <TransactionCategories
+                <Categories
                   type={categoryType}
-                  setOpen={setTransactionCategoriesOpen}
+                  onClose={() => setTransactionCategoriesOpen(false)}
                 />
               )}
-              {changePasswordOpen && <ChangePassword setOpen={setChangePasswordOpen} />}
-              {setLanguageOpen && <SetLanguage setOpen={setSetLanguageOpen} />}
+              {changePasswordOpen && (
+                <ChangePassword onClose={() => setChangePasswordOpen(false)} />
+              )}
+              {setLanguageOpen && (
+                <SetLanguage onClose={() => setSetLanguageOpen(false)} />
+              )}
             </AnimatePresence>
           </SettingsMenu>
         )}

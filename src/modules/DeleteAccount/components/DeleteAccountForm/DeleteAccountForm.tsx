@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { useSetRecoilState } from "recoil";
 import toast from "react-hot-toast";
 import { Button } from "../../../../ui";
 import { AccountSelect } from "../../../../components";
-import { deleteAccount } from "../../api";
-import { accountsState } from "../../../../app/atoms/accountsAtom";
-import { SelectOption } from "../../../../types";
+import { useDeleteAccountMutation } from "../../../../app/services/accountApi";
 import { auth } from "../../../../firebase";
+import { SelectOption } from "../../../../types";
 
 interface DeleteAccountFormProps {
   onClose: () => void;
@@ -19,10 +17,9 @@ const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ onClose }) => {
 
   const { t } = useTranslation();
 
-  const setAccountsStateValue = useSetRecoilState(accountsState);
+  const [deleteAccount, { isLoading }] = useDeleteAccountMutation();
 
   const [selectedAccount, setSelectedAccount] = useState<SelectOption | null>(null);
-  const [accountDeleting, setAccountDeleting] = useState(false);
 
   const onSelectAccount = (account: SelectOption) => {
     setSelectedAccount(account);
@@ -31,26 +28,26 @@ const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ onClose }) => {
   const handleDeleteAccount = async (evt: React.FormEvent) => {
     evt.preventDefault();
 
+    if (!currentUser) {
+      return;
+    }
+
     if (!selectedAccount) {
       toast.error(t("accountSelectedError"));
       return;
     }
-    setAccountDeleting(true);
     try {
-      await deleteAccount(currentUser?.uid, selectedAccount.id);
-      setAccountsStateValue((prev) => ({
-        ...prev,
-        accounts: [
-          ...prev.accounts.filter((account) => account.id !== selectedAccount.id),
-        ],
-      }));
+      await deleteAccount({
+        userId: currentUser.uid,
+        accountId: selectedAccount.id,
+      }).unwrap();
       onClose();
     } catch (error: any) {
       console.log(error.message);
-      toast.error(error.message);
+      toast(error.message);
     }
-    setAccountDeleting(false);
   };
+
   return (
     <form onSubmit={handleDeleteAccount}>
       <AccountSelect
@@ -58,7 +55,7 @@ const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ onClose }) => {
         value={selectedAccount}
         onChange={onSelectAccount}
       />
-      <Button type="submit" variant="orange" loading={accountDeleting}>
+      <Button type="submit" variant="orange" loading={isLoading}>
         {t("delete")}
       </Button>
     </form>

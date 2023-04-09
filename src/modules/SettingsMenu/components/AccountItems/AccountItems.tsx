@@ -35,17 +35,17 @@ const AccountItems: React.FC<AccountItemsProps> = ({
       <h3 className={styles.title}>{currentUser?.displayName || t("accountType")}</h3>
       <ul>
         <li>
-          <button className={styles.itemButton} onClick={() => setAccountsOpen(true)}>
+          <button className={styles.button} onClick={() => setAccountsOpen(true)}>
             {t("accounts")}
           </button>
         </li>
         <li>
-          <button className={styles.itemButton} onClick={onSetIncomeCategory}>
+          <button className={styles.button} onClick={onSetIncomeCategory}>
             {t("incomeCategories")}
           </button>
         </li>
         <li>
-          <button className={styles.itemButton} onClick={onSetExpenseCategory}>
+          <button className={styles.button} onClick={onSetExpenseCategory}>
             {t("expenseCategories")}
           </button>
         </li>

@@ -1,15 +1,18 @@
 import { useMemo } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { ArcElement, Chart as ChartJS, Tooltip } from "chart.js";
-import { useRecoilValue } from "recoil";
-import { transactionsState } from "../../../../app/atoms/transactionsAtom";
-import { Transaction } from "../../../../types";
 import ChartItem from "../ChartItem/ChartItem";
+import { auth } from "../../../../firebase";
+import { useGetTransactionsQuery } from "../../../../app/services/transactionApi";
+import { Transaction } from "../../../../types";
 import styles from "./Charts.module.scss";
 
 ChartJS.register(ArcElement, Tooltip);
 
 const Charts: React.FC = () => {
-  const { transactions } = useRecoilValue(transactionsState);
+  const [currentUser] = useAuthState(auth);
+
+  const { data: transactions = [] } = useGetTransactionsQuery(currentUser?.uid as string);
 
   const incomeTransactions = useMemo(() => {
     return transactions.filter(

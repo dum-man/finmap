@@ -5,10 +5,10 @@ import Languages from "../Languages/Languages";
 import styles from "./SetLanguage.module.scss";
 
 interface SetLanguageProps {
-  setOpen: (open: React.SetStateAction<boolean>) => void;
+  onClose: () => void;
 }
 
-const SetLanguage: React.FC<SetLanguageProps> = ({ setOpen }) => {
+const SetLanguage: React.FC<SetLanguageProps> = ({ onClose }) => {
   const { t, i18n } = useTranslation();
 
   const [selectedLanguage, setSelectedLanguage] = useState(() => i18n.resolvedLanguage);
@@ -18,17 +18,17 @@ const SetLanguage: React.FC<SetLanguageProps> = ({ setOpen }) => {
       if (selectedLanguage !== i18n.resolvedLanguage) {
         await i18n.changeLanguage(selectedLanguage);
       }
-      setOpen(false);
+      onClose();
     } catch (error: any) {
       console.log(error.message);
     }
   };
 
   return (
-    <Modal onClose={() => setOpen(false)}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("interfaceLanguage")}</h2>
-        <CloseButton onClick={() => setOpen(false)} />
+        <CloseButton onClick={onClose} />
         <Languages
           selectedLanguage={selectedLanguage}
           setSelectedLanguage={setSelectedLanguage}

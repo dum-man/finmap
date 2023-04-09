@@ -17,7 +17,7 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
   setSettingsMenuOpen,
 }) => {
   return (
-    <ul className={styles.buttonsList}>
+    <ul className={styles.menuButtons}>
       <li>
         <button
           className={styles.button}

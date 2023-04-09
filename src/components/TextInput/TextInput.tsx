@@ -10,13 +10,18 @@ interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
 }
 
-const TextInput: React.FC<TextInputProps> = (props) => {
-  const { type, id, placeholder, maxLength, value, ...restProps } = props;
-
-  const [textLengthVisible, setTextLengthVisible] = useState(false);
+const TextInput: React.FC<TextInputProps> = ({
+  type,
+  id,
+  placeholder,
+  maxLength,
+  value,
+  ...restProps
+}) => {
+  const [lengthVisible, setLengthVisible] = useState(false);
 
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.wrapper}>
       <input
         className={`${styles.input} ${value ? styles.active : ""}`}
         id={id}
@@ -24,8 +29,8 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         placeholder={placeholder}
         maxLength={maxLength}
         value={value}
-        onFocus={() => setTextLengthVisible(true)}
-        onBlur={() => setTextLengthVisible(false)}
+        onFocus={() => setLengthVisible(true)}
+        onBlur={() => setLengthVisible(false)}
         {...restProps}
       />
       {value && (
@@ -40,7 +45,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         </motion.label>
       )}
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {textLengthVisible && (
+        {lengthVisible && (
           <motion.span
             className={styles.inputLength}
             variants={INPUT_LENGTH_VARIANTS}

@@ -4,7 +4,7 @@ import CreateIncome from "./CreateIncome";
 
 describe("Component: CreateIncome", () => {
   it("should render", async () => {
-    render(<CreateIncome setOpen={() => {}} />);
+    render(<CreateIncome onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
@@ -15,7 +15,7 @@ describe("Component: CreateIncome", () => {
   });
 
   it("should enter transaction amount", async () => {
-    render(<CreateIncome setOpen={() => {}} />);
+    render(<CreateIncome onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>("sum, $");
     fireEvent.change(input, { target: { value: "1000" } });
     await waitFor(() => {
@@ -24,7 +24,7 @@ describe("Component: CreateIncome", () => {
   });
 
   it("should enter transaction comment", async () => {
-    render(<CreateIncome setOpen={() => {}} />);
+    render(<CreateIncome onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/leaveComment/i);
     fireEvent.change(input, { target: { value: "comment" } });
     await waitFor(() => {

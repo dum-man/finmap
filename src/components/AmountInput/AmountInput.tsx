@@ -1,23 +1,28 @@
-import { motion } from "framer-motion";
 import {
   NumberFormatValues,
   NumericFormat,
   NumericFormatProps,
 } from "react-number-format";
+import { AnimatePresence, motion } from "framer-motion";
 import { INPUT_LABEL_VARIANTS } from "../../app/constants";
 import styles from "./AmountInput.module.scss";
 
 interface AmountInputProps extends NumericFormatProps {
+  currency?: boolean;
   placeholder: string;
   value: string;
   onValueChange: (values: NumberFormatValues) => void;
 }
 
-const AmountInput: React.FC<AmountInputProps> = (props) => {
-  const { placeholder, value, onValueChange, ...restProps } = props;
-
+const AmountInput: React.FC<AmountInputProps> = ({
+  currency = true,
+  placeholder,
+  value,
+  onValueChange,
+  ...restProps
+}) => {
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles.wrapper}>
       <NumericFormat
         className={`${styles.input} ${value ? styles.active : ""}`}
         id="amount"
@@ -30,18 +35,20 @@ const AmountInput: React.FC<AmountInputProps> = (props) => {
         onValueChange={onValueChange}
         {...restProps}
       />
-      {value && (
-        <motion.label
-          className={styles.label}
-          htmlFor="amount"
-          variants={INPUT_LABEL_VARIANTS}
-          initial="hidden"
-          animate="visible"
-        >
-          {placeholder}
-        </motion.label>
-      )}
-      <span className={styles.currency}>USD ($)</span>
+      <AnimatePresence initial={false}>
+        {value && (
+          <motion.label
+            className={styles.label}
+            htmlFor="amount"
+            variants={INPUT_LABEL_VARIANTS}
+            initial="hidden"
+            animate="visible"
+          >
+            {placeholder}
+          </motion.label>
+        )}
+      </AnimatePresence>
+      {currency && <span className={styles.currency}>USD ($)</span>}
     </div>
   );
 };

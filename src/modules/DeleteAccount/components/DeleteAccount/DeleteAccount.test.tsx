@@ -4,7 +4,7 @@ import DeleteAccount from "./DeleteAccount";
 
 describe("Component: DeleteAccount", () => {
   it("should render", async () => {
-    render(<DeleteAccount setOpen={() => {}} />);
+    render(<DeleteAccount onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {

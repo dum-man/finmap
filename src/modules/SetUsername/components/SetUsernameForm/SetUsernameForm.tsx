@@ -4,8 +4,8 @@ import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { TextInput } from "../../../../components";
 import { Button } from "../../../../ui";
+import { useUpdateUserProfileMutation } from "../../../../app/services/userApi";
 import { auth } from "../../../../firebase";
-import { updateUserProfile } from "../../api";
 
 interface SetUsernameFormProps {
   onClose: () => void;
@@ -13,7 +13,9 @@ interface SetUsernameFormProps {
 
 const SetUsernameForm: React.FC<SetUsernameFormProps> = ({ onClose }) => {
   const [currentUser] = useAuthState(auth);
-  const [updateProfile, updating] = useUpdateProfile(auth);
+  const [updateProfile, isUpdating] = useUpdateProfile(auth);
+
+  const [updateUserProfile, { isLoading }] = useUpdateUserProfileMutation();
 
   const { t } = useTranslation();
 
@@ -31,6 +33,10 @@ const SetUsernameForm: React.FC<SetUsernameFormProps> = ({ onClose }) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
 
+    if (!currentUser) {
+      return;
+    }
+
     const formattedUsername = userName.trim();
 
     if (formattedUsername === currentUser?.displayName) {
@@ -42,7 +48,13 @@ const SetUsernameForm: React.FC<SetUsernameFormProps> = ({ onClose }) => {
       return;
     }
     try {
-      await updateUserProfile(currentUser?.uid, formattedUsername, updateProfile);
+      await updateProfile({
+        displayName: formattedUsername,
+      });
+      await updateUserProfile({
+        userId: currentUser.uid,
+        displayName: formattedUsername,
+      }).unwrap();
       onClose();
     } catch (error: any) {
       console.log(error.message);
@@ -59,7 +71,7 @@ const SetUsernameForm: React.FC<SetUsernameFormProps> = ({ onClose }) => {
         value={userName}
         onChange={onUsernameChange}
       />
-      <Button type="submit" loading={updating}>
+      <Button type="submit" loading={isUpdating || isLoading}>
         {t("setName")}
       </Button>
     </form>

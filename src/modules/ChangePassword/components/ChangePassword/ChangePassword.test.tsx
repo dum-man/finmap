@@ -4,7 +4,7 @@ import ChangePassword from "./ChangePassword";
 
 describe("Component: ChangePassword", () => {
   it("should render", async () => {
-    render(<ChangePassword setOpen={() => {}} />);
+    render(<ChangePassword onClose={() => {}} />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
@@ -15,7 +15,7 @@ describe("Component: ChangePassword", () => {
   });
 
   it("should enter old password", async () => {
-    render(<ChangePassword setOpen={() => {}} />);
+    render(<ChangePassword onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/oldPassword/i);
     fireEvent.change(input, { target: { value: "qwerty321" } });
     await waitFor(() => {
@@ -24,7 +24,7 @@ describe("Component: ChangePassword", () => {
   });
 
   it("should enter new password", async () => {
-    render(<ChangePassword setOpen={() => {}} />);
+    render(<ChangePassword onClose={() => {}} />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/newPassword/i);
     fireEvent.change(input, { target: { value: "qwerty123" } });
     await waitFor(() => {

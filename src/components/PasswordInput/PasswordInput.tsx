@@ -10,9 +10,12 @@ interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement>
   value: string;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = (props) => {
-  const { id, placeholder, value, ...restProps } = props;
-
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  id,
+  placeholder,
+  value,
+  ...restProps
+}) => {
   const [visible, setVisible] = useState(false);
 
   return (

@@ -5,7 +5,7 @@ import styles from "./Navigation.module.scss";
 const Navigation: React.FC = () => {
   return (
     <nav className={styles.wrapper}>
-      <ul className={styles.tabList}>
+      <ul className={styles.tabs}>
         {NAVIGATION_TABS.map((tab) => (
           <Tab key={tab} tab={tab} />
         ))}

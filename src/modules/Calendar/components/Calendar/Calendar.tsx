@@ -1,17 +1,20 @@
 import { useMemo } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Calendar as ReactBigCalendar, dayjsLocalizer } from "react-big-calendar";
-import { useRecoilValue } from "recoil";
 import dayjs from "dayjs";
 import EventItem from "../EventItem/EventItem";
-import { transactionsState } from "../../../../app/atoms/transactionsAtom";
 import { getTransactionEvents } from "../../helpers";
+import { useGetTransactionsQuery } from "../../../../app/services/transactionApi";
+import { auth } from "../../../../firebase";
 import styles from "./Calendar.module.scss";
 import "./calendar.css";
 
 const Calendar: React.FC = () => {
   const localizer = dayjsLocalizer(dayjs);
 
-  const { transactions } = useRecoilValue(transactionsState);
+  const [currentUser] = useAuthState(auth);
+
+  const { data: transactions = [] } = useGetTransactionsQuery(currentUser?.uid as string);
 
   const events = useMemo(() => {
     return getTransactionEvents(transactions);

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { useRecoilState, useSetRecoilState } from "recoil";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
@@ -9,14 +8,14 @@ import { NumberFormatValues } from "react-number-format";
 import {
   AccountSelect,
   AmountInput,
+  CategoryInput,
   CategorySelect,
   DateInput,
   TextInput,
 } from "../../../../components";
 import { Button } from "../../../../ui";
-import { accountsState } from "../../../../app/atoms/accountsAtom";
-import { transactionsState } from "../../../../app/atoms/transactionsAtom";
-import { createExpenseTransaction } from "../../api";
+import { useGetAccountsQuery } from "../../../../app/services/accountApi";
+import { useCreateTransactionMutation } from "../../../../app/services/transactionApi";
 import { auth } from "../../../../firebase";
 import { SelectOption, Transaction } from "../../../../types";
 
@@ -29,15 +28,17 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
 
   const { t } = useTranslation();
 
-  const setTransactionsStateValue = useSetRecoilState(transactionsState);
-  const [{ accounts }, setAccountStateValue] = useRecoilState(accountsState);
+  const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
+
+  const [createTransaction, { isLoading }] = useCreateTransactionMutation();
 
   const [selectedAccount, setSelectedAccount] = useState<SelectOption | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<SelectOption | null>(null);
   const [transactionAmount, setTransactionAmount] = useState("");
   const [transactionDate, setTransactionDate] = useState(new Date());
   const [transactionComment, setTransactionComment] = useState("");
-  const [transactionCreating, setTransactionCreating] = useState(false);
+
+  const [categoryInputVisible, setCategoryInputVisible] = useState(false);
 
   const onSelectAccount = (option: SelectOption) => {
     setSelectedAccount(option);
@@ -60,7 +61,12 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
 
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
+
     const currentAccount = accounts.find((account) => account.id === selectedAccount?.id);
+
+    if (!currentUser) {
+      return;
+    }
     if (!currentAccount || !selectedAccount) {
       toast.error(t("accountSelectedError"));
       return;
@@ -87,7 +93,7 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
     const transaction: Transaction = {
       id: uuidv4(),
       type: "expense",
-      amount: formattedTransactionAmount,
+      amount: -formattedTransactionAmount,
       category: selectedCategory.label,
       accountId: selectedAccount.id,
       accountName: selectedAccount.label,
@@ -95,34 +101,16 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
       comment: formattedTransactionComment ? formattedTransactionComment : null,
       createdAt: Timestamp.fromDate(transactionDate),
     };
-    setTransactionCreating(true);
     try {
-      await createExpenseTransaction(currentUser?.uid, transaction);
-      setTransactionsStateValue((prev) => ({
-        ...prev,
-        transactions: [transaction, ...prev.transactions],
-      }));
-      setAccountStateValue((prev) => {
-        const updatedAccounts = [...prev.accounts];
-        const updatedAccountIndex = updatedAccounts.findIndex(
-          (account) => account.id === currentAccount.id
-        );
-        const updatedAccount = updatedAccounts[updatedAccountIndex];
-        updatedAccounts[updatedAccountIndex] = {
-          ...updatedAccount,
-          balance: updatedAccount.balance - formattedTransactionAmount,
-        };
-        return {
-          ...prev,
-          accounts: updatedAccounts,
-        };
-      });
+      await createTransaction({
+        userId: currentUser.uid,
+        transaction,
+      }).unwrap();
       onClose();
     } catch (error: any) {
       console.log(error.message);
       toast.error(error.message);
     }
-    setTransactionCreating(false);
   };
 
   return (
@@ -137,11 +125,22 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
         value={transactionAmount}
         onValueChange={onAmountChange}
       />
-      <CategorySelect
-        type="expense"
-        value={selectedCategory}
-        onChange={onSelectCategory}
-      />
+      <>
+        {categoryInputVisible ? (
+          <CategoryInput
+            type="expense"
+            onSelectCategory={onSelectCategory}
+            onClose={() => setCategoryInputVisible(false)}
+          />
+        ) : (
+          <CategorySelect
+            type="expense"
+            value={selectedCategory}
+            onChange={onSelectCategory}
+            onOpenCategoryInput={() => setCategoryInputVisible(true)}
+          />
+        )}
+      </>
       <DateInput
         placeholder={t("expenseDate")}
         date={transactionDate}
@@ -154,7 +153,7 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
         value={transactionComment}
         onChange={onCommentChange}
       />
-      <Button type="submit" variant="orange" loading={transactionCreating}>
+      <Button type="submit" variant="orange" loading={isLoading}>
         {t("addExpense")}
       </Button>
     </form>

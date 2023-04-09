@@ -12,7 +12,7 @@ interface ResetPasswordFormProps {
 }
 
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ setSuccess }) => {
-  const [sendPasswordResetEmail, resetLoading] = useSendPasswordResetEmail(auth);
+  const [sendPasswordResetEmail, isLoading] = useSendPasswordResetEmail(auth);
 
   const { t } = useTranslation();
 
@@ -51,7 +51,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ setSuccess }) => 
         value={email}
         onChange={onEmailChange}
       />
-      <Button type="submit" loading={resetLoading}>
+      <Button type="submit" loading={isLoading}>
         {t("recover")}
       </Button>
     </form>

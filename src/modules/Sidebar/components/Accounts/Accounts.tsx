@@ -1,16 +1,16 @@
-import { useRecoilValue } from "recoil";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import useAppContext from "../../../../hooks/useAppContext";
-import { accountsState } from "../../../../app/atoms/accountsAtom";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
 import { Account } from "../../../../types";
 import styles from "./Accounts.module.scss";
 
-const Accounts: React.FC = () => {
-  const { t } = useTranslation();
+interface AccountsProps {
+  accounts: Account[];
+}
 
-  const { accounts } = useRecoilValue(accountsState);
+const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
+  const { t } = useTranslation();
 
   const { selectedAccounts, setSelectedAccounts } = useAppContext();
 
