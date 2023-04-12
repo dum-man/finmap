@@ -30,7 +30,7 @@
 - `React`
 - `React Router`
 - `Firebase`
-- `Recoil`
+- `RTK Query`
 - `Sass`
 - `React i18next`
 
