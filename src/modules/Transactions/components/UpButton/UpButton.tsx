@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { FaArrowUp } from "react-icons/fa";
 import styles from "./UpButton.module.scss";
 
@@ -8,7 +9,9 @@ interface UpButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const UpButton: React.FC<UpButtonProps> = ({ isVisible, ...restProps }) => {
   return (
     <button
-      className={`${styles.button} ${isVisible ? styles.hidden : ""}`}
+      className={classNames(styles.button, {
+        [styles.hidden]: isVisible,
+      })}
       {...restProps}
     >
       <FaArrowUp />

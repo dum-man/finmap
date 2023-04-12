@@ -1,6 +1,7 @@
 import { MutableRefObject } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { auth } from "../../../../firebase";
 import finmapLogoShort from "../../../../assets/images/finmap-logo-short.svg";
@@ -30,7 +31,10 @@ const UserInfo: React.FC<UserInfoProps> = ({ parentRef, open, setOpen }) => {
           onClick={() => setOpen((prev) => !prev)}
         >
           {currentUser?.displayName || t("accountType")}
-          <TiArrowSortedDown className={open ? styles.rotate : ""} size={18} />
+          <TiArrowSortedDown
+            className={classNames({ [styles.rotate]: open })}
+            size={18}
+          />
         </button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import { TbCash, TbCashOff } from "react-icons/tb";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
 import { setFormattedDate } from "../../../../utils";
@@ -21,9 +22,10 @@ const TransactionItem = React.forwardRef<HTMLLIElement, TransactionItemProps>(
     return (
       <li className={styles.transactionItem} ref={ref}>
         <p
-          className={`${styles.type} ${
-            type === "income" ? styles.income : styles.expense
-          }`}
+          className={classNames(styles.type, {
+            [styles.income]: type === "income",
+            [styles.expense]: type === "expense",
+          })}
         >
           {type === "income" ? <TbCash /> : <TbCashOff />}
         </p>
@@ -32,9 +34,10 @@ const TransactionItem = React.forwardRef<HTMLLIElement, TransactionItemProps>(
           <span>{setFormattedTime(createdAt.toDate())}</span>
         </p>
         <p
-          className={`${styles.amount} ${
-            type === "income" ? styles.income : styles.expense
-          }`}
+          className={classNames(styles.amount, {
+            [styles.income]: type === "income",
+            [styles.expense]: type === "expense",
+          })}
         >
           {setFormattedAmount(amount)}
         </p>

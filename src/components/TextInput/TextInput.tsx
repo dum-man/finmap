@@ -1,5 +1,6 @@
 import { HTMLInputTypeAttribute, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import classNames from "classnames";
 import { INPUT_LABEL_VARIANTS, INPUT_LENGTH_VARIANTS } from "../../app/constants";
 import styles from "./TextInput.module.scss";
 
@@ -23,7 +24,9 @@ const TextInput: React.FC<TextInputProps> = ({
   return (
     <div className={styles.wrapper}>
       <input
-        className={`${styles.input} ${value ? styles.active : ""}`}
+        className={classNames(styles.input, {
+          [styles.active]: !!value,
+        })}
         id={id}
         type={type}
         placeholder={placeholder}
@@ -33,7 +36,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onBlur={() => setLengthVisible(false)}
         {...restProps}
       />
-      {value && (
+      {!!value && (
         <motion.label
           className={styles.label}
           htmlFor={id}

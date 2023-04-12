@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { Doughnut } from "react-chartjs-2";
+import classNames from "classnames";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
 import {
   getChartData,
@@ -28,7 +29,7 @@ const ChartItem: React.FC<ChartItemProps> = ({ type, transactions }) => {
 
   return (
     <div className={styles.wrapper}>
-      <span className={`${styles.totalSum} ${styles[type]}`}>{totalSum}</span>
+      <span className={classNames(styles.totalSum, styles[type])}>{totalSum}</span>
       <Doughnut {...getChartData(transactions, type)} />
       <ul className={styles.categories}>
         {labels.map((label) => (

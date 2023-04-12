@@ -1,4 +1,4 @@
-import { Trans } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import heroImage from "../../assets/images/hero-image.webp";
 import finmapLogo from "../../assets/images/finmap-logo.svg";
 import styles from "./AuthLayout.module.scss";
@@ -8,6 +8,7 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
+  const { t } = useTranslation();
   return (
     <main className={styles.main}>
       <h1 className="visually-hidden">Welcome to Finmap</h1>
@@ -15,7 +16,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
         <h2 className="visually-hidden">Finmap benefits</h2>
         <img src={finmapLogo} width={195} height={55} alt="finmap logo" />
         <p className={styles.lead}>
-          <Trans i18nKey="hero"></Trans>
+          <Trans>{t("hero")}</Trans>
         </p>
         <div className={styles.blur} />
         <img

@@ -53,7 +53,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
         onChange={onChange}
       />
       <AnimatePresence initial={false}>
-        {value && (
+        {!!value && (
           <motion.span
             className={styles.label}
             variants={INPUT_LABEL_VARIANTS}

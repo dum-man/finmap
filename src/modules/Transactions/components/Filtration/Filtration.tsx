@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
+import classNames from "classnames";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { IoClose, IoSearch } from "react-icons/io5";
 import { Datepicker, Select } from "../../../../ui";
@@ -52,9 +53,10 @@ const Filtration: React.FC = () => {
   return (
     <>
       <div
-        className={`${styles.container} ${
-          filterMenuOpen ? styles.visible : styles.hidden
-        }`}
+        className={classNames(styles.container, {
+          [styles.visible]: filterMenuOpen,
+          [styles.hidden]: !filterMenuOpen,
+        })}
       >
         <div className={styles.datepickerWrapper}>
           <div className={styles.selectWrapper}>

@@ -20,7 +20,7 @@ const SelectedAccounts: React.FC = () => {
 
   return (
     <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-      {selectedAccounts.length > 0 && (
+      {!!selectedAccounts.length && (
         <motion.div variants={VARIANTS} initial="hidden" animate="visible" exit="exit">
           <span className={styles.divider} />
           <div className={styles.wrapper}>

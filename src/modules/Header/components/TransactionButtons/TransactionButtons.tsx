@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import { BiTransfer } from "react-icons/bi";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import styles from "./TransactionButtons.module.scss";
@@ -20,7 +21,7 @@ const TransactionButtons: React.FC<TransactionButtonsProps> = ({
     <ul className={styles.transactionButtons}>
       <li>
         <button
-          className={`${styles.button} ${styles.buttonIncome}`}
+          className={classNames(styles.button, styles.buttonIncome)}
           onClick={() => setCreateIncomeOpen(true)}
         >
           <FiPlus />
@@ -29,7 +30,7 @@ const TransactionButtons: React.FC<TransactionButtonsProps> = ({
       </li>
       <li>
         <button
-          className={`${styles.button} ${styles.buttonExpense}`}
+          className={classNames(styles.button, styles.buttonExpense)}
           onClick={() => setCreateExpenseOpen(true)}
         >
           <FiMinus />
@@ -38,7 +39,7 @@ const TransactionButtons: React.FC<TransactionButtonsProps> = ({
       </li>
       <li>
         <button
-          className={`${styles.button} ${styles.buttonTransfer}`}
+          className={classNames(styles.button, styles.buttonTransfer)}
           onClick={() => setCreateTransferOpen(true)}
         >
           <BiTransfer />

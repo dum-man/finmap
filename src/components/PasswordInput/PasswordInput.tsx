@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import classNames from "classnames";
 import { BiHide, BiShow } from "react-icons/bi";
 import { INPUT_LABEL_VARIANTS } from "../../app/constants";
 import styles from "./PasswordInput.module.scss";
@@ -21,7 +22,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   return (
     <div className={styles.inputWrapper}>
       <input
-        className={`${styles.input} ${value ? styles.active : ""}`}
+        className={classNames(styles.input, {
+          [styles.active]: !!value,
+        })}
         id={id}
         type={visible ? "text" : "password"}
         placeholder={placeholder}
@@ -29,7 +32,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         value={value}
         {...restProps}
       />
-      {value && (
+      {!!value && (
         <motion.label
           className={styles.label}
           htmlFor={id}

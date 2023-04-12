@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
+import classNames from "classnames";
 import { BsCheck } from "react-icons/bs";
 import { TiArrowSortedDown } from "react-icons/ti";
 import useOnClickOutside from "../../hooks/useOnClickOutside";
@@ -40,7 +41,7 @@ const SetLanguageDropdown: React.FC = () => {
         onClick={() => setOpen((prev) => !prev)}
       >
         {i18n.resolvedLanguage}
-        <TiArrowSortedDown className={open ? styles.rotate : ""} />
+        <TiArrowSortedDown className={classNames({ [styles.rotate]: open })} />
       </button>
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {open && (

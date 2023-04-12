@@ -1,19 +1,7 @@
-import { createContext, SetStateAction, useReducer, useState } from "react";
+import { createContext, SetStateAction, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import useSortReducer from "../hooks/useSortReducer";
 import { Account, DatepickerDate, SelectOption, SortState } from "../types";
-
-enum SortActionType {
-  UP = "UP",
-  DOWN = "DOWN",
-}
-
-interface SortAction {
-  type: SortActionType;
-  payload: {
-    type: string;
-    value: string;
-  };
-}
 
 export interface Context {
   sidebarOpen: boolean;
@@ -53,44 +41,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDates, setSelectedDates] = useState<DatepickerDate>(null);
 
-  const initialFilterState = {
-    transcationType: "",
-    dateType: "",
-    amountType: "",
-  };
-
-  function sortReducer(state: SortState, action: SortAction) {
-    const { type, payload } = action;
-    switch (type) {
-      case SortActionType.UP:
-        return {
-          ...initialFilterState,
-          [payload.type]: payload.value,
-        };
-      case SortActionType.DOWN:
-        return {
-          ...initialFilterState,
-          [payload.type]: payload.value,
-        };
-      default:
-        return state;
-    }
-  }
-
-  const [sortState, dispatch] = useReducer(sortReducer, initialFilterState);
-
-  const sortDispatch = (type: string) => {
-    dispatch({
-      type:
-        sortState[type as keyof typeof sortState] === "up"
-          ? SortActionType.DOWN
-          : SortActionType.UP,
-      payload: {
-        type,
-        value: sortState[type as keyof typeof sortState] === "up" ? "down" : "up",
-      },
-    });
-  };
+  const { sortState, sortDispatch } = useSortReducer();
 
   return (
     <AppContext.Provider

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { NumberFormatValues } from "react-number-format";
 import {
   AccountSelect,
   AmountInput,
@@ -14,10 +13,11 @@ import {
   TextInput,
 } from "../../../../components";
 import { Button } from "../../../../ui";
+import useTransactionForm from "../../../../hooks/useTransactionForm";
 import { useGetAccountsQuery } from "../../../../app/services/accountApi";
 import { useCreateTransactionMutation } from "../../../../app/services/transactionApi";
 import { auth } from "../../../../firebase";
-import { SelectOption, Transaction } from "../../../../types";
+import { Transaction } from "../../../../types";
 
 interface CreateIncomeFormProps {
   onClose: () => void;
@@ -32,70 +32,54 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
 
   const [createTransaction, { isLoading }] = useCreateTransactionMutation();
 
-  const [selectedAccount, setSelectedAccount] = useState<SelectOption | null>(null);
-  const [selectedCategory, setSelectedCategory] = useState<SelectOption | null>(null);
-  const [transactionAmount, setTransactionAmount] = useState("");
-  const [transactionDate, setTransactionDate] = useState(new Date());
-  const [transactionComment, setTransactionComment] = useState("");
+  const {
+    formState: { toAccount, category, amount, date, comment },
+    onChangeToAccount,
+    onChangeCategory,
+    onChangeAmount,
+    onChangeDate,
+    onChangeComment,
+  } = useTransactionForm();
 
   const [categoryInputVisible, setCategoryInputVisible] = useState(false);
-
-  const onSelectAccount = (option: SelectOption) => {
-    setSelectedAccount(option);
-  };
-
-  const onSelectCategory = (option: SelectOption) => {
-    setSelectedCategory(option);
-  };
-
-  const onAmountChange = (values: NumberFormatValues) => {
-    setTransactionAmount(values.value);
-  };
-
-  const onCommentChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if (evt.target.value.length > 60) {
-      return;
-    }
-    setTransactionComment(evt.target.value);
-  };
 
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
 
-    const currentAccount = accounts.find((account) => account.id === selectedAccount?.id);
+    const currentAccount = accounts.find((account) => account.id === toAccount?.id);
 
     if (!currentUser) {
       return;
     }
-    if (!currentAccount || !selectedAccount) {
+    if (!currentAccount || !toAccount) {
       toast.error(t("accountSelectedError"));
       return;
     }
-    if (!transactionAmount) {
+    if (!amount) {
       toast.error(t("sumError"));
       return;
     }
-    if (!selectedCategory) {
+    if (!category) {
       toast.error(t("categorySelectedError"));
       return;
     }
-    if (!transactionDate) {
+    if (!date) {
       toast.error(t("dateError"));
       return;
     }
-    const formattedTransactionAmount = parseFloat(transactionAmount);
-    const formattedTransactionComment = transactionComment.trim();
+    const formattedAmount = parseFloat(amount);
+    const formattedComment = comment.trim();
 
     const transaction: Transaction = {
       id: uuidv4(),
       type: "income",
-      amount: formattedTransactionAmount,
-      category: selectedCategory.label,
-      accountId: selectedAccount.id,
-      accountName: selectedAccount.label,
-      accountAmount: currentAccount.balance + formattedTransactionAmount,
-      comment: formattedTransactionComment ? formattedTransactionComment : null,
-      createdAt: Timestamp.fromDate(transactionDate),
+      amount: formattedAmount,
+      category: category.label,
+      accountId: toAccount.id,
+      accountName: toAccount.label,
+      accountAmount: currentAccount.balance + formattedAmount,
+      comment: formattedComment ? formattedComment : null,
+      createdAt: Timestamp.fromDate(date),
     };
     try {
       await createTransaction({
@@ -113,41 +97,38 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
     <form onSubmit={handleSubmit}>
       <AccountSelect
         placeholder={t("toAccount")}
-        value={selectedAccount}
-        onChange={onSelectAccount}
+        value={toAccount}
+        onChange={onChangeToAccount}
       />
       <AmountInput
         placeholder={`${t("sum")}, $`}
-        value={transactionAmount}
-        onValueChange={onAmountChange}
+        value={amount}
+        onValueChange={onChangeAmount}
       />
       <>
         {categoryInputVisible ? (
           <CategoryInput
             type="income"
-            onSelectCategory={onSelectCategory}
+            onChangeCategory={onChangeCategory}
             onClose={() => setCategoryInputVisible(false)}
           />
         ) : (
           <CategorySelect
             type="income"
-            value={selectedCategory}
-            onChange={onSelectCategory}
+            value={category}
+            onChange={onChangeCategory}
             onOpenCategoryInput={() => setCategoryInputVisible(true)}
           />
         )}
       </>
-      <DateInput
-        placeholder={t("incomeDate")}
-        date={transactionDate}
-        setDate={setTransactionDate}
-      />
+      <DateInput placeholder={t("incomeDate")} date={date} onChange={onChangeDate} />
       <TextInput
         id="comment"
+        name="transactionComment"
         placeholder={t("leaveComment")}
         maxLength={60}
-        value={transactionComment}
-        onChange={onCommentChange}
+        value={comment}
+        onChange={onChangeComment}
       />
       <Button type="submit" loading={isLoading}>
         {t("addIncome")}

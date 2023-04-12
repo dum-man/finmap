@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import { RiBankLine } from "react-icons/ri";
@@ -30,7 +31,7 @@ const TransactionCategories: React.FC<TransactionCategoriesProps> = ({
           <AiOutlineMenu size={18} />
           {category.group === "base" ? t(category.label) : category.label}
           <button
-            className={`${styles.iconButton} ${styles.editButton}`}
+            className={classNames(styles.iconButton, styles.editButton)}
             disabled={category.group === "base"}
             onClick={() => onSelectCategory(category)}
           >

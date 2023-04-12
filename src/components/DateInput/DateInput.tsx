@@ -1,23 +1,26 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { CalendarProps } from "react-calendar";
+import classNames from "classnames";
 import { Datepicker } from "../../ui";
 import { INPUT_LABEL_VARIANTS } from "../../app/constants";
 import { setFormattedDateTime } from "../../utils";
 import styles from "./DateInput.module.scss";
 
-interface DateInputProps {
+interface DateInputProps extends CalendarProps {
   placeholder: string;
   date: Date;
-  setDate: (date: SetStateAction<Date>) => void;
 }
 
-const DateInput: React.FC<DateInputProps> = ({ placeholder, date, setDate }) => {
+const DateInput: React.FC<DateInputProps> = ({ placeholder, date, ...restProps }) => {
   const [datepickerOpen, setDatepickerOpen] = useState(false);
 
   return (
     <div className={styles.wrapper}>
       <div
-        className={`${styles.input} ${datepickerOpen ? styles.focused : ""}`}
+        className={classNames(styles.input, {
+          [styles.focused]: datepickerOpen,
+        })}
         onClick={() => setDatepickerOpen(true)}
       >
         {setFormattedDateTime(date)}
@@ -34,9 +37,9 @@ const DateInput: React.FC<DateInputProps> = ({ placeholder, date, setDate }) => 
         {datepickerOpen && (
           <Datepicker
             value={date}
-            onChange={setDate}
             onClickDay={() => setDatepickerOpen(false)}
             onClose={() => setDatepickerOpen(false)}
+            {...restProps}
           />
         )}
       </AnimatePresence>

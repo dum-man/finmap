@@ -1,12 +1,11 @@
-import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
 import { Button } from "../../../../ui";
 import { AccountSelect } from "../../../../components";
+import useSelectInput from "../../../../hooks/useSelectInput";
 import { useDeleteAccountMutation } from "../../../../app/services/accountApi";
 import { auth } from "../../../../firebase";
-import { SelectOption } from "../../../../types";
 
 interface DeleteAccountFormProps {
   onClose: () => void;
@@ -19,11 +18,7 @@ const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ onClose }) => {
 
   const [deleteAccount, { isLoading }] = useDeleteAccountMutation();
 
-  const [selectedAccount, setSelectedAccount] = useState<SelectOption | null>(null);
-
-  const onSelectAccount = (account: SelectOption) => {
-    setSelectedAccount(account);
-  };
+  const [selectedAccount, onChangeAccount] = useSelectInput(null);
 
   const handleDeleteAccount = async (evt: React.FormEvent) => {
     evt.preventDefault();
@@ -53,7 +48,7 @@ const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ onClose }) => {
       <AccountSelect
         placeholder={t("selectAccount")}
         value={selectedAccount}
-        onChange={onSelectAccount}
+        onChange={onChangeAccount}
       />
       <Button type="submit" variant="orange" loading={isLoading}>
         {t("delete")}

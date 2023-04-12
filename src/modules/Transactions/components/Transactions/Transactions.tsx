@@ -24,6 +24,47 @@ const Transactions: React.FC = () => {
     currentUser?.uid as string
   );
 
+  // const [lastTransaction, setLastTransaction] = useState<Transaction | null>(null);
+
+  // const {
+  //   data: transactions,
+  //   isLoading,
+  //   isSuccess,
+  // } = useGetTransactionsQuery({
+  //   userId: currentUser?.uid as string,
+  //   lastTransaction,
+  // });
+
+  // console.log(lastTransaction);
+
+  // const [getTransactions, { data: transactions, isLoading, isSuccess }] =
+  //   useLazyGetTransactionsQuery();
+
+  // const onSetLastTransaction = () => {
+  //   console.log("onSetLastTransaction");
+  //   if (!transactions) {
+  //     return;
+  //   }
+  //   setLastTransaction(transactions[transactions.length - 1]);
+  // };
+
+  // const getTransactionsHandler = () => {
+  //   getTransactions({ userId: currentUser?.uid, lastTransaction }).then(
+  //     (value) =>
+  //       setLastTransaction(value.data ? value.data[value.data?.length - 1] : null)
+  //   );
+  // };
+
+  // useEffect(() => {
+  //   getTransactionsHandler();
+  // }, []);
+
+  // const lastTransactionRef = useInfiniteScroll(
+  //   isLoading,
+  //   lastTransaction,
+  //   getTransactionsHandler
+  // );
+
   const sortedTransactions = useSortTransactions(sortState, transactions);
 
   const filteredTransactions = useFilterTranscations(sortedTransactions, {
@@ -69,7 +110,11 @@ const Transactions: React.FC = () => {
                     );
                   } else if (filteredTransactions.length - 2 === index) {
                     return (
-                      <TransactionItem key={transaction.id} transaction={transaction} />
+                      <TransactionItem
+                        // ref={lastTransactionRef}
+                        key={transaction.id}
+                        transaction={transaction}
+                      />
                     );
                   }
                   return (
@@ -77,7 +122,7 @@ const Transactions: React.FC = () => {
                   );
                 })}
               </ul>
-              {entry && <UpButton isVisible={isVisible} onClick={onScrollToTop} />}
+              {!!entry && <UpButton isVisible={isVisible} onClick={onScrollToTop} />}
             </>
           )}
         </>

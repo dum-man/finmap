@@ -9,7 +9,6 @@ describe("Component: UserAccountMenu", () => {
         onClose={() => {}}
         setSetUsernameOpen={() => {}}
         parentRef={null}
-        children={null}
       />
     );
     await waitFor(() => {

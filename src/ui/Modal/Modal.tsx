@@ -1,3 +1,5 @@
+import ReactDOM from "react-dom";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { MODAL_VARIANTS } from "../../app/constants";
 import styles from "./Modal.module.scss";
@@ -8,7 +10,12 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
-  return (
+  const containerElement = useMemo(
+    () => document.getElementById("portal-container"),
+    []
+  ) as HTMLElement;
+
+  const element = (
     <motion.div
       className={styles.backdrop}
       onClick={onClose}
@@ -29,6 +36,8 @@ const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
       </motion.div>
     </motion.div>
   );
+
+  return ReactDOM.createPortal(element, containerElement);
 };
 
 export default Modal;

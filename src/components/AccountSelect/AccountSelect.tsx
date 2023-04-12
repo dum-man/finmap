@@ -41,7 +41,7 @@ const AccountSelect: React.FC<AccountSelectProps> = ({
         onChange={onChange}
       />
 
-      {value && (
+      {!!value && (
         <motion.span
           className={styles.label}
           variants={INPUT_LABEL_VARIANTS}

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import styles from "./Skeleton.module.scss";
 
 const Skeleton: React.FC = () => {
@@ -5,13 +6,13 @@ const Skeleton: React.FC = () => {
     <ul className={styles.wrapper}>
       {[...Array(4)].map((_, i) => (
         <li key={i} className={styles.transferItem}>
-          <span className={`${styles.skeleton} ${styles.icon}`} />
+          <span className={classNames(styles.skeleton, styles.icon)} />
           <div className={styles.transferWrapper}>
-            <span className={`${styles.skeleton} ${styles.amount}`} />
-            <span className={`${styles.skeleton} ${styles.accounts}`} />
-            <span className={`${styles.skeleton} ${styles.date}`} />
+            <span className={classNames(styles.skeleton, styles.amount)} />
+            <span className={classNames(styles.skeleton, styles.accounts)} />
+            <span className={classNames(styles.skeleton, styles.date)} />
           </div>
-          <span className={`${styles.skeleton} ${styles.button}`} />
+          <span className={classNames(styles.skeleton, styles.button)} />
         </li>
       ))}
     </ul>

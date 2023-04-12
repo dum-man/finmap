@@ -4,9 +4,7 @@ import SidebarModule from "../../../../modules/Sidebar";
 import CreateAccount from "../../../../modules/CreateAccount";
 import DeleteAccount from "../../../../modules/DeleteAccount";
 
-interface SidebarProps {}
-
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar: React.FC = () => {
   const [createAccountOpen, setCreateAccountOpen] = useState(false);
   const [deleteAccountOpen, setDeleteAccountOpen] = useState(false);
 

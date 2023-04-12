@@ -4,6 +4,7 @@ import {
   NumericFormatProps,
 } from "react-number-format";
 import { AnimatePresence, motion } from "framer-motion";
+import classNames from "classnames";
 import { INPUT_LABEL_VARIANTS } from "../../app/constants";
 import styles from "./AmountInput.module.scss";
 
@@ -24,7 +25,7 @@ const AmountInput: React.FC<AmountInputProps> = ({
   return (
     <div className={styles.wrapper}>
       <NumericFormat
-        className={`${styles.input} ${value ? styles.active : ""}`}
+        className={classNames(styles.input, { [styles.active]: !!value })}
         id="amount"
         placeholder={placeholder}
         thousandSeparator=" "
@@ -36,7 +37,7 @@ const AmountInput: React.FC<AmountInputProps> = ({
         {...restProps}
       />
       <AnimatePresence initial={false}>
-        {value && (
+        {!!value && (
           <motion.label
             className={styles.label}
             htmlFor="amount"

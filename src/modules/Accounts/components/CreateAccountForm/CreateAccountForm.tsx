@@ -5,9 +5,9 @@ import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import { NumberFormatValues } from "react-number-format";
 import { BsArrowRight, BsCheck } from "react-icons/bs";
 import { AmountInput, TextInput } from "../../../../components";
+import useAmountInput from "../../../../hooks/useAmountInput";
 import {
   useCreateAccountMutation,
   useLazyCheckAccountExistsQuery,
@@ -30,17 +30,13 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   const [createAccount] = useCreateAccountMutation();
 
   const [accountName, setAccountName] = useState("");
-  const [accountBalance, setAccountBalance] = useState("0");
+  const [accountBalance, onBalanceChange] = useAmountInput("0");
 
   const [currentInput, setCurrentInput] = useState("name");
   const [accountCreating, setAccountCreating] = useState(false);
 
   const onAccountNameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setAccountName(evt.target.value);
-  };
-
-  const onBalanceChange = (values: NumberFormatValues) => {
-    setAccountBalance(values.value);
   };
 
   const handleSubmit = async (evt: React.FormEvent) => {

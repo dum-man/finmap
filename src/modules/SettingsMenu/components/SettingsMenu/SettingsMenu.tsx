@@ -17,7 +17,6 @@ interface SettingsMenuProps {
   ) => void;
   setChangePasswordOpen: (open: React.SetStateAction<boolean>) => void;
   setSetLanguageOpen: (open: React.SetStateAction<boolean>) => void;
-  children: React.ReactNode;
 }
 
 const SettingsMenu: React.FC<SettingsMenuProps> = ({
@@ -28,7 +27,6 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({
   setCategoryType,
   setChangePasswordOpen,
   setSetLanguageOpen,
-  children,
 }) => {
   const containerRef = useRef(null);
 
@@ -57,7 +55,6 @@ const SettingsMenu: React.FC<SettingsMenuProps> = ({
           />
         </div>
       </div>
-      {children}
     </motion.div>
   );
 };

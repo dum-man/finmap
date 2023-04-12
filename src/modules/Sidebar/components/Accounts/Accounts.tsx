@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
+import classNames from "classnames";
 import useAppContext from "../../../../hooks/useAppContext";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
 import { Account } from "../../../../types";
@@ -32,9 +33,9 @@ const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
         {accounts.map((account) => (
           <motion.li
             key={account.id}
-            className={`${styles.accountItem} ${
-              isAccountSelected(account) ? styles.selected : ""
-            }`}
+            className={classNames(styles.accountItem, {
+              [styles.selected]: isAccountSelected(account),
+            })}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}

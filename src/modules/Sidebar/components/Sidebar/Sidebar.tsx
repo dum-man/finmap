@@ -1,4 +1,5 @@
 import { useAuthState } from "react-firebase-hooks/auth";
+import classNames from "classnames";
 import TotalAmount from "../TotalAmount/TotalAmount";
 import Accounts from "../Accounts/Accounts";
 import AccountButtons from "../AccountButtons/AccountButtons";
@@ -45,7 +46,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <section
-      className={`${styles.container} ${sidebarOpen ? styles.open : styles.close}`}
+      className={classNames(styles.container, {
+        [styles.open]: sidebarOpen,
+        [styles.close]: !sidebarOpen,
+      })}
     >
       <TotalAmount totalAmount={totalAmount} />
       <AccountButtons

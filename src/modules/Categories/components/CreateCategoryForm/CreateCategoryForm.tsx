@@ -151,7 +151,7 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
         >
           <IoClose />
         </button>
-        {editingCategory && (
+        {!!editingCategory && (
           <button
             className={styles.iconButton}
             type="button"

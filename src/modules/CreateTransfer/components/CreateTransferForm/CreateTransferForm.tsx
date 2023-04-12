@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { NumberFormatValues } from "react-number-format";
 import { AccountSelect, AmountInput, DateInput, TextInput } from "../../../../components";
 import { Button } from "../../../../ui";
+import useTransactionForm from "../../../../hooks/useTransactionForm";
 import { useCreateTransferMutation } from "../../../../app/services/transferApi";
 import { useGetAccountsQuery } from "../../../../app/services/accountApi";
 import { auth } from "../../../../firebase";
-import { SelectOption, Transfer } from "../../../../types";
+import { Transfer } from "../../../../types";
 
 interface CreateTransferFormProps {
   onClose: () => void;
@@ -24,32 +23,14 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
   const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
   const [createTransfer, { isLoading }] = useCreateTransferMutation();
 
-  const [transferDate, setTransferDate] = useState(new Date());
-  const [selectedFromAccount, setSelectedFromAccount] = useState<SelectOption | null>(
-    null
-  );
-  const [selectedToAccount, setSelectedToAccount] = useState<SelectOption | null>(null);
-  const [transferAmount, setTransferAmount] = useState("");
-  const [transferComment, setTransferComment] = useState("");
-
-  const onSelectFromAccount = (option: SelectOption) => {
-    setSelectedFromAccount(option);
-  };
-
-  const onSelectToAccount = (option: SelectOption) => {
-    setSelectedToAccount(option);
-  };
-
-  const onAmountChange = (values: NumberFormatValues) => {
-    setTransferAmount(values.value);
-  };
-
-  const onCommentChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    if (evt.target.value.length > 60) {
-      return;
-    }
-    setTransferComment(evt.target.value);
-  };
+  const {
+    formState: { fromAccount, toAccount, amount, date, comment },
+    onChangeToAccount,
+    onChangeFromAccount,
+    onChangeAmount,
+    onChangeDate,
+    onChangeComment,
+  } = useTransactionForm();
 
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
@@ -58,48 +39,46 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
       return;
     }
 
-    const fromAccount = accounts?.find(
-      (account) => account.id === selectedFromAccount?.id
-    );
-    const toAccount = accounts.find((account) => account.id === selectedToAccount?.id);
+    const fromAccountData = accounts.find((account) => account.id === fromAccount?.id);
+    const toAccountData = accounts.find((account) => account.id === toAccount?.id);
 
-    if (!transferDate) {
+    if (!date) {
       toast.error(t("dateError"));
       return;
     }
-    if (!fromAccount || !toAccount) {
+    if (!fromAccountData || !toAccountData) {
       toast.error(t("accountSelectedError"));
       return;
     }
-    if (fromAccount.id === toAccount.id) {
+    if (fromAccountData.id === toAccountData.id) {
       toast.error("Select different accounts");
       return;
     }
-    if (!transferAmount) {
+    if (!amount) {
       toast.error(t("sumError"));
       return;
     }
-    const formattedTransferAmount = parseFloat(transferAmount);
-    const formattedTransferComment = transferComment.trim();
+    const formattedAmount = parseFloat(amount);
+    const formattedComment = comment.trim();
 
-    if (fromAccount.balance - formattedTransferAmount < 0) {
+    if (fromAccountData.balance - formattedAmount < 0) {
       toast.error(t("insufficientFunds"));
       return;
     }
     const transfer: Transfer = {
       id: uuidv4(),
-      amount: formattedTransferAmount,
-      comment: formattedTransferComment ? formattedTransferComment : null,
-      createdAt: Timestamp.fromDate(transferDate),
+      amount: formattedAmount,
+      comment: formattedComment ? formattedComment : null,
+      createdAt: Timestamp.fromDate(date),
       fromAccount: {
-        id: fromAccount.id,
-        name: fromAccount.name,
-        balance: fromAccount.balance - formattedTransferAmount,
+        id: fromAccountData.id,
+        name: fromAccountData.name,
+        balance: fromAccountData.balance - formattedAmount,
       },
       toAccount: {
-        id: toAccount.id,
-        name: toAccount.name,
-        balance: toAccount.balance + formattedTransferAmount,
+        id: toAccountData.id,
+        name: toAccountData.name,
+        balance: toAccountData.balance + formattedAmount,
       },
     };
     try {
@@ -113,32 +92,28 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <DateInput
-        placeholder={t("transferDate")}
-        date={transferDate}
-        setDate={setTransferDate}
-      />
+      <DateInput placeholder={t("transferDate")} date={date} onChange={onChangeDate} />
       <AccountSelect
         placeholder={t("fromAccount")}
-        value={selectedFromAccount}
-        onChange={onSelectFromAccount}
+        value={fromAccount}
+        onChange={onChangeFromAccount}
       />
       <AccountSelect
         placeholder={t("toAccount")}
-        value={selectedToAccount}
-        onChange={onSelectToAccount}
+        value={toAccount}
+        onChange={onChangeToAccount}
       />
       <AmountInput
         placeholder={`${t("sum")}, $`}
-        value={transferAmount}
-        onValueChange={onAmountChange}
+        value={amount}
+        onValueChange={onChangeAmount}
       />
       <TextInput
         id="comment"
         placeholder={t("leaveComment")}
         maxLength={60}
-        value={transferComment}
-        onChange={onCommentChange}
+        value={comment}
+        onChange={onChangeComment}
       />
       <Button type="submit" variant="black" loading={isLoading}>
         {t("addTransfer")}

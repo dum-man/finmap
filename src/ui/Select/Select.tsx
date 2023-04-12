@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
+import classNames from "classnames";
 import { BsCheckLg } from "react-icons/bs";
 import { SELECT_VARIANTS } from "../../app/constants";
 import styles from "./Select.module.scss";
@@ -117,11 +118,10 @@ const Select: React.FC<SelectProps> = ({
                 {options.map((option, index) => (
                   <li
                     key={option.id}
-                    className={`
-                        ${styles.option} 
-                        ${isOptionSelected(option) ? styles.selected : ""}
-                        ${index === highlightedIndex ? styles.highlighted : ""}
-                    `}
+                    className={classNames(styles.option, {
+                      [styles.selected]: isOptionSelected(option),
+                      [styles.highlighted]: index === highlightedIndex,
+                    })}
                     onMouseEnter={() => setHighlightedIndex(index)}
                     onClick={(evt) => selectOption(option, evt)}
                   >

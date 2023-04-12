@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
+import classNames from "classnames";
 import { Timestamp } from "firebase/firestore";
 import { IoClose } from "react-icons/io5";
 import { BsCheckLg } from "react-icons/bs";
@@ -18,13 +19,13 @@ import styles from "./CategoryInput.module.scss";
 
 interface CategoryInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type: "income" | "expense";
-  onSelectCategory: (category: SelectOption) => void;
+  onChangeCategory: (category: SelectOption) => void;
   onClose: () => void;
 }
 
 const CategoryInput: React.FC<CategoryInputProps> = ({
   type,
-  onSelectCategory,
+  onChangeCategory,
   onClose,
   ...restProps
 }) => {
@@ -78,7 +79,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
         userId: currentUser.uid,
         category,
       }).unwrap();
-      onSelectCategory(data);
+      onChangeCategory(data);
       onCloseCategoryInput();
     } catch (error: any) {
       console.log(error.message);
@@ -90,7 +91,9 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
   return (
     <div className={styles.wrapper}>
       <input
-        className={`${styles.input} ${categoryName ? styles.active : ""}`}
+        className={classNames(styles.input, {
+          [styles.active]: !!categoryName,
+        })}
         placeholder={t("categoryName").toString()}
         maxLength={20}
         disabled={categoryCreating}
@@ -98,7 +101,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
         onChange={onChangeCategoryName}
         {...restProps}
       />
-      {categoryName && (
+      {!!categoryName && (
         <motion.span
           className={styles.label}
           variants={INPUT_LABEL_VARIANTS}

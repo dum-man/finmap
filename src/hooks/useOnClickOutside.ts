@@ -1,5 +1,4 @@
-import { RefObject } from "react";
-
+import { RefObject, useMemo } from "react";
 import { useEventListener } from "usehooks-ts";
 
 type Handler = (event: MouseEvent) => void;
@@ -10,6 +9,11 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
   handler: Handler,
   mouseEvent: "mousedown" | "mouseup" = "mousedown"
 ): void {
+  const portalContainer = useMemo(
+    () => document.getElementById("portal-container"),
+    []
+  ) as HTMLElement;
+
   useEventListener(mouseEvent, (event) => {
     const el = ref?.current;
     const parentEl = parentRef?.current;
@@ -17,6 +21,7 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
     if (
       !el ||
       !parentEl ||
+      portalContainer.contains(event.target as Node) ||
       el.contains(event.target as Node) ||
       parentEl.contains(event.target as Node)
     ) {

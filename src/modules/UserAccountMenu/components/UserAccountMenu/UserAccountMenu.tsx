@@ -10,14 +10,12 @@ interface UserAccountMenuProps {
   onClose: () => void;
   parentRef: MutableRefObject<null> | null;
   setSetUsernameOpen: (open: React.SetStateAction<boolean>) => void;
-  children: React.ReactNode;
 }
 
 const UserAccountMenu: React.FC<UserAccountMenuProps> = ({
   onClose,
   parentRef,
   setSetUsernameOpen,
-  children,
 }) => {
   const containerRef = useRef(null);
 
@@ -35,7 +33,6 @@ const UserAccountMenu: React.FC<UserAccountMenuProps> = ({
       <AccountType />
       <span className={styles.divider} />
       <EditAccountButton setOpen={setSetUsernameOpen} />
-      {children}
     </motion.div>
   );
 };

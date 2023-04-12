@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Spinner from "../Spinner/Spinner";
 import styles from "./Button.module.scss";
 
@@ -12,7 +13,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
-      className={`${styles.button} ${styles[variant]}`}
+      className={classNames(styles.button, styles[variant])}
       disabled={loading}
       {...restProps}
     >

@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import useAppContext from "../../../../hooks/useAppContext";
 import styles from "./Tab.module.scss";
 
@@ -14,7 +15,7 @@ const Tab: React.FC<TabProps> = ({ tab }) => {
   return (
     <li>
       <button
-        className={`${styles.button} ${tab === selectedTab ? styles.selected : ""}`}
+        className={classNames(styles.button, { [styles.selected]: tab === selectedTab })}
         onClick={() => setSelectedTab(tab)}
       >
         {t(tab)}
