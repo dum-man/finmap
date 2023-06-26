@@ -1,7 +1,8 @@
-import AppLayout from "../../../../layouts/AppLayout/AppLayout";
-import Header from "../Header/Header";
-import Sidebar from "../Sidebar/Sidebar";
+import { AppLayout } from "../../../../layouts";
+import Header from "../../../../modules/Header";
+import Sidebar from "../../../../modules/Sidebar";
 import Board from "../Board/Board";
+import Container from "../Container/Container";
 import styles from "./Main.module.scss";
 
 const Main: React.FC = () => {
@@ -13,6 +14,7 @@ const Main: React.FC = () => {
         <Sidebar />
         <Board />
       </div>
+      <Container />
     </AppLayout>
   );
 };

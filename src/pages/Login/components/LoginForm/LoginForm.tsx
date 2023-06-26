@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import { FcGoogle } from "react-icons/fc";
-import { PasswordInput, TextInput } from "../../../../components";
-import { Button, Spinner } from "../../../../ui";
-import ResetPassword from "../../../../modules/ResetPassword";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { EMAIL_FORMAT } from "../../../../app/constants";
 import {
   useCreateUserDocumentMutation,
   useLazyCheckUserExistsQuery,
 } from "../../../../app/services/userApi";
+import { toggleResetPasswordOpen } from "../../../../app/slices/appSlice";
+import { PasswordInput, TextInput } from "../../../../components";
 import { auth } from "../../../../firebase";
-import { EMAIL_FORMAT } from "../../../../app/constants";
+import { Button, Spinner } from "../../../../ui";
 import { FIREBASE_LOGIN_ERRORS } from "../../constants";
 import styles from "./LoginForm.module.scss";
 
@@ -27,10 +27,11 @@ const LoginForm: React.FC = () => {
   const [checkUserExists] = useLazyCheckUserExistsQuery();
   const [createUserDocument] = useCreateUserDocumentMutation();
 
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [modalOpen, setModalOpen] = useState(false);
   const [signInWithEmailLoading, setSignInWithEmailLoading] = useState(false);
   const [signInWithGoogleLoading, setSignInWithGoogleLoading] = useState(false);
 
@@ -117,7 +118,7 @@ const LoginForm: React.FC = () => {
         <button
           className={styles.resetButton}
           type="button"
-          onClick={() => setModalOpen(true)}
+          onClick={() => dispatch(toggleResetPasswordOpen())}
         >
           {t("resetPasswordLink")}
         </button>
@@ -139,9 +140,6 @@ const LoginForm: React.FC = () => {
           )}
         </button>
       </form>
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {modalOpen && <ResetPassword onClose={() => setModalOpen(false)} />}
-      </AnimatePresence>
     </>
   );
 };

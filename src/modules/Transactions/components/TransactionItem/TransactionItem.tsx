@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TbCash, TbCashOff } from "react-icons/tb";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
-import { setFormattedDate } from "../../../../utils";
+import { setFormattedDate } from "../../../../utils/utils";
 import { setFormattedTime } from "../../helpers";
 import { Transaction } from "../../../../types";
 import styles from "./TransactionItem.module.scss";

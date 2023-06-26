@@ -1,27 +1,30 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { IoClose, IoSearch } from "react-icons/io5";
 import { Datepicker, Select } from "../../../../ui";
-import useAppContext from "../../../../hooks/useAppContext";
 import { setFormattedDatepickerDate } from "../../helpers";
 import { DATE_FILTER_OPTIONS } from "../../constants";
-import { SelectOption } from "../../../../types";
+import { DatepickerDate, SelectOption } from "../../../../types";
 import styles from "./Filtration.module.scss";
+import {
+  setSearchQuery,
+  setSelectedDates,
+  setSelectedOption,
+} from "../../../../app/slices/filterSlice";
+import { RootState } from "../../../../app/store";
 
-const Filtration: React.FC = () => {
+const Filtration: React.FC = React.memo(() => {
   const { t } = useTranslation();
 
-  const {
-    selectedOption,
-    setSelectedOption,
-    selectedDates,
-    setSelectedDates,
-    searchQuery,
-    setSearchQuery,
-  } = useAppContext();
+  const { selectedOption, searchQuery, selectedDates } = useSelector(
+    (state: RootState) => state.filter
+  );
+
+  const dispatch = useDispatch();
 
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const [datepickerOpen, setDatepickerOpen] = useState(false);
@@ -33,20 +36,20 @@ const Filtration: React.FC = () => {
   };
 
   const onSearchQueryChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(evt.target.value);
+    dispatch(setSearchQuery(evt.target.value));
   };
 
   const onSelectDateOption = (option: SelectOption) => {
-    setSelectedOption(option);
+    dispatch(setSelectedOption(option));
     if (selectedDates) {
-      setSelectedDates(null);
+      dispatch(setSelectedDates(null));
     }
   };
 
   const onDatepickerClose = () => {
     setDatepickerOpen(false);
     if (Array.isArray(selectedDates)) {
-      setSelectedOption({ id: "0", group: "base", label: "selectDates" });
+      dispatch(setSelectedOption({ id: "0", group: "base", label: "selectDates" }));
     }
   };
 
@@ -107,7 +110,7 @@ const Filtration: React.FC = () => {
             <Datepicker
               selectRange
               value={selectedDates}
-              onChange={setSelectedDates}
+              onChange={(dates: DatepickerDate) => dispatch(setSelectedDates(dates))}
               onClose={onDatepickerClose}
             />
           )}
@@ -118,6 +121,6 @@ const Filtration: React.FC = () => {
       </div>
     </>
   );
-};
+});
 
 export default Filtration;

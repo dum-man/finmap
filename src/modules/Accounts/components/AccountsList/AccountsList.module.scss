@@ -1,0 +1,13 @@
+@import "../../../../assets/sass/variables.scss";
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 20px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media (max-width: $mobile) {
+    padding: 0 15px;
+  }
+}

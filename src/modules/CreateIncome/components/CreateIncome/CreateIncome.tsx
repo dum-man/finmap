@@ -1,21 +1,26 @@
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { CloseButton, Modal } from "../../../../ui";
+import { Modal } from "../../../../layouts";
+import { CloseButton } from "../../../../ui";
+import { toggleCreateIncomeOpen } from "../../../../app/slices/appSlice";
 import CreateIncomeForm from "../CreateIncomeForm/CreateIncomeForm";
 import styles from "./CreateIncome.module.scss";
 
-interface CreateIncomeProps {
-  onClose: () => void;
-}
-
-const CreateIncome: React.FC<CreateIncomeProps> = ({ onClose }) => {
+const CreateIncome: React.FC = () => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
+  const handleToggle = () => {
+    dispatch(toggleCreateIncomeOpen());
+  };
+
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={handleToggle}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("newIncome")}</h2>
-        <CloseButton onClick={onClose} />
-        <CreateIncomeForm onClose={onClose} />
+        <CloseButton onClick={handleToggle} />
+        <CreateIncomeForm onClose={handleToggle} />
       </div>
     </Modal>
   );

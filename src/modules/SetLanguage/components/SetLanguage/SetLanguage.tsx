@@ -1,41 +1,26 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Button, CloseButton, Modal } from "../../../../ui";
-import Languages from "../Languages/Languages";
+import { toggleSetLanguageOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "../../../../layouts";
+import { CloseButton } from "../../../../ui";
+import Container from "../Container/Container";
 import styles from "./SetLanguage.module.scss";
 
-interface SetLanguageProps {
-  onClose: () => void;
-}
+const SetLanguage: React.FC = () => {
+  const { t } = useTranslation();
 
-const SetLanguage: React.FC<SetLanguageProps> = ({ onClose }) => {
-  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch();
 
-  const [selectedLanguage, setSelectedLanguage] = useState(() => i18n.resolvedLanguage);
-
-  const onSaveSelectedLanguage = async () => {
-    try {
-      if (selectedLanguage !== i18n.resolvedLanguage) {
-        await i18n.changeLanguage(selectedLanguage);
-      }
-      onClose();
-    } catch (error: any) {
-      console.log(error.message);
-    }
+  const handleToggle = () => {
+    dispatch(toggleSetLanguageOpen());
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={handleToggle}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("interfaceLanguage")}</h2>
-        <CloseButton onClick={onClose} />
-        <Languages
-          selectedLanguage={selectedLanguage}
-          setSelectedLanguage={setSelectedLanguage}
-        />
-        <Button type="button" onClick={onSaveSelectedLanguage}>
-          {t("saveChanges")}
-        </Button>
+        <CloseButton onClick={handleToggle} />
+        <Container onToggle={handleToggle} />
       </div>
     </Modal>
   );

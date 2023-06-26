@@ -1,28 +1,26 @@
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { BiTransfer } from "react-icons/bi";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import {
+  toggleCreateExpenseOpen,
+  toggleCreateIncomeOpen,
+  toggleCreateTransferOpen,
+} from "../../../../app/slices/appSlice";
 import styles from "./TransactionButtons.module.scss";
 
-interface TransactionButtonsProps {
-  setCreateIncomeOpen: (open: React.SetStateAction<boolean>) => void;
-  setCreateExpenseOpen: (open: React.SetStateAction<boolean>) => void;
-  setCreateTransferOpen: (open: React.SetStateAction<boolean>) => void;
-}
-
-const TransactionButtons: React.FC<TransactionButtonsProps> = ({
-  setCreateIncomeOpen,
-  setCreateExpenseOpen,
-  setCreateTransferOpen,
-}) => {
+const TransactionButtons: React.FC = () => {
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
 
   return (
     <ul className={styles.transactionButtons}>
       <li>
         <button
           className={classNames(styles.button, styles.buttonIncome)}
-          onClick={() => setCreateIncomeOpen(true)}
+          onClick={() => dispatch(toggleCreateIncomeOpen())}
         >
           <FiPlus />
           <span>{t("income")}</span>
@@ -31,7 +29,7 @@ const TransactionButtons: React.FC<TransactionButtonsProps> = ({
       <li>
         <button
           className={classNames(styles.button, styles.buttonExpense)}
-          onClick={() => setCreateExpenseOpen(true)}
+          onClick={() => dispatch(toggleCreateExpenseOpen())}
         >
           <FiMinus />
           <span>{t("expense")}</span>
@@ -40,7 +38,7 @@ const TransactionButtons: React.FC<TransactionButtonsProps> = ({
       <li>
         <button
           className={classNames(styles.button, styles.buttonTransfer)}
-          onClick={() => setCreateTransferOpen(true)}
+          onClick={() => dispatch(toggleCreateTransferOpen())}
         >
           <BiTransfer />
           <span>{t("transfer")}</span>

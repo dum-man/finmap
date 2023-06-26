@@ -1,22 +1,22 @@
-import { MutableRefObject } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { auth } from "../../../../firebase";
+import { toggleUserAccountMenuOpen } from "../../../../app/slices/appSlice";
+import { RootState } from "../../../../app/store";
 import finmapLogoShort from "../../../../assets/images/finmap-logo-short.svg";
 import styles from "./UserInfo.module.scss";
 
-interface UserInfoProps {
-  parentRef: MutableRefObject<null>;
-  open: boolean;
-  setOpen: (open: React.SetStateAction<boolean>) => void;
-}
-
-const UserInfo: React.FC<UserInfoProps> = ({ parentRef, open, setOpen }) => {
+const UserInfo: React.FC = () => {
   const [currentUser] = useAuthState(auth);
 
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
+
+  const { userAccountMenuOpen } = useSelector((state: RootState) => state.app);
 
   return (
     <div className={styles.wrapper}>
@@ -27,12 +27,11 @@ const UserInfo: React.FC<UserInfoProps> = ({ parentRef, open, setOpen }) => {
         <p className={styles.name}>Finmap</p>
         <button
           className={styles.account}
-          ref={parentRef}
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() => dispatch(toggleUserAccountMenuOpen(true))}
         >
           {currentUser?.displayName || t("accountType")}
           <TiArrowSortedDown
-            className={classNames({ [styles.rotate]: open })}
+            className={classNames({ [styles.rotate]: userAccountMenuOpen })}
             size={18}
           />
         </button>

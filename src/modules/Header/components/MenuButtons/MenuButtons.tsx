@@ -1,28 +1,21 @@
-import { MutableRefObject } from "react";
+import { useDispatch } from "react-redux";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RiExchangeLine } from "react-icons/ri";
+import {
+  toggleSettingsMenuOpen,
+  toggleTransfersMeunOpen,
+} from "../../../../app/slices/appSlice";
 import styles from "./MenuButtons.module.scss";
 
-interface MenuButtonsProps {
-  transfersMenuRef: MutableRefObject<null>;
-  setTransfersMenuOpen: (open: React.SetStateAction<boolean>) => void;
-  settingsMenuRef: MutableRefObject<null>;
-  setSettingsMenuOpen: (open: React.SetStateAction<boolean>) => void;
-}
+const MenuButtons: React.FC = () => {
+  const dispatch = useDispatch();
 
-const MenuButtons: React.FC<MenuButtonsProps> = ({
-  transfersMenuRef,
-  setTransfersMenuOpen,
-  settingsMenuRef,
-  setSettingsMenuOpen,
-}) => {
   return (
     <ul className={styles.menuButtons}>
       <li>
         <button
           className={styles.button}
-          ref={transfersMenuRef}
-          onClick={() => setTransfersMenuOpen((prev) => !prev)}
+          onClick={() => dispatch(toggleTransfersMeunOpen(true))}
         >
           <RiExchangeLine />
         </button>
@@ -30,8 +23,7 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
       <li>
         <button
           className={styles.button}
-          ref={settingsMenuRef}
-          onClick={() => setSettingsMenuOpen((prev) => !prev)}
+          onClick={() => dispatch(toggleSettingsMenuOpen(true))}
         >
           <IoSettingsOutline />
         </button>

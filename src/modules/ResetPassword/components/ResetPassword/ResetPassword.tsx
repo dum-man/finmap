@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { CloseButton, Modal } from "../../../../ui";
+import { Modal } from "../../../../layouts";
+import { CloseButton } from "../../../../ui";
 import ResetPasswordForm from "../ResetPasswordForm/ResetPasswordForm";
 import ResetSuccess from "../ResetSuccess/ResetSuccess";
 import styles from "./ResetPassword.module.scss";

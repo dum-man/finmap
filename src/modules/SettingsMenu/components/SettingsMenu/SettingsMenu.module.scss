@@ -3,7 +3,7 @@
 .container {
   position: absolute;
   top: 70px;
-  right: 0;
+  right: 25px;
   z-index: 10;
   width: 450px;
   height: 500px;
@@ -13,6 +13,7 @@
   box-shadow: $box-shadow;
   @media (max-width: $tablet) {
     width: 360px;
+    right: 15px;
   }
 }
 

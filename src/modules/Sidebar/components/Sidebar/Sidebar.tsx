@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import classNames from "classnames";
 import TotalAmount from "../TotalAmount/TotalAmount";
@@ -5,44 +6,23 @@ import Accounts from "../Accounts/Accounts";
 import AccountButtons from "../AccountButtons/AccountButtons";
 import SelectedAccounts from "../SelectedAccounts/SelectedAccounts";
 import Skeleton from "../Skeleton/Skeleton";
-import useAppContext from "../../../../hooks/useAppContext";
 import { useGetAccountsQuery } from "../../../../app/services/accountApi";
 import { auth } from "../../../../firebase";
+import { RootState } from "../../../../app/store";
 import styles from "./Sidebar.module.scss";
 
-interface SidebarProps {
-  setCreateAccountOpen: (open: React.SetStateAction<boolean>) => void;
-  setDeleteAccountOpen: (open: React.SetStateAction<boolean>) => void;
-}
-
-const Sidebar: React.FC<SidebarProps> = ({
-  setCreateAccountOpen,
-  setDeleteAccountOpen,
-}) => {
+const Sidebar: React.FC = () => {
   const [currentUser] = useAuthState(auth);
 
-  const { sidebarOpen } = useAppContext();
+  const { sidebarOpen } = useSelector((state: RootState) => state.app);
 
-  const {
-    data: accounts = [],
-    isLoading,
-    isError,
-    isSuccess,
-  } = useGetAccountsQuery(currentUser?.uid as string);
+  const { data: accounts = [], isLoading } = useGetAccountsQuery(
+    currentUser?.uid as string
+  );
 
   const totalAmount = accounts
     ? accounts.reduce((acc, current) => acc + current.balance, 0)
     : 0;
-
-  let contnet;
-
-  if (isLoading) {
-    contnet = <Skeleton />;
-  } else if (isError) {
-    contnet = <div>error</div>;
-  } else if (isSuccess) {
-    contnet = <Accounts accounts={accounts} />;
-  }
 
   return (
     <section
@@ -52,11 +32,8 @@ const Sidebar: React.FC<SidebarProps> = ({
       })}
     >
       <TotalAmount totalAmount={totalAmount} />
-      <AccountButtons
-        setCreateAccountOpen={setCreateAccountOpen}
-        setDeleteAccountOpen={setDeleteAccountOpen}
-      />
-      {contnet}
+      <AccountButtons />
+      {isLoading ? <Skeleton /> : <Accounts accounts={accounts} />}
       <SelectedAccounts />
     </section>
   );

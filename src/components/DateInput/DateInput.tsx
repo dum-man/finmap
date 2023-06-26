@@ -4,7 +4,7 @@ import { CalendarProps } from "react-calendar";
 import classNames from "classnames";
 import { Datepicker } from "../../ui";
 import { INPUT_LABEL_VARIANTS } from "../../app/constants";
-import { setFormattedDateTime } from "../../utils";
+import { setFormattedDateTime } from "../../utils/utils";
 import styles from "./DateInput.module.scss";
 
 interface DateInputProps extends CalendarProps {

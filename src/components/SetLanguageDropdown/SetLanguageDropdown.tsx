@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
 import { BsCheck } from "react-icons/bs";
 import { TiArrowSortedDown } from "react-icons/ti";
-import useOnClickOutside from "../../hooks/useOnClickOutside";
+import useOnClickOutside from "../../hooks/useClickOutside";
 import { LANGUAGES, LANGUAGE_VARIANTS } from "../../app/constants";
 import styles from "./SetLanguageDropdown.module.scss";
 
@@ -20,7 +20,7 @@ const SetLanguageDropdown: React.FC = () => {
     setOpen(false);
   };
 
-  useOnClickOutside(containerRef, parentRef, handleClickOutside);
+  useOnClickOutside(containerRef, handleClickOutside);
 
   const onLanguageClick = async (lng: string) => {
     try {

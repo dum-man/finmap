@@ -1,9 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
-import useAppContext from "../../../../hooks/useAppContext";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
+import {
+  addSelectedAccount,
+  removeSelectedAccount,
+} from "../../../../app/slices/filterSlice";
 import { Account } from "../../../../types";
+import { RootState } from "../../../../app/store";
 import styles from "./Accounts.module.scss";
 
 interface AccountsProps {
@@ -13,17 +18,19 @@ interface AccountsProps {
 const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
   const { t } = useTranslation();
 
-  const { selectedAccounts, setSelectedAccounts } = useAppContext();
+  const { selectedAccounts } = useSelector((state: RootState) => state.filter);
 
   const isAccountSelected = (account: Account) => {
     return selectedAccounts.includes(account);
   };
 
-  const onSelectAccounts = (account: Account) => {
+  const dispatch = useDispatch();
+
+  const handleSelectAccounts = (account: Account) => {
     if (isAccountSelected(account)) {
-      setSelectedAccounts((prev) => prev.filter((acc) => acc.id !== account.id));
+      dispatch(removeSelectedAccount(account));
     } else {
-      setSelectedAccounts((prev) => [...prev, account]);
+      dispatch(addSelectedAccount(account));
     }
   };
 
@@ -39,7 +46,7 @@ const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            onClick={() => onSelectAccounts(account)}
+            onClick={() => handleSelectAccounts(account)}
           >
             <p>{account.group === "base" ? t(account.name) : account.name}</p>
             {setFormattedAmount(account.balance)}

@@ -1,5 +1,9 @@
 import { Timestamp } from "firebase/firestore";
 
+export type TabType = "actions" | "analytics" | "calendar";
+
+export type CategoryType = "income" | "expense" | null;
+
 export interface Account {
   id: string;
   group: "base" | "user";

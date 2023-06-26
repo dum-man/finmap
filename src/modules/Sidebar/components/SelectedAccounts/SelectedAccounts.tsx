@@ -1,15 +1,16 @@
 import { useMemo } from "react";
+import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
-import useAppContext from "../../../../hooks/useAppContext";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
 import { VARIANTS } from "../../constants";
+import { RootState } from "../../../../app/store";
 import styles from "./SelectedAccounts.module.scss";
 
 const SelectedAccounts: React.FC = () => {
   const { t } = useTranslation();
 
-  const { selectedAccounts } = useAppContext();
+  const { selectedAccounts } = useSelector((state: RootState) => state.filter);
 
   const selectedAccountsTotalSum = useMemo(() => {
     return selectedAccounts.reduce((acc, current) => acc + current.balance, 0);

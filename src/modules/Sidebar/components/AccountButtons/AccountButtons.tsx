@@ -1,18 +1,17 @@
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BiEditAlt } from "react-icons/bi";
 import { GoPlus } from "react-icons/go";
+import {
+  toggleCreateAccountOpen,
+  toggleDeleteAccountOpen,
+} from "../../../../app/slices/appSlice";
 import styles from "./AccountButtons.module.scss";
 
-interface AccountButtonsProps {
-  setCreateAccountOpen: (open: React.SetStateAction<boolean>) => void;
-  setDeleteAccountOpen: (open: React.SetStateAction<boolean>) => void;
-}
-
-const AccountButtons: React.FC<AccountButtonsProps> = ({
-  setCreateAccountOpen,
-  setDeleteAccountOpen,
-}) => {
+const AccountButtons: React.FC = () => {
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.wrapper}>
@@ -20,14 +19,14 @@ const AccountButtons: React.FC<AccountButtonsProps> = ({
       <button
         type="button"
         className={styles.iconButton}
-        onClick={() => setCreateAccountOpen(true)}
+        onClick={() => dispatch(toggleCreateAccountOpen())}
       >
         <GoPlus />
       </button>
       <button
         type="button"
         className={styles.iconButton}
-        onClick={() => setDeleteAccountOpen(true)}
+        onClick={() => dispatch(toggleDeleteAccountOpen())}
       >
         <BiEditAlt />
       </button>

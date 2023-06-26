@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { BiTransferAlt } from "react-icons/bi";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
 import { useCancelTransferMutation } from "../../../../app/services/transferApi";
-import { setFormattedDateTime } from "../../../../utils";
+import { setFormattedDateTime } from "../../../../utils/utils";
 import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
 import { auth } from "../../../../firebase";
 import { Transfer } from "../../../../types";
@@ -22,7 +22,7 @@ const Transfers: React.FC<TransfersProps> = ({ transfers }) => {
 
   const [cancelTransfer, { isLoading }] = useCancelTransferMutation();
 
-  const onCancelTransfer = async (userId: string, transfer: Transfer) => {
+  const handleCancelTransfer = async (userId: string, transfer: Transfer) => {
     try {
       await cancelTransfer({ userId, transfer }).unwrap();
     } catch (error: any) {
@@ -59,7 +59,7 @@ const Transfers: React.FC<TransfersProps> = ({ transfers }) => {
             <button
               className={styles.cancelButton}
               disabled={isLoading}
-              onClick={() => onCancelTransfer(currentUser?.uid as string, transfer)}
+              onClick={() => handleCancelTransfer(currentUser?.uid as string, transfer)}
             >
               {t("cancel")}
             </button>

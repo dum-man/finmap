@@ -6,7 +6,6 @@ interface Args extends IntersectionObserverInit {
 
 function useIntersectionObserver(
   elementRef: RefObject<Element>,
-  loading: boolean,
   { threshold = 0, root = null, rootMargin = "0%", freezeOnceVisible = false }: Args
 ): IntersectionObserverEntry | undefined {
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
@@ -18,9 +17,7 @@ function useIntersectionObserver(
   };
 
   useEffect(() => {
-    if (loading) return;
-
-    const node = elementRef?.current; // DOM Ref
+    const node = elementRef?.current;
     const hasIOSupport = !!window.IntersectionObserver;
 
     if (!hasIOSupport || frozen || !node) return;
@@ -33,7 +30,7 @@ function useIntersectionObserver(
     return () => observer.disconnect();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [elementRef?.current, loading, JSON.stringify(threshold), root, rootMargin, frozen]);
+  }, [elementRef?.current, JSON.stringify(threshold), root, rootMargin, frozen]);
 
   return entry;
 }

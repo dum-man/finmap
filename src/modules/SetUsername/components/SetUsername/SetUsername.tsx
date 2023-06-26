@@ -1,21 +1,26 @@
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { CloseButton, Modal } from "../../../../ui";
+import { Modal } from "../../../../layouts";
+import { CloseButton } from "../../../../ui";
+import { toggleSetUsernameOpen } from "../../../../app/slices/appSlice";
 import SetUsernameForm from "../SetUsernameForm/SetUsernameForm";
 import styles from "./SetUsername.module.scss";
 
-interface SetUsernameProps {
-  onClose: () => void;
-}
-
-const SetUsername: React.FC<SetUsernameProps> = ({ onClose }) => {
+const SetUsername: React.FC = () => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    dispatch(toggleSetUsernameOpen());
+  };
+
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("username")}</h2>
-        <CloseButton onClick={onClose} />
-        <SetUsernameForm onClose={onClose} />
+        <CloseButton onClick={handleClose} />
+        <SetUsernameForm onClose={handleClose} />
       </div>
     </Modal>
   );

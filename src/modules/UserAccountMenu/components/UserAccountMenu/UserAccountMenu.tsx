@@ -1,39 +1,32 @@
-import { MutableRefObject, useRef } from "react";
-import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import { SlidingMenu } from "../../../../layouts";
 import AccountType from "../AccountType/AccountType";
 import EditAccountButton from "../EditAccountButton/EditAccountButton";
-import useOnClickOutside from "../../../../hooks/useOnClickOutside";
+import { toggleUserAccountMenuOpen } from "../../../../app/slices/appSlice";
+import { RootState } from "../../../../app/store";
 import { VARIANTS } from "../../constants";
 import styles from "./UserAccountMenu.module.scss";
 
-interface UserAccountMenuProps {
-  onClose: () => void;
-  parentRef: MutableRefObject<null> | null;
-  setSetUsernameOpen: (open: React.SetStateAction<boolean>) => void;
-}
+const UserAccountMenu: React.FC = () => {
+  const dispatch = useDispatch();
 
-const UserAccountMenu: React.FC<UserAccountMenuProps> = ({
-  onClose,
-  parentRef,
-  setSetUsernameOpen,
-}) => {
-  const containerRef = useRef(null);
+  const { userAccountMenuOpen } = useSelector((state: RootState) => state.app);
 
-  useOnClickOutside(containerRef, parentRef, onClose);
+  const handleClose = () => {
+    dispatch(toggleUserAccountMenuOpen(false));
+  };
 
   return (
-    <motion.div
-      className={styles.container}
+    <SlidingMenu
+      open={userAccountMenuOpen}
+      onClose={handleClose}
       variants={VARIANTS}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      ref={containerRef}
+      className={styles.container}
     >
       <AccountType />
       <span className={styles.divider} />
-      <EditAccountButton setOpen={setSetUsernameOpen} />
-    </motion.div>
+      <EditAccountButton />
+    </SlidingMenu>
   );
 };
 

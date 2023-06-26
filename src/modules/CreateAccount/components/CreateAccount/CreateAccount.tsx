@@ -1,21 +1,22 @@
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { CloseButton, Modal } from "../../../../ui";
+import { Modal } from "../../../../layouts";
+import { CloseButton } from "../../../../ui";
+import { toggleCreateAccountOpen } from "../../../../app/slices/appSlice";
 import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
 import styles from "./CreateAccount.module.scss";
 
-interface CreateAccountProps {
-  onClose: () => void;
-}
-
-const CreateAccount: React.FC<CreateAccountProps> = ({ onClose }) => {
+const CreateAccount: React.FC = () => {
   const { t } = useTranslation();
 
+  const dispatch = useDispatch();
+
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={() => dispatch(toggleCreateAccountOpen())}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("addAccount")}</h2>
-        <CloseButton onClick={onClose} />
-        <CreateAccountForm onClose={onClose} />
+        <CloseButton onClick={() => dispatch(toggleCreateAccountOpen())} />
+        <CreateAccountForm onClose={() => dispatch(toggleCreateAccountOpen())} />
       </div>
     </Modal>
   );

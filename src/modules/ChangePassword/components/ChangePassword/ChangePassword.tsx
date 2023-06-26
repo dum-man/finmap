@@ -1,23 +1,28 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { Modal } from "../../../../layouts";
+import { CloseButton } from "../../../../ui";
+import { toggleChangePasswordOpen } from "../../../../app/slices/appSlice";
 import ChangePasswordForm from "../ChangePasswordForm/ChangePasswordForm";
 import Success from "../ChangeSuccess/ChangeSuccess";
-import { CloseButton, Modal } from "../../../../ui";
 import styles from "./ChangePassword.module.scss";
 
-interface ChangePasswordProps {
-  onClose: () => void;
-}
-
-const ChangePassword: React.FC<ChangePasswordProps> = ({ onClose }) => {
+const ChangePassword: React.FC = () => {
   const { t } = useTranslation();
 
   const [success, setSuccess] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const handleToggle = () => {
+    dispatch(toggleChangePasswordOpen());
+  };
+
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={handleToggle}>
       <div className={styles.container}>
-        <CloseButton onClick={onClose} />
+        <CloseButton onClick={handleToggle} />
         {success ? (
           <Success />
         ) : (
