@@ -3,11 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import toast from "react-hot-toast";
-import { PasswordInput, TextInput } from "../../../../components";
-import { Button } from "../../../../ui";
-import { useCreateUserDocumentMutation } from "../../../../app/services/userApi";
-import { auth } from "../../../../firebase";
-import { EMAIL_FORMAT } from "../../../../app/constants";
+import { PasswordInput, TextInput } from "components";
+import { Button } from "ui";
+import { useCreateUserDocumentMutation } from "app/services/userApi";
+import { auth } from "app/config";
+import { EMAIL_FORMAT } from "app/constants";
 import { FIREBASE_REGISTER_ERROR } from "../../constants";
 import styles from "./SignupForm.module.scss";
 

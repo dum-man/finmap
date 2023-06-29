@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import classNames from "classnames";
 import { BiHide, BiShow } from "react-icons/bi";
-import { INPUT_LABEL_VARIANTS } from "../../app/constants";
+import { INPUT_LABEL_VARIANTS } from "app/constants";
 import styles from "./PasswordInput.module.scss";
 
 interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {

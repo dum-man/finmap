@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Calendar from "../../../../modules/Calendar";
-import Charts from "../../../../modules/Charts";
-import Navigation from "../../../../modules/Navigation";
-import Transactions from "../../../../modules/Transactions";
-import { TabType } from "../../../../types";
+import Calendar from "modules/Calendar";
+import Charts from "modules/Charts";
+import Navigation from "modules/Navigation";
+import Transactions from "modules/Transactions";
+import { TabType } from "types";
 import styles from "./Board.module.scss";
 
 const Board: React.FC = () => {

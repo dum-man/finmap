@@ -3,11 +3,11 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { GoPlus } from "react-icons/go";
-import { Select } from "../../ui";
-import { useGetCategoriesQuery } from "../../app/services/categoryApi";
-import { auth } from "../../firebase";
-import { INPUT_LABEL_VARIANTS } from "../../app/constants";
-import { SelectOption } from "../../types";
+import { Select } from "ui";
+import { useGetCategoriesQuery } from "app/services/categoryApi";
+import { auth } from "app/config";
+import { INPUT_LABEL_VARIANTS } from "app/constants";
+import { SelectOption } from "types";
 import styles from "./CategorySelect.module.scss";
 
 interface CategorySelectProps {

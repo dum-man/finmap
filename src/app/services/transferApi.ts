@@ -8,8 +8,8 @@ import {
   writeBatch,
 } from "firebase/firestore";
 import { emptySplitApi } from "./emptySplitApi";
-import { firestore } from "../../firebase";
-import { Transfer } from "../../types";
+import { firestore } from "app/config";
+import { Transfer } from "types";
 
 const transferApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({

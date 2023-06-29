@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
+import { setFormattedAmount } from "utils/setFormattedAmount";
 import styles from "./TotalAmount.module.scss";
 
 interface TotalAmountProps {

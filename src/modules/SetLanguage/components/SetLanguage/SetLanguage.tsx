@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { toggleSetLanguageOpen } from "../../../../app/slices/appSlice";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
+import { toggleSetLanguageOpen } from "app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
 import Container from "../Container/Container";
 import styles from "./SetLanguage.module.scss";
 

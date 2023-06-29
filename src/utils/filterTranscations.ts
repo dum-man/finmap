@@ -1,5 +1,5 @@
-import { Account, DatepickerDate, Transaction } from "../types";
-import { filterByDateRange, filterByMonth, filterByWeek } from "./utils";
+import { Account, DatepickerDate, Transaction } from "types";
+import { filterByDateRange, filterByMonth, filterByWeek } from "./index";
 
 interface FilterOptions {
   selectedAccounts: Account[];

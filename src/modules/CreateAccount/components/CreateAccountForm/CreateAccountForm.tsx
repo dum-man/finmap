@@ -4,15 +4,15 @@ import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { AmountInput, TextInput } from "../../../../components";
-import { Button } from "../../../../ui";
+import { AmountInput, TextInput } from "components";
+import { Button } from "ui";
 import {
   useCreateAccountMutation,
   useLazyCheckAccountExistsQuery,
-} from "../../../../app/services/accountApi";
-import useAmountInput from "../../../../hooks/useAmountInput";
-import { auth } from "../../../../firebase";
-import { Account } from "../../../../types";
+} from "app/services/accountApi";
+import useAmountInput from "hooks/useAmountInput";
+import { auth } from "app/config";
+import { Account } from "types";
 
 interface CreateAccountFormProps {
   onClose: () => void;

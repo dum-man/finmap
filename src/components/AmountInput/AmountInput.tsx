@@ -5,7 +5,7 @@ import {
 } from "react-number-format";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
-import { INPUT_LABEL_VARIANTS } from "../../app/constants";
+import { INPUT_LABEL_VARIANTS } from "app/constants";
 import styles from "./AmountInput.module.scss";
 
 interface AmountInputProps extends NumericFormatProps {

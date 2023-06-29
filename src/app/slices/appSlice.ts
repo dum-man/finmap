@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CategoryType } from "../../types";
+import { CategoryType } from "types";
 
 export interface AppState {
   resetPasswordOpen: boolean;

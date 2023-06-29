@@ -1,10 +1,7 @@
 import { useDispatch } from "react-redux";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RiExchangeLine } from "react-icons/ri";
-import {
-  toggleSettingsMenuOpen,
-  toggleTransfersMeunOpen,
-} from "../../../../app/slices/appSlice";
+import { toggleSettingsMenuOpen, toggleTransfersMeunOpen } from "app/slices/appSlice";
 import styles from "./MenuButtons.module.scss";
 
 const MenuButtons: React.FC = () => {

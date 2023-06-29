@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
+import { setFormattedAmount } from "utils/setFormattedAmount";
 import { VARIANTS } from "../../constants";
-import { RootState } from "../../../../app/store";
+import { RootState } from "app/store";
 import styles from "./SelectedAccounts.module.scss";
 
 const SelectedAccounts: React.FC = () => {

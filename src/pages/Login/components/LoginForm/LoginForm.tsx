@@ -9,15 +9,15 @@ import { useTranslation } from "react-i18next";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { EMAIL_FORMAT } from "../../../../app/constants";
+import { EMAIL_FORMAT } from "app/constants";
 import {
   useCreateUserDocumentMutation,
   useLazyCheckUserExistsQuery,
-} from "../../../../app/services/userApi";
-import { toggleResetPasswordOpen } from "../../../../app/slices/appSlice";
-import { PasswordInput, TextInput } from "../../../../components";
-import { auth } from "../../../../firebase";
-import { Button, Spinner } from "../../../../ui";
+} from "app/services/userApi";
+import { toggleResetPasswordOpen } from "app/slices/appSlice";
+import { PasswordInput, TextInput } from "components";
+import { auth } from "app/config";
+import { Button, Spinner } from "ui";
 import { FIREBASE_LOGIN_ERRORS } from "../../constants";
 import styles from "./LoginForm.module.scss";
 

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Doughnut } from "react-chartjs-2";
 import classNames from "classnames";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
+import { setFormattedAmount } from "utils/setFormattedAmount";
 import {
   getChartData,
   getLabels,
@@ -9,7 +9,7 @@ import {
   getTotalSum,
   setCategoryColor,
 } from "../../helpers";
-import { Transaction } from "../../../../types";
+import { Transaction } from "types";
 import styles from "./ChartItem.module.scss";
 
 interface ChartItemProps {

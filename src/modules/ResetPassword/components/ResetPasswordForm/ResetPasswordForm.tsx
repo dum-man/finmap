@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { TextInput } from "../../../../components";
-import { Button } from "../../../../ui";
-import { auth } from "../../../../firebase";
-import { EMAIL_FORMAT } from "../../../../app/constants";
+import { TextInput } from "components";
+import { Button } from "ui";
+import { auth } from "app/config";
+import { EMAIL_FORMAT } from "app/constants";
 
 interface ResetPasswordFormProps {
   setSuccess: (success: React.SetStateAction<boolean>) => void;

@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import { AnimatePresence, Variants, motion } from "framer-motion";
-import useClickOutside from "../../hooks/useClickOutside";
-import { MENU_VARIANTS } from "../../app/constants";
+import useClickOutside from "hooks/useClickOutside";
+import { MENU_VARIANTS } from "app/constants";
 
 interface SlidingMenuProps {
   onClose: () => void;

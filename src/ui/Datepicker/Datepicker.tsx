@@ -2,7 +2,7 @@ import Calendar, { CalendarProps } from "react-calendar";
 import { motion } from "framer-motion";
 import { HiChevronDoubleLeft } from "react-icons/hi";
 import { IoIosArrowBack } from "react-icons/io";
-import { MODAL_VARIANTS } from "../../app/constants";
+import { MODAL_VARIANTS } from "app/constants";
 import styles from "./Datepicker.module.scss";
 import "./datepicker.css";
 

@@ -4,8 +4,8 @@ import { Calendar as ReactBigCalendar, dayjsLocalizer } from "react-big-calendar
 import dayjs from "dayjs";
 import EventItem from "../EventItem/EventItem";
 import { getTransactionEvents } from "../../helpers";
-import { useGetTransactionsQuery } from "../../../../app/services/transactionApi";
-import { auth } from "../../../../firebase";
+import { useGetTransactionsQuery } from "app/services/transactionApi";
+import { auth } from "app/config";
 import styles from "./Calendar.module.scss";
 import "./calendar.css";
 

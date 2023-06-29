@@ -3,10 +3,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TiArrowSortedDown } from "react-icons/ti";
-import { auth } from "../../../../firebase";
-import { toggleUserAccountMenuOpen } from "../../../../app/slices/appSlice";
-import { RootState } from "../../../../app/store";
-import finmapLogoShort from "../../../../assets/images/finmap-logo-short.svg";
+import { auth } from "app/config";
+import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
+import { RootState } from "app/store";
+import finmapLogoShort from "assets/images/finmap-logo-short.svg";
 import styles from "./UserInfo.module.scss";
 
 const UserInfo: React.FC = () => {

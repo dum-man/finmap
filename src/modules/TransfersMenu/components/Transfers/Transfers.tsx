@@ -4,11 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { BiTransferAlt } from "react-icons/bi";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-import { useCancelTransferMutation } from "../../../../app/services/transferApi";
-import { setFormattedDateTime } from "../../../../utils/utils";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
-import { auth } from "../../../../firebase";
-import { Transfer } from "../../../../types";
+import { useCancelTransferMutation } from "app/services/transferApi";
+import { setFormattedDateTime } from "utils";
+import { setFormattedAmount } from "utils/setFormattedAmount";
+import { auth } from "app/config";
+import { Transfer } from "types";
 import styles from "./Transfers.module.scss";
 
 interface TransfersProps {

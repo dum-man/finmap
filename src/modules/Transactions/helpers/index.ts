@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { DatepickerDate } from "../../../types";
+import { DatepickerDate } from "types";
 
 export const setFormattedTime = (date: Date | string | null) => {
   return dayjs(date).format("HH:mm");

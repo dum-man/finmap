@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleDeleteAccountOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleDeleteAccountOpen } from "app/slices/appSlice";
 import DeleteAccountForm from "../DeleteAccountForm/DeleteAccountForm";
 import styles from "./DeleteAccount.module.scss";
 

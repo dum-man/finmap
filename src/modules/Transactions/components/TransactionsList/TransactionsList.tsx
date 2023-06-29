@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { Transaction } from "../../../../types";
+import { Transaction } from "types";
 import TransactionItem from "../TransactionItem/TransactionItem";
-import useIntersectionObserver from "../../../../hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/useIntersectionObserver";
 import UpButton from "../UpButton/UpButton";
 import styles from "./TransactionsList.module.scss";
 

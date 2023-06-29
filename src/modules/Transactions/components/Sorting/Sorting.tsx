@@ -6,8 +6,8 @@ import {
   toggleAmountType,
   toggleDateType,
   toggleTranscationType,
-} from "../../../../app/slices/sortSlice";
-import { RootState } from "../../../../app/store";
+} from "app/slices/sortSlice";
+import { RootState } from "app/store";
 import styles from "./Sorting.module.scss";
 
 const Sorting: React.FC = () => {

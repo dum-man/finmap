@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleChangePasswordOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleChangePasswordOpen } from "app/slices/appSlice";
 import ChangePasswordForm from "../ChangePasswordForm/ChangePasswordForm";
 import Success from "../ChangeSuccess/ChangeSuccess";
 import styles from "./ChangePassword.module.scss";

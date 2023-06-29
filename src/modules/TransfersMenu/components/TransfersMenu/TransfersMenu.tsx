@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { SlidingMenu } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
+import { SlidingMenu } from "layouts";
+import { CloseButton } from "ui";
 import Transfers from "../Transfers/Transfers";
 import NotFound from "../NotFound/NotFound";
 import Skeleton from "../Skeleton/Skeleton";
-import { useGetTransfersQuery } from "../../../../app/services/transferApi";
-import { auth } from "../../../../firebase";
-import { RootState } from "../../../../app/store";
-import { toggleTransfersMeunOpen } from "../../../../app/slices/appSlice";
+import { useGetTransfersQuery } from "app/services/transferApi";
+import { auth } from "app/config";
+import { RootState } from "app/store";
+import { toggleTransfersMeunOpen } from "app/slices/appSlice";
 import styles from "./TransfersMenu.module.scss";
 
 const TransfersMenu: React.FC = () => {

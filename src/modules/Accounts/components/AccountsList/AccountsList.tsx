@@ -1,7 +1,7 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import AccountItem from "../AccountItem/AccountItem";
-import { auth } from "../../../../firebase";
-import { useGetAccountsQuery } from "../../../../app/services/accountApi";
+import { auth } from "app/config";
+import { useGetAccountsQuery } from "app/services/accountApi";
 import styles from "./AccountsList.module.scss";
 
 const AccountsList: React.FC = () => {

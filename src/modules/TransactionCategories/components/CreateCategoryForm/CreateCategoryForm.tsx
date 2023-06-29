@@ -9,16 +9,16 @@ import toast from "react-hot-toast";
 import { BsCheckLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { RiDeleteBinLine } from "react-icons/ri";
-import { TextInput } from "../../../../components";
+import { TextInput } from "components";
 import {
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
   useLazyCheckCategoryExistsQuery,
-} from "../../../../app/services/categoryApi";
-import { auth } from "../../../../firebase";
+} from "app/services/categoryApi";
+import { auth } from "app/config";
 import { VARIANTS } from "../../constants";
-import { Category } from "../../../../types";
-import { RootState } from "../../../../app/store";
+import { Category } from "types";
+import { RootState } from "app/store";
 import styles from "./CreateCategoryForm.module.scss";
 
 interface CreateCategoryFormProps {

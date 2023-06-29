@@ -14,7 +14,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    "paths": {
+      "app/*": ["app/*"],
+      "assets/*": ["assets/*"],
+      "firebase/*": ["firebase/*"],
+      "hooks/*": ["hooks/*"],
+      "layouts/*": ["layouts/*"],
+      "modules/*": ["modules/*"],
+      "test/*": ["test/*"],
+      "types/*": ["types/*"],
+      "ui/*": ["ui/*"],
+      "utils/*": ["utils/*"]
+    }
   },
   "include": ["src"]
 }

@@ -6,15 +6,15 @@ import { Timestamp } from "firebase/firestore";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { BsArrowRight, BsCheck } from "react-icons/bs";
-import { AmountInput, TextInput } from "../../../../components";
-import useAmountInput from "../../../../hooks/useAmountInput";
+import { AmountInput, TextInput } from "components";
+import useAmountInput from "hooks/useAmountInput";
 import {
   useCreateAccountMutation,
   useLazyCheckAccountExistsQuery,
-} from "../../../../app/services/accountApi";
-import { auth } from "../../../../firebase";
+} from "app/services/accountApi";
+import { auth } from "app/config";
 import { INPUT_VARIANTS } from "../../constants";
-import { Account } from "../../../../types";
+import { Account } from "types";
 import styles from "./CreateAccountForm.module.scss";
 
 interface CreateAccountFormProps {

@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
+import { setFormattedAmount } from "utils/setFormattedAmount";
 import styles from "./EventItem.module.scss";
 
 interface Event {

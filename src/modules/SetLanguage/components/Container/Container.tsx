@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "../../../../ui";
+import { Button } from "ui";
 import Languages from "../Languages/Languages";
 
 interface ContainerProps {

@@ -10,11 +10,11 @@ import { BsCheckLg } from "react-icons/bs";
 import {
   useCreateCategoryMutation,
   useLazyCheckCategoryExistsQuery,
-} from "../../app/services/categoryApi";
+} from "app/services/categoryApi";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../../firebase";
-import { INPUT_LABEL_VARIANTS } from "../../app/constants";
-import { Category, SelectOption } from "../../types";
+import { auth } from "app/config";
+import { INPUT_LABEL_VARIANTS } from "app/constants";
+import { Category, SelectOption } from "types";
 import styles from "./CategoryInput.module.scss";
 
 interface CategoryInputProps extends React.InputHTMLAttributes<HTMLInputElement> {

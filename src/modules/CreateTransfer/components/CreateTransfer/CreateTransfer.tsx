@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleCreateTransferOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleCreateTransferOpen } from "app/slices/appSlice";
 import CreateTransferForm from "../CreateTransferForm/CreateTransferForm";
 import styles from "./CreateTransfer.module.scss";
 

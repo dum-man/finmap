@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
-import { RootState } from "../../../../app/store";
-import { toggleSidebarOpen } from "../../../../app/slices/appSlice";
+import { RootState } from "app/store";
+import { toggleSidebarOpen } from "app/slices/appSlice";
 import styles from "./SidebarButton.module.scss";
 
 const SidebarButton: React.FC = () => {

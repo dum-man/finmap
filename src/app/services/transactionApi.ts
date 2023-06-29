@@ -7,9 +7,9 @@ import {
   query,
   writeBatch,
 } from "firebase/firestore";
-import { Transaction } from "../../types";
 import { emptySplitApi } from "./emptySplitApi";
-import { firestore } from "../../firebase";
+import { firestore } from "app/config";
+import { Transaction } from "types";
 
 export const transactionApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({

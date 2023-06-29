@@ -1,5 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { render } from "../../../../test/customRender";
+import { render } from "test/customRender";
 import Login from "./Login";
 
 describe("Component: Login", () => {

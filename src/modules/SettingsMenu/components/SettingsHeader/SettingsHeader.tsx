@@ -1,11 +1,11 @@
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useTranslation } from "react-i18next";
-import { signOut } from "firebase/auth";
-import toast from "react-hot-toast";
-import { auth } from "../../../../firebase";
-import styles from "./SettingsHeader.module.scss";
 import { useDispatch } from "react-redux";
-import { toggleSettingsMenuOpen } from "../../../../app/slices/appSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { signOut } from "firebase/auth";
+import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
+import { auth } from "app/config";
+import { toggleSettingsMenuOpen } from "app/slices/appSlice";
+import styles from "./SettingsHeader.module.scss";
 
 const SettingsHeader: React.FC = () => {
   const [currentUser] = useAuthState(auth);

@@ -1,11 +1,11 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { Button } from "../../../../ui";
-import { AccountSelect } from "../../../../components";
-import useSelectInput from "../../../../hooks/useSelectInput";
-import { useDeleteAccountMutation } from "../../../../app/services/accountApi";
-import { auth } from "../../../../firebase";
+import { Button } from "ui";
+import { AccountSelect } from "components";
+import useSelectInput from "hooks/useSelectInput";
+import { useDeleteAccountMutation } from "app/services/accountApi";
+import { auth } from "app/config";
 
 interface DeleteAccountFormProps {
   onClose: () => void;

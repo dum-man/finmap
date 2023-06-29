@@ -5,17 +5,17 @@ import { AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { IoClose, IoSearch } from "react-icons/io5";
-import { Datepicker, Select } from "../../../../ui";
+import { Datepicker, Select } from "ui";
 import { setFormattedDatepickerDate } from "../../helpers";
 import { DATE_FILTER_OPTIONS } from "../../constants";
-import { DatepickerDate, SelectOption } from "../../../../types";
-import styles from "./Filtration.module.scss";
+import { DatepickerDate, SelectOption } from "types";
 import {
   setSearchQuery,
   setSelectedDates,
   setSelectedOption,
-} from "../../../../app/slices/filterSlice";
-import { RootState } from "../../../../app/store";
+} from "app/slices/filterSlice";
+import { RootState } from "app/store";
+import styles from "./Filtration.module.scss";
 
 const Filtration: React.FC = React.memo(() => {
   const { t } = useTranslation();

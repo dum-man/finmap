@@ -1,9 +1,9 @@
 import { Timestamp, doc, getDoc, updateDoc, writeBatch } from "firebase/firestore";
 import { uuidv4 } from "@firebase/util";
 import { emptySplitApi } from "./emptySplitApi";
-import { firestore } from "../../firebase";
-import { DEFAULT_ACCOUNTS, DEFAULT_CATEGORIES } from "../constants";
-import { Account } from "../../types";
+import { firestore } from "app/config";
+import { DEFAULT_ACCOUNTS, DEFAULT_CATEGORIES } from "app/constants";
+import { Account } from "types";
 
 const userApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({

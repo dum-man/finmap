@@ -1,7 +1,7 @@
 import { SetStateAction } from "react";
 import { NAVIGATION_TABS } from "../../constants";
 import Tab from "../Tab/Tab";
-import { TabType } from "../../../../types";
+import { TabType } from "types";
 import styles from "./Navigation.module.scss";
 
 interface NavigationProps {

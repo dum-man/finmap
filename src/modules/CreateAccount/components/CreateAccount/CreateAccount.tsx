@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleCreateAccountOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleCreateAccountOpen } from "app/slices/appSlice";
 import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
 import styles from "./CreateAccount.module.scss";
 

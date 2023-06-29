@@ -1,3 +1,3 @@
-import { TabType } from "../../../types";
+import { TabType } from "types";
 
 export const NAVIGATION_TABS: TabType[] = ["actions", "analytics", "calendar"];

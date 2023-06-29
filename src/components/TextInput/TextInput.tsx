@@ -1,7 +1,7 @@
 import { HTMLInputTypeAttribute, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
-import { INPUT_LABEL_VARIANTS, INPUT_LENGTH_VARIANTS } from "../../app/constants";
+import { INPUT_LABEL_VARIANTS, INPUT_LENGTH_VARIANTS } from "app/constants";
 import styles from "./TextInput.module.scss";
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {

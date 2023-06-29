@@ -2,10 +2,10 @@ import { useState } from "react";
 import { useAuthState, useUpdateProfile } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { TextInput } from "../../../../components";
-import { Button } from "../../../../ui";
-import { useUpdateUserProfileMutation } from "../../../../app/services/userApi";
-import { auth } from "../../../../firebase";
+import { TextInput } from "components";
+import { Button } from "ui";
+import { useUpdateUserProfileMutation } from "app/services/userApi";
+import { auth } from "app/config";
 
 interface SetUsernameFormProps {
   onClose: () => void;

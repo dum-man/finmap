@@ -3,13 +3,13 @@ import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { AccountSelect, AmountInput, DateInput, TextInput } from "../../../../components";
-import { Button } from "../../../../ui";
-import useTransactionForm from "../../../../hooks/useTransactionForm";
-import { useCreateTransferMutation } from "../../../../app/services/transferApi";
-import { useGetAccountsQuery } from "../../../../app/services/accountApi";
-import { auth } from "../../../../firebase";
-import { Transfer } from "../../../../types";
+import { AccountSelect, AmountInput, DateInput, TextInput } from "components";
+import { Button } from "ui";
+import useTransactionForm from "hooks/useTransactionForm";
+import { useCreateTransferMutation } from "app/services/transferApi";
+import { useGetAccountsQuery } from "app/services/accountApi";
+import { auth } from "app/config";
+import { Transfer } from "types";
 
 interface CreateTransferFormProps {
   onClose: () => void;
@@ -25,11 +25,11 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
 
   const {
     formState: { fromAccount, toAccount, amount, date, comment },
-    onChangeToAccount,
-    onChangeFromAccount,
-    onChangeAmount,
-    onChangeDate,
-    onChangeComment,
+    handleChangeToAccount,
+    handleChangeFromAccount,
+    handleChangeAmount,
+    handleChangeDate,
+    handleChangeComment,
   } = useTransactionForm();
 
   const handleSubmit = async (evt: React.FormEvent) => {
@@ -92,28 +92,32 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <DateInput placeholder={t("transferDate")} date={date} onChange={onChangeDate} />
+      <DateInput
+        placeholder={t("transferDate")}
+        date={date}
+        onChange={handleChangeDate}
+      />
       <AccountSelect
         placeholder={t("fromAccount")}
         value={fromAccount}
-        onChange={onChangeFromAccount}
+        onChange={handleChangeFromAccount}
       />
       <AccountSelect
         placeholder={t("toAccount")}
         value={toAccount}
-        onChange={onChangeToAccount}
+        onChange={handleChangeToAccount}
       />
       <AmountInput
         placeholder={`${t("sum")}, $`}
         value={amount}
-        onValueChange={onChangeAmount}
+        onValueChange={handleChangeAmount}
       />
       <TextInput
         id="comment"
         placeholder={t("leaveComment")}
         maxLength={60}
         value={comment}
-        onChange={onChangeComment}
+        onChange={handleChangeComment}
       />
       <Button type="submit" variant="black" loading={isLoading}>
         {t("addTransfer")}

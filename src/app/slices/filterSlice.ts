@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { Account, DatepickerDate, SelectOption } from "../../types";
+import { Account, DatepickerDate, SelectOption } from "types";
 
 interface FilterState {
   selectedAccounts: Account[];

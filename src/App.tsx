@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./app/routes/ProtectedRoute";
-import AuthRoute from "./app/routes/AuthRoute";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Main from "./pages/Main";
+import ProtectedRoute from "app/routes/ProtectedRoute";
+import AuthRoute from "app/routes/AuthRoute";
+import Signup from "pages/Signup";
+import Login from "pages/Login";
+import Main from "pages/Main";
 
 const App: React.FC = () => {
   let vh = window.innerHeight * 0.01;

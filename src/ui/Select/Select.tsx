@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
 import { BsCheckLg } from "react-icons/bs";
-import { SELECT_VARIANTS } from "../../app/constants";
+import { SELECT_VARIANTS } from "app/constants";
 import styles from "./Select.module.scss";
 
 interface SelectOption {

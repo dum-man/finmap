@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
-import ResetPassword from "../../../../modules/ResetPassword";
-import { RootState } from "../../../../app/store";
-import { toggleResetPasswordOpen } from "../../../../app/slices/appSlice";
+import ResetPassword from "modules/ResetPassword";
+import { RootState } from "app/store";
+import { toggleResetPasswordOpen } from "app/slices/appSlice";
 
 const ResetPasswordContainer: React.FC = () => {
   const dispatch = useDispatch();

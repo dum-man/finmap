@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Loader } from "../../../../ui";
+import { Loader } from "ui";
 import Filtration from "../Filtration/Filtration";
 import Sorting from "../Sorting/Sorting";
 import NotFound from "../NotFound/NotFound";
-import { useGetTransactionsQuery } from "../../../../app/services/transactionApi";
-import { sortTransactions } from "../../../../utils/sortTransactions";
-import { filterTranscations } from "../../../../utils/filterTranscations";
-import { auth } from "../../../../firebase";
-import { RootState } from "../../../../app/store";
+import { useGetTransactionsQuery } from "app/services/transactionApi";
+import { sortTransactions } from "utils/sortTransactions";
+import { filterTranscations } from "utils/filterTranscations";
+import { auth } from "app/config";
+import { RootState } from "app/store";
 import TransactionsList from "../TransactionsList/TransactionsList";
 
 const Transactions: React.FC = () => {

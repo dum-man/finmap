@@ -7,7 +7,7 @@ import {
   toggleCreateExpenseOpen,
   toggleCreateIncomeOpen,
   toggleCreateTransferOpen,
-} from "../../../../app/slices/appSlice";
+} from "app/slices/appSlice";
 import styles from "./TransactionButtons.module.scss";
 
 const TransactionButtons: React.FC = () => {

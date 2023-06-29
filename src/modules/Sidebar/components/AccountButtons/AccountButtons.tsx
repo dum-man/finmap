@@ -2,10 +2,7 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BiEditAlt } from "react-icons/bi";
 import { GoPlus } from "react-icons/go";
-import {
-  toggleCreateAccountOpen,
-  toggleDeleteAccountOpen,
-} from "../../../../app/slices/appSlice";
+import { toggleCreateAccountOpen, toggleDeleteAccountOpen } from "app/slices/appSlice";
 import styles from "./AccountButtons.module.scss";
 
 const AccountButtons: React.FC = () => {

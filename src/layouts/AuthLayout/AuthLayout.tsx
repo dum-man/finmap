@@ -1,6 +1,6 @@
 import { Trans, useTranslation } from "react-i18next";
-import heroImage from "../../assets/images/hero-image.webp";
-import finmapLogo from "../../assets/images/finmap-logo.svg";
+import heroImage from "assets/images/hero-image.webp";
+import finmapLogo from "assets/images/finmap-logo.svg";
 import styles from "./AuthLayout.module.scss";
 
 interface AuthLayoutProps {

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { Button } from "../../../../ui";
+import { Button } from "ui";
 import { VARIANTS } from "../../constants";
 import styles from "./AddCategoryButton.module.scss";
 

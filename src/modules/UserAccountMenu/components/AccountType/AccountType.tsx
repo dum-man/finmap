@@ -1,6 +1,6 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { auth } from "../../../../firebase";
+import { auth } from "app/config";
 import styles from "./AccountType.module.scss";
 
 const AccountType: React.FC = () => {

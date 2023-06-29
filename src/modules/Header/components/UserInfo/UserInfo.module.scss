@@ -1,4 +1,4 @@
-@import "../../../../assets/sass/variables.scss";
+@import "assets/sass/variables.scss";
 
 .wrapper {
   position: relative;
@@ -39,8 +39,15 @@
   svg {
     transition: transform 0.2s;
   }
-  &:hover {
-    background-color: $whiteAlpha900;
+  @media (hover: hover) {
+    &:hover {
+      background-color: $whiteAlpha900;
+    }
+  }
+  @media (hover: none) {
+    &:active {
+      background-color: $whiteAlpha900;
+    }
   }
 }
 

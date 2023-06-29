@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ArcElement, Chart as ChartJS, Tooltip } from "chart.js";
 import ChartItem from "../ChartItem/ChartItem";
-import { auth } from "../../../../firebase";
-import { useGetTransactionsQuery } from "../../../../app/services/transactionApi";
-import { Transaction } from "../../../../types";
+import { auth } from "app/config";
+import { useGetTransactionsQuery } from "app/services/transactionApi";
+import { Transaction } from "types";
 import styles from "./Charts.module.scss";
 
 ChartJS.register(ArcElement, Tooltip);

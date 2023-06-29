@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import { MODAL_VARIANTS } from "../../app/constants";
+import { MODAL_VARIANTS } from "app/constants";
 import styles from "./Modal.module.scss";
 
 interface ModalProps {

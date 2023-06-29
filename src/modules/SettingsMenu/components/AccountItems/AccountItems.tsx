@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
-import { auth } from "../../../../firebase";
+import { auth } from "app/config";
 import {
   setCategoryType,
   toggleAccountsOpen,
   toggleTransactionCategoriesOpen,
-} from "../../../../app/slices/appSlice";
+} from "app/slices/appSlice";
 import styles from "./AccountItems.module.scss";
 
 const AccountItems: React.FC = () => {

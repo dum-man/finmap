@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { toggleSetUsernameOpen } from "../../../../app/slices/appSlice";
+import { toggleSetUsernameOpen } from "app/slices/appSlice";
 import styles from "./EditAccountButton.module.scss";
 
 const EditAccountButton: React.FC = () => {

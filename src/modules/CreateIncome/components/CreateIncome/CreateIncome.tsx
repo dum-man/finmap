@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleCreateIncomeOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleCreateIncomeOpen } from "app/slices/appSlice";
 import CreateIncomeForm from "../CreateIncomeForm/CreateIncomeForm";
 import styles from "./CreateIncome.module.scss";
 

@@ -1,11 +1,11 @@
 import { useMemo } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { motion } from "framer-motion";
-import { Select } from "../../ui";
-import { useGetAccountsQuery } from "../../app/services/accountApi";
-import { auth } from "../../firebase";
-import { INPUT_LABEL_VARIANTS } from "../../app/constants";
-import { SelectOption } from "../../types";
+import { Select } from "ui";
+import { auth } from "app/config";
+import { useGetAccountsQuery } from "app/services/accountApi";
+import { INPUT_LABEL_VARIANTS } from "app/constants";
+import { SelectOption } from "types";
 import styles from "./AccountSelect.module.scss";
 
 interface AccountSelectProps {

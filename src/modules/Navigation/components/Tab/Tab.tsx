@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
-import { TabType } from "../../../../types";
+import { TabType } from "types";
 import styles from "./Tab.module.scss";
 
 interface TabProps {

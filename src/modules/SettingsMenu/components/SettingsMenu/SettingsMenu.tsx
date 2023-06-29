@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SlidingMenu } from "../../../../layouts";
+import { SlidingMenu } from "layouts";
 import AccountItems from "../AccountItems/AccountItems";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import SettingsItems from "../SettingsItems/SettingsItems";
-import useOnClickOutside from "../../../../hooks/useClickOutside";
-import { RootState } from "../../../../app/store";
-import { toggleSettingsMenuOpen } from "../../../../app/slices/appSlice";
+import useOnClickOutside from "hooks/useClickOutside";
+import { RootState } from "app/store";
+import { toggleSettingsMenuOpen } from "app/slices/appSlice";
 import styles from "./SettingsMenu.module.scss";
 
 const SettingsMenu: React.FC = () => {

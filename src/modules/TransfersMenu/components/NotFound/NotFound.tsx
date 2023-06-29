@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import notFoundImage from "../../../../assets/images/not-found.svg";
+import notFoundImage from "assets/images/not-found.svg";
 import styles from "./NotFound.module.scss";
 
 const NotFound: React.FC = () => {

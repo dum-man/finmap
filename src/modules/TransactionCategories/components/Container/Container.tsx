@@ -5,9 +5,9 @@ import AddCategoryButton from "../AddCategoryButton/AddCategoryButton";
 import CategoriesList from "../CategoriesList/CategoriesList";
 import CreateCategoryForm from "../CreateCategoryForm/CreateCategoryForm";
 import Skeleton from "../Skeleton/Skeleton";
-import { useGetCategoriesQuery } from "../../../../app/services/categoryApi";
-import { auth } from "../../../../firebase";
-import { Category } from "../../../../types";
+import { useGetCategoriesQuery } from "app/services/categoryApi";
+import { auth } from "app/config";
+import { Category } from "types";
 
 const Container: React.FC = () => {
   const [currentUser] = useAuthState(auth);

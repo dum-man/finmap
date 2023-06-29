@@ -1,6 +1,6 @@
-import { AppLayout } from "../../../../layouts";
-import Header from "../../../../modules/Header";
-import Sidebar from "../../../../modules/Sidebar";
+import { AppLayout } from "layouts";
+import Header from "modules/Header";
+import Sidebar from "modules/Sidebar";
 import Board from "../Board/Board";
 import Container from "../Container/Container";
 import styles from "./Main.module.scss";

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "../../../../ui";
+import { Button } from "ui";
 import styles from "./AddButton.module.scss";
 
 interface AddButtonProps {

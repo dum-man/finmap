@@ -2,13 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
-import {
-  addSelectedAccount,
-  removeSelectedAccount,
-} from "../../../../app/slices/filterSlice";
-import { Account } from "../../../../types";
-import { RootState } from "../../../../app/store";
+import { setFormattedAmount } from "utils/setFormattedAmount";
+import { addSelectedAccount, removeSelectedAccount } from "app/slices/filterSlice";
+import { Account } from "types";
+import { RootState } from "app/store";
 import styles from "./Accounts.module.scss";
 
 interface AccountsProps {

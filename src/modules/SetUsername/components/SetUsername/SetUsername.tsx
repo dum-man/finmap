@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleSetUsernameOpen } from "../../../../app/slices/appSlice";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleSetUsernameOpen } from "app/slices/appSlice";
 import SetUsernameForm from "../SetUsernameForm/SetUsernameForm";
 import styles from "./SetUsername.module.scss";
 

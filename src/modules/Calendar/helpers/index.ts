@@ -1,5 +1,5 @@
-import { Transaction } from "../../../types";
-import { isDaysSame } from "../../../utils/utils";
+import { Transaction } from "types";
+import { isDaysSame } from "utils";
 
 interface Event {
   title: string;

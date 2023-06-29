@@ -5,8 +5,8 @@ import classNames from "classnames";
 import { AiOutlineMenu } from "react-icons/ai";
 import { BiEditAlt } from "react-icons/bi";
 import { RiBankLine } from "react-icons/ri";
-import { Category } from "../../../../types";
-import { RootState } from "../../../../app/store";
+import { Category } from "types";
+import { RootState } from "app/store";
 import styles from "./CategoriesList.module.scss";
 
 interface CategoriesListProps {

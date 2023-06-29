@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useUpdatePassword } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
-import { PasswordInput } from "../../../../components";
-import { Button } from "../../../../ui";
-import { auth } from "../../../../firebase";
+import { PasswordInput } from "components";
+import { Button } from "ui";
+import { auth } from "app/config";
 
 interface ChangePasswordFormProps {
   setSuccess: (success: React.SetStateAction<boolean>) => void;

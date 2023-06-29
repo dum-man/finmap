@@ -1,5 +1,5 @@
-import { AuthLayout } from "../../../../layouts";
-import SetLanguageDropdown from "../../../../components/SetLanguageDropdown/SetLanguageDropdown";
+import { AuthLayout } from "layouts";
+import SetLanguageDropdown from "components/SetLanguageDropdown/SetLanguageDropdown";
 import LoginForm from "../LoginForm/LoginForm";
 import ResetPasswordContainer from "../ResetPasswordContainer/ResetPasswordContainer";
 

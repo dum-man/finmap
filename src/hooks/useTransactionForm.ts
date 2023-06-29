@@ -1,6 +1,6 @@
 import { useReducer } from "react";
 import { NumberFormatValues } from "react-number-format";
-import { SelectOption } from "../types";
+import { SelectOption } from "types";
 
 enum FormActionTypes {
   TO_ACCOUNT = "TO_ACCOUNT",
@@ -74,42 +74,42 @@ const useTransactionForm = () => {
 
   const [formState, formDispatch] = useReducer(formReducer, initialFormState);
 
-  const onChangeToAccount = (option: SelectOption) => {
+  const handleChangeToAccount = (option: SelectOption) => {
     formDispatch({
       type: FormActionTypes.TO_ACCOUNT,
       payload: option,
     });
   };
 
-  const onChangeFromAccount = (option: SelectOption) => {
+  const handleChangeFromAccount = (option: SelectOption) => {
     formDispatch({
       type: FormActionTypes.FROM_ACCOUNT,
       payload: option,
     });
   };
 
-  const onChangeCategory = (option: SelectOption) => {
+  const handleChangeCategory = (option: SelectOption) => {
     formDispatch({
       type: FormActionTypes.CATEGORY,
       payload: option,
     });
   };
 
-  const onChangeAmount = (values: NumberFormatValues) => {
+  const handleChangeAmount = (values: NumberFormatValues) => {
     formDispatch({
       type: FormActionTypes.AMOUNT,
       payload: values.value,
     });
   };
 
-  const onChangeDate = (date: Date) => {
+  const handleChangeDate = (date: Date) => {
     formDispatch({
       type: FormActionTypes.DATE,
       payload: date,
     });
   };
 
-  const onChangeComment = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeComment = (evt: React.ChangeEvent<HTMLInputElement>) => {
     formDispatch({
       type: FormActionTypes.COMMENT,
       payload: evt.target.value,
@@ -118,12 +118,12 @@ const useTransactionForm = () => {
 
   return {
     formState,
-    onChangeToAccount,
-    onChangeFromAccount,
-    onChangeAmount,
-    onChangeCategory,
-    onChangeDate,
-    onChangeComment,
+    handleChangeToAccount,
+    handleChangeFromAccount,
+    handleChangeAmount,
+    handleChangeCategory,
+    handleChangeDate,
+    handleChangeComment,
   };
 };
 

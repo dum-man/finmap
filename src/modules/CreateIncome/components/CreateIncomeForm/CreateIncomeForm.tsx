@@ -11,13 +11,13 @@ import {
   CategorySelect,
   DateInput,
   TextInput,
-} from "../../../../components";
-import { Button } from "../../../../ui";
-import useTransactionForm from "../../../../hooks/useTransactionForm";
-import { useGetAccountsQuery } from "../../../../app/services/accountApi";
-import { useCreateTransactionMutation } from "../../../../app/services/transactionApi";
-import { auth } from "../../../../firebase";
-import { Transaction } from "../../../../types";
+} from "components";
+import { Button } from "ui";
+import useTransactionForm from "hooks/useTransactionForm";
+import { useGetAccountsQuery } from "app/services/accountApi";
+import { useCreateTransactionMutation } from "app/services/transactionApi";
+import { auth } from "app/config";
+import { Transaction } from "types";
 
 interface CreateIncomeFormProps {
   onClose: () => void;
@@ -34,11 +34,11 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
 
   const {
     formState: { toAccount, category, amount, date, comment },
-    onChangeToAccount,
-    onChangeCategory,
-    onChangeAmount,
-    onChangeDate,
-    onChangeComment,
+    handleChangeToAccount,
+    handleChangeCategory,
+    handleChangeAmount,
+    handleChangeDate,
+    handleChangeComment,
   } = useTransactionForm();
 
   const [categoryInputVisible, setCategoryInputVisible] = useState(false);
@@ -98,37 +98,37 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
       <AccountSelect
         placeholder={t("toAccount")}
         value={toAccount}
-        onChange={onChangeToAccount}
+        onChange={handleChangeToAccount}
       />
       <AmountInput
         placeholder={`${t("sum")}, $`}
         value={amount}
-        onValueChange={onChangeAmount}
+        onValueChange={handleChangeAmount}
       />
       <>
         {categoryInputVisible ? (
           <CategoryInput
             type="income"
-            onChangeCategory={onChangeCategory}
+            onChangeCategory={handleChangeCategory}
             onClose={() => setCategoryInputVisible(false)}
           />
         ) : (
           <CategorySelect
             type="income"
             value={category}
-            onChange={onChangeCategory}
+            onChange={handleChangeCategory}
             onOpenCategoryInput={() => setCategoryInputVisible(true)}
           />
         )}
       </>
-      <DateInput placeholder={t("incomeDate")} date={date} onChange={onChangeDate} />
+      <DateInput placeholder={t("incomeDate")} date={date} onChange={handleChangeDate} />
       <TextInput
         id="comment"
         name="transactionComment"
         placeholder={t("leaveComment")}
         maxLength={60}
         value={comment}
-        onChange={onChangeComment}
+        onChange={handleChangeComment}
       />
       <Button type="submit" loading={isLoading}>
         {t("addIncome")}

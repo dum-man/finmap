@@ -1,5 +1,5 @@
-import { SortState, Transaction } from "../types";
-import { sortByDate } from "./utils";
+import { SortState, Transaction } from "types";
+import { sortByDate } from "./index";
 
 const sortTransactionsByType = (type: string, transactions: Transaction[]) => {
   switch (type) {

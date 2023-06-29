@@ -9,8 +9,8 @@ import {
   where,
 } from "firebase/firestore";
 import { emptySplitApi } from "./emptySplitApi";
-import { firestore } from "../../firebase";
-import { Account } from "../../types";
+import { firestore } from "app/config";
+import { Account } from "types";
 
 export const accountApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({

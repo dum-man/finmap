@@ -1,9 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import {
-  toggleChangePasswordOpen,
-  toggleSetLanguageOpen,
-} from "../../../../app/slices/appSlice";
+import { toggleChangePasswordOpen, toggleSetLanguageOpen } from "app/slices/appSlice";
 import styles from "./SettingsItems.module.scss";
 
 const SettingItems: React.FC = () => {

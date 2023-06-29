@@ -6,9 +6,9 @@ import Accounts from "../Accounts/Accounts";
 import AccountButtons from "../AccountButtons/AccountButtons";
 import SelectedAccounts from "../SelectedAccounts/SelectedAccounts";
 import Skeleton from "../Skeleton/Skeleton";
-import { useGetAccountsQuery } from "../../../../app/services/accountApi";
-import { auth } from "../../../../firebase";
-import { RootState } from "../../../../app/store";
+import { useGetAccountsQuery } from "app/services/accountApi";
+import { auth } from "app/config";
+import { RootState } from "app/store";
 import styles from "./Sidebar.module.scss";
 
 const Sidebar: React.FC = () => {

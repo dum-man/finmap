@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Modal } from "../../../../layouts";
-import { CloseButton } from "../../../../ui";
-import { toggleTransactionCategoriesOpen } from "../../../../app/slices/appSlice";
-import { RootState } from "../../../../app/store";
+import { Modal } from "layouts";
+import { CloseButton } from "ui";
+import { toggleTransactionCategoriesOpen } from "app/slices/appSlice";
+import { RootState } from "app/store";
 import Container from "../Container/Container";
 import styles from "./TransactionCategories.module.scss";
 

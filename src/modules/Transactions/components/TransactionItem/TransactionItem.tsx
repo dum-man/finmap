@@ -2,10 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TbCash, TbCashOff } from "react-icons/tb";
-import { setFormattedAmount } from "../../../../utils/setFormattedAmount";
-import { setFormattedDate } from "../../../../utils/utils";
+import { setFormattedAmount } from "utils/setFormattedAmount";
+import { setFormattedDate } from "utils";
 import { setFormattedTime } from "../../helpers";
-import { Transaction } from "../../../../types";
+import { Transaction } from "types";
 import styles from "./TransactionItem.module.scss";
 
 interface TransactionItemProps {

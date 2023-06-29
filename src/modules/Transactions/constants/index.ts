@@ -1,4 +1,4 @@
-import { SelectOption } from "../../../types";
+import { SelectOption } from "types";
 
 export const DATE_FILTER_OPTIONS: SelectOption[] = [
   { id: "1", group: "base", label: "currentWeek" },

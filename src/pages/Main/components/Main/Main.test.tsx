@@ -1,5 +1,5 @@
 import { screen, waitFor } from "@testing-library/react";
-import { render } from "../../../../test/customRender";
+import { render } from "test/customRender";
 import Main from "./Main";
 
 describe("Component: Main", () => {

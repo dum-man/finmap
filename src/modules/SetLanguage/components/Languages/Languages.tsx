@@ -1,5 +1,5 @@
 import { BsCheck } from "react-icons/bs";
-import { LANGUAGES } from "../../../../app/constants";
+import { LANGUAGES } from "app/constants";
 import { LANGUAGE_FlAGS } from "../../constants";
 import styles from "./Languages.module.scss";
 

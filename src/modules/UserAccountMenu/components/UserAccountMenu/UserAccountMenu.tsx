@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SlidingMenu } from "../../../../layouts";
+import { SlidingMenu } from "layouts";
 import AccountType from "../AccountType/AccountType";
 import EditAccountButton from "../EditAccountButton/EditAccountButton";
-import { toggleUserAccountMenuOpen } from "../../../../app/slices/appSlice";
-import { RootState } from "../../../../app/store";
+import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
+import { RootState } from "app/store";
 import { VARIANTS } from "../../constants";
 import styles from "./UserAccountMenu.module.scss";
 
