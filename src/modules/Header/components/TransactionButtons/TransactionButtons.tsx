@@ -20,7 +20,7 @@ const TransactionButtons: React.FC = () => {
       <li>
         <button
           className={classNames(styles.button, styles.buttonIncome)}
-          onClick={() => dispatch(toggleCreateIncomeOpen())}
+          onClick={() => dispatch(toggleCreateIncomeOpen(true))}
         >
           <FiPlus />
           <span>{t("income")}</span>
@@ -29,7 +29,7 @@ const TransactionButtons: React.FC = () => {
       <li>
         <button
           className={classNames(styles.button, styles.buttonExpense)}
-          onClick={() => dispatch(toggleCreateExpenseOpen())}
+          onClick={() => dispatch(toggleCreateExpenseOpen(true))}
         >
           <FiMinus />
           <span>{t("expense")}</span>
@@ -38,7 +38,7 @@ const TransactionButtons: React.FC = () => {
       <li>
         <button
           className={classNames(styles.button, styles.buttonTransfer)}
-          onClick={() => dispatch(toggleCreateTransferOpen())}
+          onClick={() => dispatch(toggleCreateTransferOpen(true))}
         >
           <BiTransfer />
           <span>{t("transfer")}</span>

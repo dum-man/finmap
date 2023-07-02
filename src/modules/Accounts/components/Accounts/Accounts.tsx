@@ -12,15 +12,15 @@ const Accounts: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleToggle = () => {
-    dispatch(toggleAccountsOpen());
+  const handleClose = () => {
+    dispatch(toggleAccountsOpen(false));
   };
 
   return (
-    <Modal onClose={handleToggle}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("accounts")}</h2>
-        <CloseButton onClick={handleToggle} />
+        <CloseButton onClick={handleClose} />
         <Container />
         <AccountsList />
       </div>

@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { SlidingMenu } from "layouts";
 import { CloseButton } from "ui";
 import Transfers from "../Transfers/Transfers";
-import NotFound from "../NotFound/NotFound";
 import Skeleton from "../Skeleton/Skeleton";
 import { useGetTransfersQuery } from "app/services/transferApi";
 import { auth } from "app/config";
@@ -33,16 +32,12 @@ const TransfersMenu: React.FC = () => {
     <SlidingMenu
       open={transfersMeunOpen}
       onClose={handleClose}
-      className={styles.container}
+      className={styles.menuContainer}
     >
       <div className={styles.wrapper}>
         <h2 className={styles.title}>{t("transfers")}</h2>
         <CloseButton onClick={handleClose} />
-        {isLoading ? (
-          <Skeleton />
-        ) : (
-          <>{transfers.length ? <Transfers transfers={transfers} /> : <NotFound />}</>
-        )}
+        {isLoading ? <Skeleton /> : <Transfers transfers={transfers} />}
       </div>
     </SlidingMenu>
   );

@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+@mixin focus-green {
+  outline: none;
+  box-shadow: 0 0 0 1px $green600;
+}
+@mixin focus-white {
+  outline: none;
+  box-shadow: 0 0 0 1px $white;
+}

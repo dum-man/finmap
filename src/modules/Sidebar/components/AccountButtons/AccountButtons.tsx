@@ -16,14 +16,14 @@ const AccountButtons: React.FC = () => {
       <button
         type="button"
         className={styles.iconButton}
-        onClick={() => dispatch(toggleCreateAccountOpen())}
+        onClick={() => dispatch(toggleCreateAccountOpen(true))}
       >
         <GoPlus />
       </button>
       <button
         type="button"
         className={styles.iconButton}
-        onClick={() => dispatch(toggleDeleteAccountOpen())}
+        onClick={() => dispatch(toggleDeleteAccountOpen(true))}
       >
         <BiEditAlt />
       </button>

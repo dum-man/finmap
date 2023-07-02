@@ -21,6 +21,7 @@ const DateInput: React.FC<DateInputProps> = ({ placeholder, date, ...restProps }
         className={classNames(styles.input, {
           [styles.focused]: datepickerOpen,
         })}
+        tabIndex={0}
         onClick={() => setDatepickerOpen(true)}
       >
         {setFormattedDateTime(date)}

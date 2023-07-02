@@ -11,16 +11,16 @@ const SetLanguage: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleToggle = () => {
-    dispatch(toggleSetLanguageOpen());
+  const handleClose = () => {
+    dispatch(toggleSetLanguageOpen(false));
   };
 
   return (
-    <Modal onClose={handleToggle}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("interfaceLanguage")}</h2>
-        <CloseButton onClick={handleToggle} />
-        <Container onToggle={handleToggle} />
+        <CloseButton onClick={handleClose} />
+        <Container onToggle={handleClose} />
       </div>
     </Modal>
   );

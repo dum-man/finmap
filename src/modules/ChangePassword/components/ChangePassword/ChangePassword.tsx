@@ -15,14 +15,14 @@ const ChangePassword: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleToggle = () => {
-    dispatch(toggleChangePasswordOpen());
+  const handleClose = () => {
+    dispatch(toggleChangePasswordOpen(false));
   };
 
   return (
-    <Modal onClose={handleToggle}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
-        <CloseButton onClick={handleToggle} />
+        <CloseButton onClick={handleClose} />
         {success ? (
           <Success />
         ) : (

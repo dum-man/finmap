@@ -12,7 +12,7 @@ const EditAccountButton: React.FC = () => {
     <div className={styles.wrapper}>
       <button
         className={styles.editButton}
-        onClick={() => dispatch(toggleSetUsernameOpen())}
+        onClick={() => dispatch(toggleSetUsernameOpen(true))}
       >
         {t("edit")}
       </button>

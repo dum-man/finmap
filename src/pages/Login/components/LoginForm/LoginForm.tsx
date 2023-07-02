@@ -118,7 +118,7 @@ const LoginForm: React.FC = () => {
         <button
           className={styles.resetButton}
           type="button"
-          onClick={() => dispatch(toggleResetPasswordOpen())}
+          onClick={() => dispatch(toggleResetPasswordOpen(true))}
         >
           {t("resetPasswordLink")}
         </button>

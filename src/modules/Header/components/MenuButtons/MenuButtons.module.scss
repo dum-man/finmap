@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .menuButtons {
@@ -20,12 +21,15 @@
   color: $gray400;
   background-color: $whiteAlpha300;
   border-radius: 50%;
-  transition: transform 0.1s, background-color 0.2s;
+  transition: transform 0.1s, background-color 0.2s, box-shadow 0.2s;
   &:hover {
     background-color: $whiteAlpha400;
   }
   &:active {
     transform: scale(0.9);
+  }
+  &:focus-visible {
+    @include shared.focus-white;
   }
   @media (max-width: $tablet) {
     font-size: 22px;

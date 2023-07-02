@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom";
 import { useMemo } from "react";
+import FocusTrap from "focus-trap-react";
 import { motion } from "framer-motion";
 import { MODAL_VARIANTS } from "app/constants";
 import styles from "./Modal.module.scss";
@@ -15,30 +16,28 @@ const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
     []
   ) as HTMLElement;
 
-  const handleClose = (evt: React.MouseEvent<HTMLDivElement>) => {
-    onClose();
-    evt.stopPropagation();
-  };
-
   const element = (
     <motion.div
       className={styles.backdrop}
-      onClick={handleClose}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.1 }}
+      onClick={(evt) => evt.stopPropagation()}
     >
-      <motion.div
-        className={styles.container}
-        onClick={(evt) => evt.stopPropagation()}
-        variants={MODAL_VARIANTS}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+      <FocusTrap
+        focusTrapOptions={{ clickOutsideDeactivates: true, onDeactivate: onClose }}
       >
-        {children}
-      </motion.div>
+        <motion.div
+          className={styles.container}
+          variants={MODAL_VARIANTS}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          {children}
+        </motion.div>
+      </FocusTrap>
     </motion.div>
   );
 

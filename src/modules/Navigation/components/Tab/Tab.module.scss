@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .button {
@@ -6,10 +7,13 @@
   font-weight: 700;
   color: $gray500;
   border-radius: 20px;
-  transition: background-color 0.2s, color 0.2s, transform 0.1s;
   user-select: none;
+  transition: background-color 0.2s, color 0.2s, transform 0.1s, box-shadow 0.2s;
   @media (max-width: $mobile) {
     padding: 8px 15px;
+  }
+  &:focus-visible {
+    @include shared.focus-green;
   }
   &:disabled {
     cursor: not-allowed;

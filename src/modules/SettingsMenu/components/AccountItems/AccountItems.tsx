@@ -5,7 +5,7 @@ import { auth } from "app/config";
 import {
   setCategoryType,
   toggleAccountsOpen,
-  toggleTransactionCategoriesOpen,
+  toggleCategoriesOpen,
 } from "app/slices/appSlice";
 import styles from "./AccountItems.module.scss";
 
@@ -17,12 +17,12 @@ const AccountItems: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleSetIncomeCategory = () => {
-    dispatch(toggleTransactionCategoriesOpen());
+    dispatch(toggleCategoriesOpen(true));
     dispatch(setCategoryType("income"));
   };
 
   const handleSetExpenseCategory = () => {
-    dispatch(toggleTransactionCategoriesOpen());
+    dispatch(toggleCategoriesOpen(true));
     dispatch(setCategoryType("expense"));
   };
 
@@ -33,7 +33,7 @@ const AccountItems: React.FC = () => {
         <li>
           <button
             className={styles.button}
-            onClick={() => dispatch(toggleAccountsOpen())}
+            onClick={() => dispatch(toggleAccountsOpen(true))}
           >
             {t("accounts")}
           </button>

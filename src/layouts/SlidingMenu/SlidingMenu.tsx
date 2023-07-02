@@ -1,7 +1,10 @@
 import { useCallback, useRef } from "react";
+import FocusTrap from "focus-trap-react";
 import { AnimatePresence, Variants, motion } from "framer-motion";
+import classNames from "classnames";
 import useClickOutside from "hooks/useClickOutside";
 import { MENU_VARIANTS } from "app/constants";
+import styles from "./SlidingMenu.module.scss";
 
 interface SlidingMenuProps {
   onClose: () => void;
@@ -27,16 +30,18 @@ const SlidingMenu: React.FC<SlidingMenuProps> = ({
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
-          className={className}
-          ref={ref}
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
-          {children}
-        </motion.div>
+        <FocusTrap focusTrapOptions={{ allowOutsideClick: true }}>
+          <motion.div
+            className={classNames(styles.container, className)}
+            ref={ref}
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            {children}
+          </motion.div>
+        </FocusTrap>
       )}
     </AnimatePresence>
   );

@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -35,7 +36,7 @@
   color: $gray400;
   font-size: 14px;
   border-radius: 6px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
   svg {
     transition: transform 0.2s;
   }
@@ -48,6 +49,9 @@
     &:active {
       background-color: $whiteAlpha900;
     }
+  }
+  &:focus-visible {
+    @include shared.focus-white;
   }
 }
 

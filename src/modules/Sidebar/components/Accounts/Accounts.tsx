@@ -43,10 +43,14 @@ const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            onClick={() => handleSelectAccounts(account)}
           >
-            <p>{account.group === "base" ? t(account.name) : account.name}</p>
-            {setFormattedAmount(account.balance)}
+            <button
+              className={styles.accountItemButton}
+              onClick={() => handleSelectAccounts(account)}
+            >
+              <span>{account.group === "base" ? t(account.name) : account.name}</span>
+              {setFormattedAmount(account.balance)}
+            </button>
           </motion.li>
         ))}
       </AnimatePresence>

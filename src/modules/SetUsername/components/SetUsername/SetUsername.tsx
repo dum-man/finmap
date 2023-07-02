@@ -12,7 +12,7 @@ const SetUsername: React.FC = () => {
   const dispatch = useDispatch();
 
   const handleClose = () => {
-    dispatch(toggleSetUsernameOpen());
+    dispatch(toggleSetUsernameOpen(false));
   };
 
   return (

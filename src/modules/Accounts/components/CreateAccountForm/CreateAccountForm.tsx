@@ -3,17 +3,19 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
+import { useStep } from "usehooks-ts";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
-import { BsArrowRight, BsCheck } from "react-icons/bs";
+import { BsArrowLeft, BsArrowRight, BsCheck } from "react-icons/bs";
 import { AmountInput, TextInput } from "components";
+import { Spinner } from "ui";
 import useAmountInput from "hooks/useAmountInput";
 import {
   useCreateAccountMutation,
   useLazyCheckAccountExistsQuery,
 } from "app/services/accountApi";
 import { auth } from "app/config";
-import { INPUT_VARIANTS } from "../../constants";
+import { setInputVariants } from "../../helpers";
 import { Account } from "types";
 import styles from "./CreateAccountForm.module.scss";
 
@@ -26,13 +28,14 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
 
   const { t } = useTranslation();
 
+  const [currentStep, { goToNextStep, goToPrevStep }] = useStep(2);
+
   const [checkAccountExists] = useLazyCheckAccountExistsQuery();
   const [createAccount] = useCreateAccountMutation();
 
   const [accountName, setAccountName] = useState("");
   const [accountBalance, onBalanceChange] = useAmountInput("0");
 
-  const [currentInput, setCurrentInput] = useState("name");
   const [accountCreating, setAccountCreating] = useState(false);
 
   const onAccountNameChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,10 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   const handleSubmit = async (evt: React.FormEvent) => {
     evt.preventDefault();
 
+    if (currentStep === 1) {
+      goToNextStep();
+      return;
+    }
     if (!currentUser) {
       return;
     }
@@ -67,7 +74,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
         name: account.name,
       }).unwrap();
       if (accountExists) {
-        setCurrentInput("name");
+        goToPrevStep();
         throw new Error(`You already have "${account.name}" account`);
       }
       await createAccount({ userId: currentUser.uid, account }).unwrap();
@@ -81,10 +88,10 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
 
   return (
     <form className={styles.wrapper} onSubmit={handleSubmit}>
-      {currentInput === "name" && (
+      {currentStep === 1 && (
         <motion.div
           className={styles.inputWrapper}
-          variants={INPUT_VARIANTS}
+          variants={setInputVariants(currentStep !== 1)}
           initial="hidden"
           animate="visible"
         >
@@ -98,16 +105,16 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
           <button
             type="button"
             className={styles.iconButton}
-            onClick={() => setCurrentInput("amount")}
+            onClick={() => goToNextStep()}
           >
             <BsArrowRight />
           </button>
         </motion.div>
       )}
-      {currentInput === "amount" && (
+      {currentStep === 2 && (
         <motion.div
           className={styles.inputWrapper}
-          variants={INPUT_VARIANTS}
+          variants={setInputVariants(currentStep === 2)}
           initial="hidden"
           animate="visible"
         >
@@ -117,9 +124,28 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
             value={accountBalance}
             onValueChange={onBalanceChange}
           />
-          <button type="submit" className={styles.iconButton} disabled={accountCreating}>
-            <BsCheck className={styles.submitIcon} />
-          </button>
+          <div className={styles.buttons}>
+            {!accountCreating ? (
+              <>
+                <button
+                  type="button"
+                  className={styles.iconButton}
+                  onClick={() => goToPrevStep()}
+                >
+                  <BsArrowLeft />
+                </button>
+                <button
+                  type="submit"
+                  className={styles.iconButton}
+                  disabled={accountCreating}
+                >
+                  <BsCheck className={styles.submitIcon} />
+                </button>
+              </>
+            ) : (
+              <Spinner variant="dark" />
+            )}
+          </div>
         </motion.div>
       )}
     </form>

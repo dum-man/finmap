@@ -11,12 +11,16 @@ const CreateAccount: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  const onClose = () => {
+    dispatch(toggleCreateAccountOpen(false));
+  };
+
   return (
-    <Modal onClose={() => dispatch(toggleCreateAccountOpen())}>
+    <Modal onClose={onClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("addAccount")}</h2>
-        <CloseButton onClick={() => dispatch(toggleCreateAccountOpen())} />
-        <CreateAccountForm onClose={() => dispatch(toggleCreateAccountOpen())} />
+        <CloseButton onClick={onClose} />
+        <CreateAccountForm onClose={onClose} />
       </div>
     </Modal>
   );

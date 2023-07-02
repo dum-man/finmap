@@ -21,7 +21,9 @@
   font-size: 24px;
   color: $gray600;
   position: absolute;
-  top: 12px;
+  top: 10px;
   right: 40px;
-  font-size: 18px;
+  svg {
+    transform: scale(0.8);
+  }
 }

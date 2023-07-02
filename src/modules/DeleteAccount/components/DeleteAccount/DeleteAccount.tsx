@@ -11,16 +11,16 @@ const DeleteAccount: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleToggle = () => {
-    dispatch(toggleDeleteAccountOpen());
+  const handleClose = () => {
+    dispatch(toggleDeleteAccountOpen(false));
   };
 
   return (
-    <Modal onClose={handleToggle}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("deleteAccount")}</h2>
-        <CloseButton onClick={handleToggle} />
-        <DeleteAccountForm onClose={handleToggle} />
+        <CloseButton onClick={handleClose} />
+        <DeleteAccountForm onClose={handleClose} />
       </div>
     </Modal>
   );

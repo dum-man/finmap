@@ -1,4 +1,5 @@
 @use "assets/sass/input";
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -11,6 +12,7 @@
   @include input.input;
   padding-top: 25px;
   color: $blackAlpha900;
+  cursor: pointer;
 }
 
 .label {
@@ -18,5 +20,5 @@
 }
 
 .focused {
-  box-shadow: 0 0 0 1px $green600;
+  @include shared.focus-green;
 }

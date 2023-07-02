@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .container {
@@ -25,7 +26,7 @@
 }
 
 .container:focus {
-  box-shadow: 0 0 0 1px $green600;
+  @include shared.focus-green;
 }
 
 .value {

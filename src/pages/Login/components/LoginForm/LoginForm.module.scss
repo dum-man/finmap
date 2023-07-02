@@ -1,4 +1,5 @@
 @use "assets/sass/button";
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -22,11 +23,17 @@
 }
 
 .link {
+  padding: 5px;
   font-size: 13px;
   color: $green500;
+  border-radius: 6px;
   text-decoration: none;
+  transition: box-shadow 0.2s;
   &:hover {
     text-decoration: underline;
+  }
+  &:focus-visible {
+    @include shared.focus-green;
   }
   @media (max-width: $tablet) {
     margin-bottom: 10px;
@@ -34,15 +41,20 @@
 }
 
 .resetButton {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 13px;
-  padding: 0;
+  padding: 5px;
   color: $green500;
   border: none;
+  border-radius: 6px;
   background: transparent;
+  transition: box-shadow 0.2s;
   cursor: pointer;
   &:hover {
     text-decoration: underline;
+  }
+  &:focus-visible {
+    @include shared.focus-green;
   }
 }
 

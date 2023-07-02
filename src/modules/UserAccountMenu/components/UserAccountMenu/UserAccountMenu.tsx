@@ -21,7 +21,7 @@ const UserAccountMenu: React.FC = () => {
       open={userAccountMenuOpen}
       onClose={handleClose}
       variants={VARIANTS}
-      className={styles.container}
+      className={styles.menuContainer}
     >
       <AccountType />
       <span className={styles.divider} />

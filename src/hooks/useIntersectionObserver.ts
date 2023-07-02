@@ -1,4 +1,5 @@
 import { RefObject, useEffect, useState } from "react";
+import { useDebounce } from "usehooks-ts";
 
 interface Args extends IntersectionObserverInit {
   freezeOnceVisible?: boolean;
@@ -9,8 +10,9 @@ function useIntersectionObserver(
   { threshold = 0, root = null, rootMargin = "0%", freezeOnceVisible = false }: Args
 ): IntersectionObserverEntry | undefined {
   const [entry, setEntry] = useState<IntersectionObserverEntry>();
+  const debouncedValue = useDebounce<IntersectionObserverEntry | undefined>(entry, 100);
 
-  const frozen = entry?.isIntersecting && freezeOnceVisible;
+  const frozen = debouncedValue?.isIntersecting && freezeOnceVisible;
 
   const updateEntry = ([entry]: IntersectionObserverEntry[]): void => {
     setEntry(entry);
@@ -32,7 +34,7 @@ function useIntersectionObserver(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [elementRef?.current, JSON.stringify(threshold), root, rootMargin, frozen]);
 
-  return entry;
+  return debouncedValue;
 }
 
 export default useIntersectionObserver;

@@ -11,16 +11,16 @@ const CreateTransfer: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleToggle = () => {
-    dispatch(toggleCreateTransferOpen());
+  const handleClose = () => {
+    dispatch(toggleCreateTransferOpen(false));
   };
 
   return (
-    <Modal onClose={handleToggle}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("newTransfer")}</h2>
-        <CloseButton onClick={handleToggle} />
-        <CreateTransferForm onClose={handleToggle} />
+        <CloseButton onClick={handleClose} />
+        <CreateTransferForm onClose={handleClose} />
       </div>
     </Modal>
   );

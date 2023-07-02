@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .transactionButtons {
@@ -21,9 +22,12 @@
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 12px;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
   &:active {
     transform: scale(0.9);
+  }
+  &:focus-visible {
+    @include shared.focus-white;
   }
   @media (max-width: $laptop) {
     width: 100px;

@@ -2,8 +2,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CategoryType } from "types";
 
 export interface AppState {
-  resetPasswordOpen: boolean;
   sidebarOpen: boolean;
+  resetPasswordOpen: boolean;
   createAccountOpen: boolean;
   deleteAccountOpen: boolean;
   userAccountMenuOpen: boolean;
@@ -14,15 +14,15 @@ export interface AppState {
   transfersMeunOpen: boolean;
   settingsMenuOpen: boolean;
   accountsOpen: boolean;
-  transactionCategoriesOpen: boolean;
+  categoriesOpen: boolean;
   categoryType: CategoryType;
   changePasswordOpen: boolean;
   setLanguageOpen: boolean;
 }
 
 const initialState: AppState = {
-  resetPasswordOpen: false,
   sidebarOpen: window.matchMedia("(min-width: 768px)").matches,
+  resetPasswordOpen: false,
   createAccountOpen: false,
   deleteAccountOpen: false,
   userAccountMenuOpen: false,
@@ -33,7 +33,7 @@ const initialState: AppState = {
   transfersMeunOpen: false,
   settingsMenuOpen: false,
   accountsOpen: false,
-  transactionCategoriesOpen: false,
+  categoriesOpen: false,
   categoryType: null,
   changePasswordOpen: false,
   setLanguageOpen: false,
@@ -43,60 +43,60 @@ export const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    toggleResetPasswordOpen: (state) => {
-      state.resetPasswordOpen = !state.resetPasswordOpen;
-    },
     toggleSidebarOpen: (state) => {
       state.sidebarOpen = !state.sidebarOpen;
     },
-    toggleCreateAccountOpen: (state) => {
-      state.createAccountOpen = !state.createAccountOpen;
+    toggleResetPasswordOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.resetPasswordOpen = isOpen;
     },
-    toggleDeleteAccountOpen: (state) => {
-      state.deleteAccountOpen = !state.deleteAccountOpen;
+    toggleCreateAccountOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.createAccountOpen = isOpen;
     },
-    toggleUserAccountMenuOpen: (state, { payload: open }: PayloadAction<boolean>) => {
-      state.userAccountMenuOpen = open;
+    toggleDeleteAccountOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.deleteAccountOpen = isOpen;
     },
-    toggleSetUsernameOpen: (state) => {
-      state.setUsernameOpen = !state.setUsernameOpen;
+    toggleUserAccountMenuOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.userAccountMenuOpen = isOpen;
     },
-    toggleCreateIncomeOpen: (state) => {
-      state.createIncomeOpen = !state.createIncomeOpen;
+    toggleSetUsernameOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.setUsernameOpen = isOpen;
     },
-    toggleCreateExpenseOpen: (state) => {
-      state.createExpenseOpen = !state.createExpenseOpen;
+    toggleCreateIncomeOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.createIncomeOpen = isOpen;
     },
-    toggleCreateTransferOpen: (state) => {
-      state.createTransferOpen = !state.createTransferOpen;
+    toggleCreateExpenseOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.createExpenseOpen = isOpen;
     },
-    toggleTransfersMeunOpen: (state, { payload: open }: PayloadAction<boolean>) => {
-      state.transfersMeunOpen = open;
+    toggleCreateTransferOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.createTransferOpen = isOpen;
     },
-    toggleSettingsMenuOpen: (state, { payload: open }: PayloadAction<boolean>) => {
-      state.settingsMenuOpen = open;
+    toggleTransfersMeunOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.transfersMeunOpen = isOpen;
     },
-    toggleAccountsOpen: (state) => {
-      state.accountsOpen = !state.accountsOpen;
+    toggleSettingsMenuOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.settingsMenuOpen = isOpen;
     },
-    toggleChangePasswordOpen: (state) => {
-      state.changePasswordOpen = !state.changePasswordOpen;
+    toggleAccountsOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.accountsOpen = isOpen;
     },
-    toggleTransactionCategoriesOpen: (state) => {
-      state.transactionCategoriesOpen = !state.transactionCategoriesOpen;
+    toggleChangePasswordOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.changePasswordOpen = isOpen;
+    },
+    toggleCategoriesOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.categoriesOpen = isOpen;
     },
     setCategoryType: (state, { payload: categoryType }: PayloadAction<CategoryType>) => {
       state.categoryType = categoryType;
     },
-    toggleSetLanguageOpen: (state) => {
-      state.setLanguageOpen = !state.setLanguageOpen;
+    toggleSetLanguageOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.setLanguageOpen = isOpen;
     },
   },
 });
 
 export const {
-  toggleResetPasswordOpen,
   toggleSidebarOpen,
+  toggleResetPasswordOpen,
   toggleCreateAccountOpen,
   toggleDeleteAccountOpen,
   toggleUserAccountMenuOpen,
@@ -107,7 +107,7 @@ export const {
   toggleTransfersMeunOpen,
   toggleSettingsMenuOpen,
   toggleAccountsOpen,
-  toggleTransactionCategoriesOpen,
+  toggleCategoriesOpen,
   setCategoryType,
   toggleChangePasswordOpen,
   toggleSetLanguageOpen,

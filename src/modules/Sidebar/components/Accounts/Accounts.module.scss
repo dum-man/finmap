@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .accountsList {
@@ -5,22 +6,43 @@
   color: $gray700;
   overflow-y: auto;
   padding: 0 25px;
+  padding-top: 1px;
+  margin-left: -5px;
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
 .accountItem {
+  margin-bottom: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.accountItemButton {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 18px;
-  padding: 2px 0;
-  cursor: pointer;
+  padding: 5px;
+  color: inherit;
+  border-radius: 6px;
+  transition: box-shadow 0.2s;
+  &:focus-visible {
+    @include shared.focus-green;
+  }
 }
 
 .selected {
-  padding-left: 10px;
-  font-weight: 700;
-  border-left: 3px solid $green500;
+  &::before {
+    content: "";
+    width: 4px;
+    height: 25px;
+    margin-right: 5px;
+    border-radius: 6px;
+    background-color: $green500;
+  }
+  button {
+    font-weight: 700;
+  }
 }

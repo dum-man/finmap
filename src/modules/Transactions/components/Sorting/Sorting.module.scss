@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -10,7 +11,7 @@
 .sortList {
   display: grid;
   grid-template-columns: 1fr repeat(5, 2fr);
-  padding: 5px 0;
+  padding: 4px 0 8px 0;
   border-bottom: 0.5px solid $gray200;
   @media (max-width: $desktop) {
     grid-template-columns: 1fr repeat(4, 2fr);
@@ -18,12 +19,12 @@
   @media (max-width: $laptop) {
     display: flex;
     gap: 5px;
+    padding-bottom: 5px;
   }
 }
 
 .sortItem {
   display: flex;
-  padding: 5px 0;
   font-size: 14px;
   color: $gray700;
   &:hover button:nth-child(2) {
@@ -35,6 +36,8 @@
     }
   }
   &:nth-child(n + 4):nth-child(-n + 6) {
+    margin-left: -4px;
+    padding: 4px;
     @media (max-width: $laptop) {
       display: none;
     }
@@ -46,9 +49,12 @@
   justify-content: space-between;
   align-items: center;
   gap: 5px;
-  padding-left: 0;
+  margin-left: -4px;
+  padding: 4px;
   font-size: 14px;
   color: inherit;
+  border-radius: 6px;
+  transition: box-shadow 0.2s;
   svg {
     opacity: 0;
     transition: opacity 0.2s, transform 0.2s;
@@ -56,8 +62,8 @@
   &:hover svg {
     opacity: 1;
   }
-  @media (max-width: $laptop) {
-    padding-right: 0;
+  &:focus-visible {
+    @include shared.focus-green;
   }
 }
 

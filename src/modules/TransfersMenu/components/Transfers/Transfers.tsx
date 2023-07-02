@@ -8,6 +8,7 @@ import { useCancelTransferMutation } from "app/services/transferApi";
 import { setFormattedDateTime } from "utils";
 import { setFormattedAmount } from "utils/setFormattedAmount";
 import { auth } from "app/config";
+import NotFound from "../NotFound/NotFound";
 import { Transfer } from "types";
 import styles from "./Transfers.module.scss";
 
@@ -30,6 +31,10 @@ const Transfers: React.FC<TransfersProps> = ({ transfers }) => {
       toast.error(error.message);
     }
   };
+
+  if (!transfers.length) {
+    return <NotFound />;
+  }
 
   return (
     <ul className={styles.transfersList}>

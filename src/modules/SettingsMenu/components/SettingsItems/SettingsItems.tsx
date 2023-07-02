@@ -15,7 +15,7 @@ const SettingItems: React.FC = () => {
         <li>
           <button
             className={styles.button}
-            onClick={() => dispatch(toggleChangePasswordOpen())}
+            onClick={() => dispatch(toggleChangePasswordOpen(true))}
           >
             {t("changePassword")}
           </button>
@@ -23,7 +23,7 @@ const SettingItems: React.FC = () => {
         <li>
           <button
             className={styles.button}
-            onClick={() => dispatch(toggleSetLanguageOpen())}
+            onClick={() => dispatch(toggleSetLanguageOpen(true))}
           >
             🌎 {t("language")}:
             <span className={styles.currentLanguage}>{i18n.resolvedLanguage}</span>

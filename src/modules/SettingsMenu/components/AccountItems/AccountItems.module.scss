@@ -1,3 +1,4 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -21,11 +22,14 @@
   font-size: 15px;
   text-align: left;
   border-radius: 12px;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  @media (max-width: $tablet) {
+    padding: 13px 10px;
+  }
   &:hover {
     background-color: $blue50;
   }
-  @media (max-width: $tablet) {
-    padding: 13px 10px;
+  &:focus-visible {
+    @include shared.focus-green;
   }
 }

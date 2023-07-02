@@ -1,11 +1,11 @@
+@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 20px;
-  padding-left: 25px;
+  padding: 20px 20px 15px 25px;
 }
 
 .title {
@@ -20,7 +20,10 @@
   color: $green500;
   font-size: 20px;
   border-radius: 50%;
-  transition: transform 0.1s;
+  transition: transform 0.1s, box-shadow 0.2s;
+  &:focus-visible {
+    @include shared.focus-green;
+  }
   &:first-of-type {
     margin-left: auto;
   }

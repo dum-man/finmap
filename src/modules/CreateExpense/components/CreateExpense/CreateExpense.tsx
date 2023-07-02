@@ -11,16 +11,16 @@ const CreateExpense: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleToggle = () => {
-    dispatch(toggleCreateExpenseOpen());
+  const handleClose = () => {
+    dispatch(toggleCreateExpenseOpen(false));
   };
 
   return (
-    <Modal onClose={handleToggle}>
+    <Modal onClose={handleClose}>
       <div className={styles.container}>
         <h2 className={styles.title}>{t("newExpense")}</h2>
-        <CloseButton onClick={handleToggle} />
-        <CreateExpenseForm onClose={handleToggle} />
+        <CloseButton onClick={handleClose} />
+        <CreateExpenseForm onClose={handleClose} />
       </div>
     </Modal>
   );

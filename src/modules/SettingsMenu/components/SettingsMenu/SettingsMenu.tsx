@@ -26,7 +26,7 @@ const SettingsMenu: React.FC = () => {
     <SlidingMenu
       open={settingsMenuOpen}
       onClose={handleClose}
-      className={styles.container}
+      className={styles.menuContainer}
     >
       <div className={styles.wrapper}>
         <SettingsHeader />
@@ -37,25 +37,6 @@ const SettingsMenu: React.FC = () => {
       </div>
     </SlidingMenu>
   );
-
-  // return (
-  //   <motion.div
-  //     className={styles.container}
-  //     variants={MENU_VARIANTS}
-  //     initial="hidden"
-  //     animate="visible"
-  //     exit="exit"
-  //     ref={containerRef}
-  //   >
-  //     <div className={styles.wrapper}>
-  //       <SettingsHeader />
-  //       <div className={styles.menuWrapper}>
-  //         <AccountItems />
-  //         <SettingsItems />
-  //       </div>
-  //     </div>
-  //   </motion.div>
-  // );
 };
 
 export default SettingsMenu;

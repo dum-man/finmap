@@ -13,7 +13,7 @@ import SetUsername from "modules/SetUsername";
 import UserAccountMenu from "modules/UserAccountMenu";
 import TransfersMenu from "modules/TransfersMenu";
 import SettingsMenu from "modules/SettingsMenu";
-import TransactionCategories from "modules/TransactionCategories";
+import Categories from "modules/Categories";
 
 const Container: React.FC = () => {
   const {
@@ -26,7 +26,7 @@ const Container: React.FC = () => {
     accountsOpen,
     changePasswordOpen,
     setLanguageOpen,
-    transactionCategoriesOpen,
+    categoriesOpen,
   } = useSelector((state: RootState) => state.app);
 
   return (
@@ -40,7 +40,7 @@ const Container: React.FC = () => {
         {createExpenseOpen && <CreateExpense />}
         {createTransferOpen && <CreateTransfer />}
         {accountsOpen && <Accounts />}
-        {transactionCategoriesOpen && <TransactionCategories />}
+        {categoriesOpen && <Categories />}
         {changePasswordOpen && <ChangePassword />}
         {setLanguageOpen && <SetLanguage />}
         {createAccountOpen && <CreateAccount />}

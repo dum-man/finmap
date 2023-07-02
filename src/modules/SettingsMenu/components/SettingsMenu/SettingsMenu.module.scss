@@ -1,16 +1,11 @@
 @import "assets/sass/variables.scss";
 
-.container {
-  position: absolute;
+.menuContainer {
   top: 70px;
   right: 25px;
-  z-index: 10;
   width: 450px;
   height: 500px;
   display: flex;
-  background-color: $white;
-  border-radius: 12px;
-  box-shadow: $box-shadow;
   @media (max-width: $tablet) {
     width: 360px;
     right: 15px;
