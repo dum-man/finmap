@@ -37,6 +37,13 @@
   color: $blackAlpha900;
 }
 
+.value span {
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .divider {
   align-self: stretch;
   width: 0.05em;

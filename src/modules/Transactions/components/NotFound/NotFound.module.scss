@@ -7,6 +7,9 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+  p {
+    text-align: center;
+  }
   p:first-of-type {
     margin-top: 10px;
     font-size: 26px;

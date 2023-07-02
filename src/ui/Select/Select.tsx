@@ -91,17 +91,19 @@ const Select: React.FC<SelectProps> = ({
       onBlur={() => setIsOpen(false)}
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <span
+      <p
         className={`${styles.value} ${value?.label ? "" : styles.placeholder} ${
           active ? styles.active : ""
         }`}
       >
-        {value?.label && value.group === "base"
-          ? t(value.label)
-          : value?.label
-          ? value.label
-          : placeholder}
-      </span>
+        <span>
+          {value?.label && value.group === "base"
+            ? t(value.label)
+            : value?.label
+            ? value.label
+            : placeholder}
+        </span>
+      </p>
       <div className={styles.divider} />
       <div className={styles.caret} />
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>

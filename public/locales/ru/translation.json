@@ -5,7 +5,7 @@
   "registerLink": "Нет аккаунта? Зарегистрируйтесь",
   "loginLink": "Есть аккаунт? Войти",
   "email": "Ваш email",
-  "registerEmail": "Ваш правильный email",
+  "registerEmail": "Ваш email",
   "invalidEmail": "Неверный адрес электронной почты",
   "password": "Пароль",
   "registerPassword": "Придумайте пароль",
