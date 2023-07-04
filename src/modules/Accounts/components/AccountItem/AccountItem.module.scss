@@ -1,3 +1,4 @@
+@use "assets/sass/button";
 @import "assets/sass/variables.scss";
 
 .accountItem {
@@ -5,21 +6,41 @@
   &:not(:last-child) {
     border-bottom: 1px solid $gray200;
   }
-  & div {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 20px 10px;
-    font-size: 16px;
-    border-radius: 12px;
-    transition: background-color 0.2s;
-    &:hover {
-      background-color: $blue50;
-    }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 10px;
+  font-size: 16px;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $blue50;
+  }
+  p {
+    margin-right: auto;
   }
 }
 
 .icon {
   font-size: 18px;
   color: $gray700;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.button {
+  font-size: 20px;
+  color: $gray700;
+  @include button.icon;
+}
+
+.deleteButton {
+  color: red;
 }

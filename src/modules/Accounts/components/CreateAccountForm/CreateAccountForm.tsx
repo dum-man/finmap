@@ -7,6 +7,7 @@ import { useStep } from "usehooks-ts";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { BsArrowLeft, BsArrowRight, BsCheck } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
 import { AmountInput, TextInput } from "components";
 import { Spinner } from "ui";
 import useAmountInput from "hooks/useAmountInput";
@@ -102,13 +103,18 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
             value={accountName}
             onChange={onAccountNameChange}
           />
-          <button
-            type="button"
-            className={styles.iconButton}
-            onClick={() => goToNextStep()}
-          >
-            <BsArrowRight />
-          </button>
+          <div className={styles.buttons}>
+            <button type="button" className={styles.iconButton} onClick={onClose}>
+              <IoClose />
+            </button>
+            <button
+              type="button"
+              className={styles.iconButton}
+              onClick={() => goToNextStep()}
+            >
+              <BsArrowRight />
+            </button>
+          </div>
         </motion.div>
       )}
       {currentStep === 2 && (

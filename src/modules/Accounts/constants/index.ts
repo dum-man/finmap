@@ -1,21 +1,20 @@
 import { Variants } from "framer-motion";
 
-export const INPUT_VARIANTS: Variants = {
+export const ACCOUNT_ITEM_VARIANTS: Variants = {
   hidden: {
-    x: 500,
+    opacity: 0,
   },
   visible: {
-    x: 0,
-    transition: {
-      ease: "easeOut",
-      duration: 0.2,
-    },
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
   },
 };
 
-export const INPUT_VARIANTS2: Variants = {
+export const INPUT_VARIANTS: Variants = {
   hidden: {
-    x: -500,
+    x: 500,
   },
   visible: {
     x: 0,

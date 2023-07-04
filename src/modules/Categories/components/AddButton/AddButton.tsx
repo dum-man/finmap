@@ -2,13 +2,13 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Button } from "ui";
 import { VARIANTS } from "../../constants";
-import styles from "./AddCategoryButton.module.scss";
+import styles from "./AddButton.module.scss";
 
-interface AddCategoryButtonProps {
+interface AddButtonProps {
   setFormVisible: (visible: React.SetStateAction<boolean>) => void;
 }
 
-const AddCategoryButton: React.FC<AddCategoryButtonProps> = ({ setFormVisible }) => {
+const AddButton: React.FC<AddButtonProps> = ({ setFormVisible }) => {
   const { t } = useTranslation();
 
   return (
@@ -25,4 +25,4 @@ const AddCategoryButton: React.FC<AddCategoryButtonProps> = ({ setFormVisible })
   );
 };
 
-export default AddCategoryButton;
+export default AddButton;

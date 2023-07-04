@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { AnimatePresence } from "framer-motion";
-import AddCategoryButton from "../AddCategoryButton/AddCategoryButton";
+import AddButton from "../AddButton/AddButton";
 import CategoriesList from "../CategoriesList/CategoriesList";
 import CreateCategoryForm from "../CreateCategoryForm/CreateCategoryForm";
 import Skeleton from "../Skeleton/Skeleton";
@@ -37,7 +37,7 @@ const Container: React.FC = () => {
             setFormVisible={setFormVisible}
           />
         ) : (
-          <AddCategoryButton setFormVisible={setFormVisible} />
+          <AddButton setFormVisible={setFormVisible} />
         )}
       </AnimatePresence>
       {!isLoading ? (

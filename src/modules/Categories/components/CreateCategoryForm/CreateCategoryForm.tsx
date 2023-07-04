@@ -10,6 +10,7 @@ import { BsCheckLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TextInput } from "components";
+import { Spinner } from "ui";
 import {
   useCreateCategoryMutation,
   useDeleteCategoryMutation,
@@ -142,9 +143,13 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
         onChange={handleChangeCategoryName}
       />
       <div className={styles.buttons}>
-        <button className={styles.iconButton} type="submit" disabled={categoryCreating}>
-          <BsCheckLg className={styles.submitIcon} />
-        </button>
+        {!categoryCreating ? (
+          <button className={styles.iconButton} type="submit">
+            <BsCheckLg className={styles.submitIcon} />
+          </button>
+        ) : (
+          <Spinner variant="dark" />
+        )}
         <button
           className={styles.iconButton}
           type="button"
