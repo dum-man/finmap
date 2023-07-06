@@ -14,7 +14,7 @@ import styles from "./Sidebar.module.scss";
 const Sidebar: React.FC = () => {
   const [currentUser] = useAuthState(auth);
 
-  const { sidebarOpen } = useSelector((state: RootState) => state.app);
+  const sidebarOpen = useSelector((state: RootState) => state.app.sidebarOpen);
 
   const { data: accounts = [], isLoading } = useGetAccountsQuery(
     currentUser?.uid as string

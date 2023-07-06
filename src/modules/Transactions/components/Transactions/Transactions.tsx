@@ -4,12 +4,13 @@ import { Loader } from "ui";
 import Filtration from "../Filtration/Filtration";
 import Sorting from "../Sorting/Sorting";
 import NotFound from "../NotFound/NotFound";
+import ScrollToTop from "../ScrollToTop/ScrollToTop";
+import TransactionsList from "../TransactionsList/TransactionsList";
 import { useGetTransactionsQuery } from "app/services/transactionApi";
 import { sortTransactions } from "utils/sortTransactions";
 import { filterTranscations } from "utils/filterTranscations";
 import { auth } from "app/config";
 import { RootState } from "app/store";
-import TransactionsList from "../TransactionsList/TransactionsList";
 
 const Transactions: React.FC = () => {
   const [currentUser] = useAuthState(auth);
@@ -40,12 +41,14 @@ const Transactions: React.FC = () => {
   return (
     <>
       <Filtration />
-      {!transactions?.length || !filteredTransactions.length ? (
-        <NotFound noMatches={!!transactions?.length && !filteredTransactions.length} />
+      {!transactions.length || !filteredTransactions.length ? (
+        <NotFound noMatches={!!transactions.length && !filteredTransactions.length} />
       ) : (
         <>
           <Sorting />
-          <TransactionsList transactions={filteredTransactions} />
+          <ScrollToTop>
+            <TransactionsList transactions={filteredTransactions} />
+          </ScrollToTop>
         </>
       )}
     </>

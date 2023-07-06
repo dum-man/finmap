@@ -47,7 +47,7 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
 
   const [categoryCreating, setCategoryCreating] = useState(false);
 
-  const { categoryType } = useSelector((state: RootState) => state.app);
+  const categoryType = useSelector((state: RootState) => state.app.categoryType);
 
   const handleChangeCategoryName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setCategoryName(evt.target.value);

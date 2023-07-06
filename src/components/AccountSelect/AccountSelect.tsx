@@ -23,13 +23,15 @@ const AccountSelect: React.FC<AccountSelectProps> = ({
 
   const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
 
-  const accountOptions = useMemo(() => {
-    return accounts.map((account) => ({
-      id: account.id,
-      group: account.group,
-      label: account.name,
-    }));
-  }, [accounts]);
+  const accountOptions = useMemo(
+    () =>
+      accounts.map((account) => ({
+        id: account.id,
+        group: account.group,
+        label: account.name,
+      })),
+    [accounts]
+  );
 
   return (
     <div className={styles.wrapper}>

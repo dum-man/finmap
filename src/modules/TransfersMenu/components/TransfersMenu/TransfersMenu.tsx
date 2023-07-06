@@ -20,7 +20,9 @@ const TransfersMenu: React.FC = () => {
     currentUser?.uid as string
   );
 
-  const { transfersMeunOpen } = useSelector((state: RootState) => state.app);
+  const transfersMeunOpen = useSelector(
+    (state: RootState) => state.app.transfersMeunOpen
+  );
 
   const dispatch = useDispatch();
 

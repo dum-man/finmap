@@ -1,38 +1,38 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence } from "framer-motion";
 import { Modal } from "layouts";
 import { CloseButton } from "ui";
+import ChangePasswordWrapper from "../ChangePasswordWrapper/ChangePasswordWrapper";
 import { toggleChangePasswordOpen } from "app/slices/appSlice";
-import ChangePasswordForm from "../ChangePasswordForm/ChangePasswordForm";
-import Success from "../ChangeSuccess/ChangeSuccess";
+import { RootState } from "app/store";
 import styles from "./ChangePassword.module.scss";
 
 const ChangePassword: React.FC = () => {
   const { t } = useTranslation();
 
-  const [success, setSuccess] = useState(false);
-
   const dispatch = useDispatch();
+
+  const changePasswordOpen = useSelector(
+    (state: RootState) => state.app.changePasswordOpen
+  );
 
   const handleClose = () => {
     dispatch(toggleChangePasswordOpen(false));
   };
 
   return (
-    <Modal onClose={handleClose}>
-      <div className={styles.container}>
-        <CloseButton onClick={handleClose} />
-        {success ? (
-          <Success />
-        ) : (
-          <>
+    <AnimatePresence>
+      {changePasswordOpen && (
+        <Modal onClose={handleClose}>
+          <div className={styles.container}>
+            <CloseButton onClick={handleClose} />
             <h2 className={styles.title}>{t("changePassword")}</h2>
-            <ChangePasswordForm setSuccess={setSuccess} />
-          </>
-        )}
-      </div>
-    </Modal>
+            <ChangePasswordWrapper />
+          </div>
+        </Modal>
+      )}
+    </AnimatePresence>
   );
 };
 

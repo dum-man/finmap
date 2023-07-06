@@ -12,7 +12,7 @@ import styles from "./SettingsMenu.module.scss";
 const SettingsMenu: React.FC = () => {
   const containerRef = useRef(null);
 
-  const { settingsMenuOpen } = useSelector((state: RootState) => state.app);
+  const settingsMenuOpen = useSelector((state: RootState) => state.app.settingsMenuOpen);
 
   const dispatch = useDispatch();
 

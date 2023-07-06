@@ -1,9 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence } from "framer-motion";
 import { toggleSetLanguageOpen } from "app/slices/appSlice";
 import { Modal } from "layouts";
 import { CloseButton } from "ui";
 import Container from "../Container/Container";
+import { RootState } from "app/store";
 import styles from "./SetLanguage.module.scss";
 
 const SetLanguage: React.FC = () => {
@@ -11,18 +13,24 @@ const SetLanguage: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  const setLanguageOpen = useSelector((state: RootState) => state.app.setLanguageOpen);
+
   const handleClose = () => {
     dispatch(toggleSetLanguageOpen(false));
   };
 
   return (
-    <Modal onClose={handleClose}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>{t("interfaceLanguage")}</h2>
-        <CloseButton onClick={handleClose} />
-        <Container onToggle={handleClose} />
-      </div>
-    </Modal>
+    <AnimatePresence>
+      {setLanguageOpen && (
+        <Modal onClose={handleClose}>
+          <div className={styles.container}>
+            <h2 className={styles.title}>{t("interfaceLanguage")}</h2>
+            <CloseButton onClick={handleClose} />
+            <Container onToggle={handleClose} />
+          </div>
+        </Modal>
+      )}
+    </AnimatePresence>
   );
 };
 

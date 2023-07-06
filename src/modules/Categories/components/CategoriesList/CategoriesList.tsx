@@ -18,11 +18,13 @@ const CategoriesList: React.FC<CategoriesListProps> = React.memo(
   ({ transactionCategories, onSelectCategory }) => {
     const { t } = useTranslation();
 
-    const { categoryType } = useSelector((state: RootState) => state.app);
+    const categoryType = useSelector((state: RootState) => state.app.categoryType);
 
     const categories = useMemo(() => {
       return transactionCategories.filter((category) => category.type === categoryType);
     }, [transactionCategories, categoryType]);
+
+    console.log("categories");
 
     return (
       <ul className={styles.categories}>

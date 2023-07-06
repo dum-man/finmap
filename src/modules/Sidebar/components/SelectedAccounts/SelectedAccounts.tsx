@@ -1,8 +1,8 @@
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { setFormattedAmount } from "utils/setFormattedAmount";
+import { getSelectedAccountsTotalSum } from "../../helpers/getSelectedAccountsTotalSum";
 import { VARIANTS } from "../../constants";
 import { RootState } from "app/store";
 import styles from "./SelectedAccounts.module.scss";
@@ -10,11 +10,9 @@ import styles from "./SelectedAccounts.module.scss";
 const SelectedAccounts: React.FC = () => {
   const { t } = useTranslation();
 
-  const { selectedAccounts } = useSelector((state: RootState) => state.filter);
-
-  const selectedAccountsTotalSum = useMemo(() => {
-    return selectedAccounts.reduce((acc, current) => acc + current.balance, 0);
-  }, [selectedAccounts]);
+  const selectedAccounts = useSelector(
+    (state: RootState) => state.filter.selectedAccounts
+  );
 
   let count = selectedAccounts.length;
   let name = t(selectedAccounts.length === 1 ? "account" : "selectedAccounts");
@@ -31,7 +29,7 @@ const SelectedAccounts: React.FC = () => {
               </Trans>
             </p>
             <span className={styles.amount}>
-              {setFormattedAmount(selectedAccountsTotalSum)}
+              {setFormattedAmount(getSelectedAccountsTotalSum(selectedAccounts))}
             </span>
           </div>
         </motion.div>

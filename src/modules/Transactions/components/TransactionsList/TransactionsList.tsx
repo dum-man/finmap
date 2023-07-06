@@ -1,8 +1,7 @@
-import { useRef } from "react";
-import { Transaction } from "types";
+import { useContext } from "react";
 import TransactionItem from "../TransactionItem/TransactionItem";
-import useIntersectionObserver from "hooks/useIntersectionObserver";
-import UpButton from "../UpButton/UpButton";
+import { Context } from "../ScrollToTop/ScrollToTop";
+import { Transaction } from "types";
 import styles from "./TransactionsList.module.scss";
 
 interface TransactionsListProps {
@@ -10,32 +9,23 @@ interface TransactionsListProps {
 }
 
 const TransactionsList: React.FC<TransactionsListProps> = ({ transactions }) => {
-  const firstTransactionRef = useRef<HTMLLIElement | null>(null);
-  const entry = useIntersectionObserver(firstTransactionRef, {});
-  const isVisible = !!entry?.isIntersecting;
-
-  const handleScrollToTop = () => {
-    firstTransactionRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const firstTransactionRef = useContext(Context);
 
   return (
-    <>
-      <ul className={styles.list}>
-        {transactions.map((transaction, index) => {
-          if (index === 0) {
-            return (
-              <TransactionItem
-                ref={firstTransactionRef}
-                key={transaction.id}
-                transaction={transaction}
-              />
-            );
-          }
-          return <TransactionItem key={transaction.id} transaction={transaction} />;
-        })}
-      </ul>
-      {!!entry && <UpButton isVisible={isVisible} onClick={handleScrollToTop} />}
-    </>
+    <ul className={styles.list}>
+      {transactions.map((transaction, index) => {
+        if (index === 0) {
+          return (
+            <TransactionItem
+              ref={firstTransactionRef}
+              key={transaction.id}
+              transaction={transaction}
+            />
+          );
+        }
+        return <TransactionItem key={transaction.id} transaction={transaction} />;
+      })}
+    </ul>
   );
 };
 

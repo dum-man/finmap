@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Calendar as ReactBigCalendar, dayjsLocalizer } from "react-big-calendar";
 import dayjs from "dayjs";
@@ -16,10 +15,6 @@ const Calendar: React.FC = () => {
 
   const { data: transactions = [] } = useGetTransactionsQuery(currentUser?.uid as string);
 
-  const events = useMemo(() => {
-    return getTransactionEvents(transactions);
-  }, [transactions]);
-
   return (
     <div className={styles.wrapper}>
       <h2 className="visually-hidden">Calendar</h2>
@@ -29,7 +24,7 @@ const Calendar: React.FC = () => {
         defaultView="month"
         drilldownView="month"
         components={{ event: EventItem }}
-        events={events}
+        events={getTransactionEvents(transactions)}
       />
     </div>
   );

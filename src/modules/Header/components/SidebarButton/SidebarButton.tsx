@@ -5,7 +5,7 @@ import { toggleSidebarOpen } from "app/slices/appSlice";
 import styles from "./SidebarButton.module.scss";
 
 const SidebarButton: React.FC = () => {
-  const { sidebarOpen } = useSelector((state: RootState) => state.app);
+  const sidebarOpen = useSelector((state: RootState) => state.app.sidebarOpen);
 
   const dispatch = useDispatch();
 

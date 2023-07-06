@@ -30,7 +30,7 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
   const { data: categories = [] } = useGetCategoriesQuery(currentUser?.uid as string);
 
   const options = useMemo(() => {
-    return categories?.filter((category) => {
+    return categories.filter((category) => {
       if (category.type === type) {
         return {
           id: category.id,

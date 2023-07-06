@@ -15,7 +15,9 @@ interface AccountsProps {
 const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
   const { t } = useTranslation();
 
-  const { selectedAccounts } = useSelector((state: RootState) => state.filter);
+  const selectedAccounts = useSelector(
+    (state: RootState) => state.filter.selectedAccounts
+  );
 
   const isAccountSelected = (account: Account) => {
     return selectedAccounts.includes(account);

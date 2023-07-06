@@ -16,7 +16,9 @@ const UserInfo: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const { userAccountMenuOpen } = useSelector((state: RootState) => state.app);
+  const userAccountMenuOpen = useSelector(
+    (state: RootState) => state.app.userAccountMenuOpen
+  );
 
   return (
     <div className={styles.wrapper}>

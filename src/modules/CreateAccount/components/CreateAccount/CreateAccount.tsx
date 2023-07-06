@@ -1,9 +1,11 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { AnimatePresence } from "framer-motion";
 import { Modal } from "layouts";
 import { CloseButton } from "ui";
 import { toggleCreateAccountOpen } from "app/slices/appSlice";
 import CreateAccountForm from "../CreateAccountForm/CreateAccountForm";
+import { RootState } from "app/store";
 import styles from "./CreateAccount.module.scss";
 
 const CreateAccount: React.FC = () => {
@@ -11,18 +13,26 @@ const CreateAccount: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const onClose = () => {
+  const createAccountOpen = useSelector(
+    (state: RootState) => state.app.createAccountOpen
+  );
+
+  const handleClose = () => {
     dispatch(toggleCreateAccountOpen(false));
   };
 
   return (
-    <Modal onClose={onClose}>
-      <div className={styles.container}>
-        <h2 className={styles.title}>{t("addAccount")}</h2>
-        <CloseButton onClick={onClose} />
-        <CreateAccountForm onClose={onClose} />
-      </div>
-    </Modal>
+    <AnimatePresence>
+      {createAccountOpen && (
+        <Modal onClose={handleClose}>
+          <div className={styles.container}>
+            <h2 className={styles.title}>{t("addAccount")}</h2>
+            <CloseButton onClick={handleClose} />
+            <CreateAccountForm onClose={handleClose} />
+          </div>
+        </Modal>
+      )}
+    </AnimatePresence>
   );
 };
 

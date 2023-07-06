@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Doughnut } from "react-chartjs-2";
 import classNames from "classnames";
 import { setFormattedAmount } from "utils/setFormattedAmount";
@@ -9,28 +9,34 @@ import {
   getTotalSum,
   setCategoryColor,
 } from "../../helpers";
-import { Transaction } from "types";
+import { useGetTransactionsQuery } from "app/services/transactionApi";
+import { auth } from "app/config";
+import { getFilteredTransactions } from "../../helpers/getFilteredTransactions";
 import styles from "./ChartItem.module.scss";
 
 interface ChartItemProps {
   type: "income" | "expense";
-  transactions: Transaction[];
 }
 
-const ChartItem: React.FC<ChartItemProps> = ({ type, transactions }) => {
-  const totalSum = useMemo(() => {
-    return setFormattedAmount(getTotalSum(transactions));
-  }, [transactions]);
+const ChartItem: React.FC<ChartItemProps> = ({ type }) => {
+  const [currentUser] = useAuthState(auth);
 
-  const labels = useMemo(() => {
-    const labelsData = getLabelsData(transactions);
-    return getLabels(labelsData, transactions);
-  }, [transactions]);
+  const { data: transactions = [] } = useGetTransactionsQuery(currentUser?.uid as string);
+
+  const filteredTransactions = getFilteredTransactions(transactions, type);
+
+  const totalSum = getTotalSum(filteredTransactions);
+
+  const labelsData = getLabelsData(filteredTransactions);
+
+  const labels = getLabels(labelsData, filteredTransactions);
 
   return (
     <div className={styles.wrapper}>
-      <span className={classNames(styles.totalSum, styles[type])}>{totalSum}</span>
-      <Doughnut {...getChartData(transactions, type)} />
+      <span className={classNames(styles.totalSum, styles[type])}>
+        {setFormattedAmount(totalSum)}
+      </span>
+      <Doughnut {...getChartData(filteredTransactions, type)} />
       <ul className={styles.categories}>
         {labels.map((label) => (
           <li key={label.category} className={styles.categoryItem}>

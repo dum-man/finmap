@@ -10,7 +10,9 @@ import styles from "./UserAccountMenu.module.scss";
 const UserAccountMenu: React.FC = () => {
   const dispatch = useDispatch();
 
-  const { userAccountMenuOpen } = useSelector((state: RootState) => state.app);
+  const userAccountMenuOpen = useSelector(
+    (state: RootState) => state.app.userAccountMenuOpen
+  );
 
   const handleClose = () => {
     dispatch(toggleUserAccountMenuOpen(false));
