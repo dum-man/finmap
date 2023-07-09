@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import { Modal } from "layouts";
 import { CloseButton } from "ui";
+import Title from "../Title/Title";
 import { toggleCategoriesOpen } from "app/slices/appSlice";
 import { RootState } from "app/store";
 import Container from "../Container/Container";
@@ -22,7 +23,7 @@ const Categories: React.FC = () => {
         <Modal onClose={handleClose}>
           <div className={styles.container}>
             <CloseButton onClick={handleClose} />
-
+            <Title />
             <Container />
           </div>
         </Modal>

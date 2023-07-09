@@ -33,8 +33,7 @@
   border-radius: 50%;
   transition: transform 0.1s, box-shadow 0.2s;
   &:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 1px $green600;
+    @include shared.focus-green;
   }
   &:disabled {
     cursor: not-allowed;

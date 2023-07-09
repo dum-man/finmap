@@ -1,6 +1,10 @@
 import { Variants } from "framer-motion";
+import { SelectOption } from "types";
 
 export const EMAIL_FORMAT = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+
+export const DEFAULT_DATE_OPTION: SelectOption = { id: "5", label: "allTime" };
+export const DATEPICKER_DATE_OPTION: SelectOption = { id: "0", label: "selectDates" };
 
 export const DEFAULT_ACCOUNTS = ["Bank account", "Savings", "Cash"];
 
@@ -92,19 +96,23 @@ export const MODAL_VARIANTS: Variants = {
 
 export const SELECT_VARIANTS: Variants = {
   hidden: {
-    y: -80,
-    scale: 0.3,
+    y: -8,
+    opacity: 0,
   },
   visible: {
     y: 0,
-    scale: 1,
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
   },
   exit: {
-    y: -80,
-    scale: 0.3,
+    y: -8,
     opacity: 0,
     transition: {
-      duration: 0.1,
+      ease: "easeInOut",
+      duration: 0.2,
     },
   },
 };

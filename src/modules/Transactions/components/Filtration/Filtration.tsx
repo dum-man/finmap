@@ -14,6 +14,7 @@ import {
   setSelectedDates,
   setSelectedOption,
 } from "app/slices/filterSlice";
+import { DATEPICKER_DATE_OPTION, DEFAULT_DATE_OPTION } from "app/constants";
 import { RootState } from "app/store";
 import styles from "./Filtration.module.scss";
 
@@ -26,100 +27,89 @@ const Filtration: React.FC = React.memo(() => {
 
   const dispatch = useDispatch();
 
-  const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const [datepickerOpen, setDatepickerOpen] = useState(false);
 
-  const dateRangeOptionValue: SelectOption = {
-    id: "7",
-    group: "base",
-    label: setFormattedDatepickerDate(selectedDates),
-  };
-
-  const onSearchQueryChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchQueryChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchQuery(evt.target.value));
   };
 
-  const onSelectDateOption = (option: SelectOption) => {
+  const handleSelectDateOption = (option: SelectOption) => {
     dispatch(setSelectedOption(option));
-    if (selectedDates) {
-      dispatch(setSelectedDates(null));
+  };
+
+  const handleSetSelectedDates = (dates: DatepickerDate) =>
+    dispatch(setSelectedDates(dates));
+
+  const handleDatepickerClose = () => {
+    setDatepickerOpen(false);
+    if (Array.isArray(selectedDates)) {
+      dispatch(setSelectedOption(DATEPICKER_DATE_OPTION));
     }
   };
 
-  const onDatepickerClose = () => {
-    setDatepickerOpen(false);
-    if (Array.isArray(selectedDates)) {
-      dispatch(setSelectedOption({ id: "0", group: "base", label: "selectDates" }));
-    }
+  const handleDatepickerClear = () => {
+    dispatch(setSelectedOption(DEFAULT_DATE_OPTION));
+    dispatch(setSelectedDates(null));
   };
 
   return (
-    <>
-      <div
-        className={classNames(styles.container, {
-          [styles.visible]: filterMenuOpen,
-          [styles.hidden]: !filterMenuOpen,
-        })}
-      >
-        <div className={styles.datepickerWrapper}>
-          <div className={styles.selectWrapper}>
-            <Select
-              value={Array.isArray(selectedDates) ? dateRangeOptionValue : selectedOption}
-              onChange={onSelectDateOption}
-              options={DATE_FILTER_OPTIONS}
-            />
-          </div>
-          <>
-            <div
-              className={`${styles.datepicker} ${datepickerOpen ? styles.focused : ""}`}
-              onClick={() => setDatepickerOpen(true)}
-            >
-              {Array.isArray(selectedDates) ? (
-                <span>{setFormattedDatepickerDate(selectedDates)}</span>
-              ) : (
-                <span className={styles.placeholder}>{t("selectDates")}</span>
-              )}
-            </div>
-            <div className={styles.iconButtons}>
-              <button
-                className={styles.iconButton}
-                onClick={() => setDatepickerOpen(true)}
-              >
-                <AiOutlineCalendar />
-              </button>
-              <button
-                className={`${styles.iconButton} ${styles.clearButton}`}
-                onClick={() => setSelectedDates(null)}
-              >
-                <IoClose />
-              </button>
-            </div>
-          </>
+    <div className={styles.container}>
+      {selectedDates ? (
+        <div
+          className={classNames(styles.datepicker, {
+            [styles.focused]: datepickerOpen,
+          })}
+        >
+          <p>{setFormattedDatepickerDate(selectedDates)}</p>
+          <button
+            className={classNames(styles.iconButton, styles.closeButton)}
+            onClick={handleDatepickerClear}
+          >
+            <IoClose />
+          </button>
+          <button
+            className={classNames(styles.iconButton)}
+            onClick={() => setDatepickerOpen(true)}
+          >
+            <AiOutlineCalendar />
+          </button>
         </div>
-        <div className={styles.inputWrapper}>
-          <IoSearch className={styles.searchIcon} />
-          <input
-            className={styles.input}
-            placeholder={t("search").toString()}
-            value={searchQuery}
-            onChange={onSearchQueryChange}
+      ) : (
+        <div className={styles.selectWrapper}>
+          <Select
+            options={DATE_FILTER_OPTIONS}
+            cancelable={false}
+            value={selectedOption}
+            onChange={handleSelectDateOption}
           />
+          <button
+            className={classNames(styles.iconButton, styles.calendarButton)}
+            onClick={() => setDatepickerOpen(true)}
+          >
+            <AiOutlineCalendar />
+          </button>
         </div>
-        <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-          {datepickerOpen && (
-            <Datepicker
-              selectRange
-              value={selectedDates}
-              onChange={(dates: DatepickerDate) => dispatch(setSelectedDates(dates))}
-              onClose={onDatepickerClose}
-            />
-          )}
-        </AnimatePresence>
+      )}
+      <div className={styles.inputWrapper}>
+        <IoSearch className={styles.searchIcon} />
+        <input
+          className={styles.input}
+          placeholder={t("search").toString()}
+          value={searchQuery}
+          onChange={handleSearchQueryChange}
+        />
       </div>
-      <div className={styles.bar}>
-        <button onClick={() => setFilterMenuOpen((prev) => !prev)} />
-      </div>
-    </>
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {datepickerOpen && (
+          <Datepicker
+            selectRange
+            value={selectedDates}
+            onChange={handleSetSelectedDates}
+            onClose={handleDatepickerClose}
+          />
+        )}
+      </AnimatePresence>
+    </div>
   );
 });
 

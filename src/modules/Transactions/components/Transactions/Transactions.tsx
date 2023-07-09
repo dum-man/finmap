@@ -29,7 +29,8 @@ const Transactions: React.FC = () => {
 
   const filteredTransactions = filterTranscations(sortedTransactions, {
     selectedAccounts,
-    filterOption: selectedOption.label,
+    /// todo
+    filterOption: selectedOption?.label!,
     searchQuery,
     selectedDates,
   });

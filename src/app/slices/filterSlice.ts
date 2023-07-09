@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { DEFAULT_DATE_OPTION } from "app/constants";
 import { Account, DatepickerDate, SelectOption } from "types";
 
 interface FilterState {
@@ -8,11 +9,9 @@ interface FilterState {
   selectedDates: DatepickerDate;
 }
 
-const DEFAULT_OPTION: SelectOption = { id: "5", group: "base", label: "allTime" };
-
 const initialState: FilterState = {
   selectedAccounts: [],
-  selectedOption: DEFAULT_OPTION,
+  selectedOption: DEFAULT_DATE_OPTION,
   searchQuery: "",
   selectedDates: null,
 };

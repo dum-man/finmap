@@ -35,7 +35,6 @@ export interface Transfer {
 
 export interface SelectOption {
   id: string;
-  group: "base" | "user";
   label: string;
 }
 

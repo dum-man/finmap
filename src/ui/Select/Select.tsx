@@ -3,12 +3,13 @@ import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
 import { BsCheckLg } from "react-icons/bs";
+import { IoCaretDown } from "react-icons/io5";
+// import { CgClose } from "react-icons/cg";
 import { SELECT_VARIANTS } from "app/constants";
 import styles from "./Select.module.scss";
 
 interface SelectOption {
   id: string;
-  group: "base" | "user";
   label: string;
 }
 
@@ -18,27 +19,33 @@ interface SelectProps {
   options: SelectOption[];
   placeholder?: string;
   active?: boolean;
+  cancelable?: boolean;
 }
 
 const Select: React.FC<SelectProps> = ({
   value,
   onChange,
   options,
-  placeholder,
+  placeholder = "Select option",
   active,
+  // cancelable = true,
 }) => {
   const { t } = useTranslation();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const selectedOptionRef = useRef<HTMLLIElement | null>(null);
+
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const selectOption = (
-    option: SelectOption,
-    evt?: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
+  const handleSelectOption = (
+    evt: React.MouseEvent<HTMLLIElement | HTMLButtonElement>,
+    option: SelectOption
   ) => {
-    evt?.stopPropagation();
-    if (option.id === value?.id) return;
+    evt.stopPropagation();
+    if (option.id === value?.id) {
+      return;
+    }
     onChange(option);
     setIsOpen(false);
   };
@@ -48,17 +55,24 @@ const Select: React.FC<SelectProps> = ({
   };
 
   useEffect(() => {
-    if (isOpen) setHighlightedIndex(0);
+    if (isOpen) {
+      selectedOptionRef.current?.scrollIntoView({ behavior: "auto" });
+    }
   }, [isOpen]);
 
   useEffect(() => {
+    const currentRef = containerRef.current;
+    if (!currentRef) {
+      return;
+    }
     const handler = (evt: KeyboardEvent) => {
-      if (evt.target !== containerRef.current) return;
+      if (evt.target !== currentRef) {
+        return;
+      }
       switch (evt.code) {
         case "Enter":
         case "Space":
           setIsOpen((prev) => !prev);
-          if (isOpen) selectOption(options[highlightedIndex]);
           break;
         case "ArrowUp":
         case "ArrowDown": {
@@ -77,46 +91,52 @@ const Select: React.FC<SelectProps> = ({
           break;
       }
     };
-    containerRef.current?.addEventListener("keydown", handler);
-    return () => {
-      containerRef.current?.removeEventListener("keydown", handler);
-    };
+    currentRef.addEventListener("keydown", handler);
+    return () => currentRef.removeEventListener("keydown", handler);
   }, [isOpen, highlightedIndex, options]);
 
   return (
     <div
-      ref={containerRef}
       tabIndex={0}
       className={styles.container}
       onBlur={() => setIsOpen(false)}
       onClick={() => setIsOpen((prev) => !prev)}
     >
-      <p
-        className={`${styles.value} ${value?.label ? "" : styles.placeholder} ${
-          active ? styles.active : ""
-        }`}
+      <div
+        className={classNames(styles.value, {
+          [styles.placeholder]: !value,
+          [styles.active]: active,
+        })}
       >
-        <span>
-          {value?.label && value.group === "base"
-            ? t(value.label)
-            : value?.label
-            ? value.label
-            : placeholder}
-        </span>
-      </p>
-      <div className={styles.divider} />
-      <div className={styles.caret} />
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        <p className={classNames({ [styles.active]: active })}>
+          {value ? t(value.label) : placeholder}
+        </p>
+      </div>
+      <div className={styles.icons}>
+        {/* {cancelable && value && (
+          <button
+            className={styles.closeButton}
+            type="button"
+            onClick={(evt) => {
+              evt.stopPropagation();
+            }}
+          >
+            <CgClose />
+          </button>
+        )} */}
+        <IoCaretDown />
+      </div>
+      <AnimatePresence>
         {isOpen && (
-          <motion.ul
+          <motion.div
+            className={styles.optionsWrapper}
             variants={SELECT_VARIANTS}
             initial="hidden"
             animate="visible"
             exit="exit"
-            className={styles.options}
           >
             {options.length ? (
-              <>
+              <ul className={styles.options}>
                 {options.map((option, index) => (
                   <li
                     key={option.id}
@@ -124,20 +144,21 @@ const Select: React.FC<SelectProps> = ({
                       [styles.selected]: isOptionSelected(option),
                       [styles.highlighted]: index === highlightedIndex,
                     })}
+                    ref={isOptionSelected(option) ? selectedOptionRef : null}
                     onMouseEnter={() => setHighlightedIndex(index)}
-                    onClick={(evt) => selectOption(option, evt)}
+                    onClick={(evt) => handleSelectOption(evt, option)}
                   >
-                    {option.group === "base" ? t(option.label) : option.label}
-                    {isOptionSelected(option) ? (
-                      <BsCheckLg className={styles.icon} />
-                    ) : null}
+                    <p>{t(option.label)}</p>
+                    {isOptionSelected(option) && (
+                      <BsCheckLg className={styles.selectedIcon} />
+                    )}
                   </li>
                 ))}
-              </>
+              </ul>
             ) : (
-              <div className={styles.blank}>{t("noOptions")}</div>
+              <p className={styles.noOptions}>{t("noOptions")}</p>
             )}
-          </motion.ul>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>

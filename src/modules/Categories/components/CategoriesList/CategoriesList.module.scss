@@ -16,14 +16,24 @@
 }
 
 .categoryItem {
+  padding: 5px 0;
+  &:not(:last-child) {
+    border-bottom: 1px solid $gray200;
+  }
+}
+
+.wrapper {
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 13px 10px;
+  gap: 15px;
+  height: 60px;
+  padding: 0 10px;
   font-size: 16px;
-  font-weight: 700;
   border-radius: 12px;
   transition: background-color 0.2s;
+  p {
+    margin-right: auto;
+  }
   &:hover {
     background-color: $blue50;
   }
@@ -31,13 +41,11 @@
 
 .iconButton {
   @include button.icon;
-  font-size: 24px;
-  &:active:not(:disabled) {
-    transform: scale(0.9);
-  }
+  font-size: 18px;
+  color: $gray700;
 }
 
-.editButton {
-  margin-left: auto;
-  color: $gray400;
+.icon {
+  font-size: 18px;
+  color: $gray700;
 }
