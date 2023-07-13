@@ -13,7 +13,7 @@ const Languages: React.FC<LanguagesProps> = ({
   setSelectedLanguage,
 }) => {
   return (
-    <ul className={styles.languages}>
+    <ul className={styles.languagesList}>
       {Object.keys(LANGUAGES).map((lng) => (
         <li key={lng}>
           <button

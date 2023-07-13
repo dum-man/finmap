@@ -13,8 +13,8 @@ import { Transaction } from "types";
 
 export const transactionApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    getTransactions: builder.query<Transaction[], string>({
-      async queryFn(userId) {
+    getTransactions: builder.query<Transaction[], { userId: string }>({
+      async queryFn({ userId }) {
         try {
           const transactionsDocs = await getDocs(
             query(

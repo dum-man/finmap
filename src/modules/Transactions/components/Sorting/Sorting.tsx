@@ -1,23 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { HiArrowDown } from "react-icons/hi";
+import useAppDispatch from "hooks/useAppDispatch";
+import useAppSelector from "hooks/useAppSelector";
 import {
   toggleAmountType,
   toggleDateType,
   toggleTranscationType,
 } from "app/slices/sortSlice";
-import { RootState } from "app/store";
 import styles from "./Sorting.module.scss";
 
 const Sorting: React.FC = () => {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { transcationType, dateType, amountType } = useSelector(
-    (state: RootState) => state.sort
-  );
+  const { transcationType, dateType, amountType } = useAppSelector((state) => state.sort);
 
   return (
     <div className={styles.wrapper}>

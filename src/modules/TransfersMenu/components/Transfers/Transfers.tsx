@@ -4,24 +4,28 @@ import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-hot-toast";
 import { BiTransferAlt } from "react-icons/bi";
 import { MdOutlineArrowRightAlt } from "react-icons/md";
-import { useCancelTransferMutation } from "app/services/transferApi";
+import {
+  useCancelTransferMutation,
+  useGetTransfersQuery,
+} from "app/services/transferApi";
 import { setFormattedDateTime } from "utils";
 import { setFormattedAmount } from "utils/setFormattedAmount";
 import { auth } from "app/config";
+import { Loader } from "ui";
 import NotFound from "../NotFound/NotFound";
 import { Transfer } from "types";
 import styles from "./Transfers.module.scss";
 
-interface TransfersProps {
-  transfers: Transfer[];
-}
-
-const Transfers: React.FC<TransfersProps> = ({ transfers }) => {
+const Transfers: React.FC = () => {
   const { t } = useTranslation();
 
   const [currentUser] = useAuthState(auth);
 
-  const [cancelTransfer, { isLoading }] = useCancelTransferMutation();
+  const { data: transfers = [], isLoading } = useGetTransfersQuery({
+    userId: currentUser?.uid!,
+  });
+
+  const [cancelTransfer, { isLoading: isCancelling }] = useCancelTransferMutation();
 
   const handleCancelTransfer = async (userId: string, transfer: Transfer) => {
     try {
@@ -31,6 +35,10 @@ const Transfers: React.FC<TransfersProps> = ({ transfers }) => {
       toast.error(error.message);
     }
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (!transfers.length) {
     return <NotFound />;
@@ -63,8 +71,8 @@ const Transfers: React.FC<TransfersProps> = ({ transfers }) => {
             </div>
             <button
               className={styles.cancelButton}
-              disabled={isLoading}
-              onClick={() => handleCancelTransfer(currentUser?.uid as string, transfer)}
+              disabled={isCancelling}
+              onClick={() => handleCancelTransfer(currentUser?.uid!, transfer)}
             >
               {t("cancel")}
             </button>

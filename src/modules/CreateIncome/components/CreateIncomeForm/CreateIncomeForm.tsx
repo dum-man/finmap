@@ -28,7 +28,7 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
 
   const { t } = useTranslation();
 
-  const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
+  const { data: accounts = [] } = useGetAccountsQuery({ userId: currentUser?.uid! });
 
   const [createTransaction, { isLoading }] = useCreateTransactionMutation();
 

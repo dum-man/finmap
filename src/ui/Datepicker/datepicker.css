@@ -4,7 +4,7 @@
     max-width: 315px;
     min-width: 265px;
     height: 100%;
-    border-radius: 12px;
+    border-radius: 24px;
 }
 
 .react-calendar button {
@@ -113,8 +113,8 @@ abbr {
     display: flex;
     align-items: center;
     background: linear-gradient(88.88deg, #7fdef5 0%, #7ef5ad 100%);
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
 }
 
 .react-calendar__navigation__label {

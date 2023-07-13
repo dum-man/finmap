@@ -1,18 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import useAppDispatch from "hooks/useAppDispatch";
+import useAppSelector from "hooks/useAppSelector";
 import { SlidingMenu } from "layouts";
 import AccountType from "../AccountType/AccountType";
 import EditAccountButton from "../EditAccountButton/EditAccountButton";
 import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
-import { RootState } from "app/store";
 import { VARIANTS } from "../../constants";
 import styles from "./UserAccountMenu.module.scss";
 
 const UserAccountMenu: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const userAccountMenuOpen = useSelector(
-    (state: RootState) => state.app.userAccountMenuOpen
-  );
+  const userAccountMenuOpen = useAppSelector((state) => state.app.userAccountMenuOpen);
 
   const handleClose = () => {
     dispatch(toggleUserAccountMenuOpen(false));

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { AnimatePresence } from "framer-motion";
 import classNames from "classnames";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { IoClose, IoSearch } from "react-icons/io5";
-import { Datepicker, Select } from "ui";
+import useAppSelector from "hooks/useAppSelector";
+import useAppDispatch from "hooks/useAppDispatch";
+import { CalendarDatepicker } from "components";
+import { Select } from "ui";
 import { setFormattedDatepickerDate } from "../../helpers";
 import { DATE_FILTER_OPTIONS } from "../../constants";
 import { DatepickerDate, SelectOption } from "types";
@@ -15,17 +16,16 @@ import {
   setSelectedOption,
 } from "app/slices/filterSlice";
 import { DATEPICKER_DATE_OPTION, DEFAULT_DATE_OPTION } from "app/constants";
-import { RootState } from "app/store";
 import styles from "./Filtration.module.scss";
 
 const Filtration: React.FC = React.memo(() => {
   const { t } = useTranslation();
 
-  const { selectedOption, searchQuery, selectedDates } = useSelector(
-    (state: RootState) => state.filter
-  );
+  const dispatch = useAppDispatch();
 
-  const dispatch = useDispatch();
+  const { selectedOption, searchQuery, selectedDates } = useAppSelector(
+    (state) => state.filter
+  );
 
   const [datepickerOpen, setDatepickerOpen] = useState(false);
 
@@ -99,16 +99,13 @@ const Filtration: React.FC = React.memo(() => {
           onChange={handleSearchQueryChange}
         />
       </div>
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {datepickerOpen && (
-          <Datepicker
-            selectRange
-            value={selectedDates}
-            onChange={handleSetSelectedDates}
-            onClose={handleDatepickerClose}
-          />
-        )}
-      </AnimatePresence>
+      <CalendarDatepicker
+        selectRange
+        isOpen={datepickerOpen}
+        onClose={handleDatepickerClose}
+        value={selectedDates}
+        onChange={handleSetSelectedDates}
+      />
     </div>
   );
 });

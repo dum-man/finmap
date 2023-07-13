@@ -14,8 +14,8 @@ import { Category } from "types";
 
 export const categoryApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    getCategories: builder.query<Category[], string>({
-      async queryFn(userId) {
+    getCategories: builder.query<Category[], { userId: string }>({
+      async queryFn({ userId }) {
         try {
           const categoriesDocs = await getDocs(
             query(
@@ -37,13 +37,17 @@ export const categoryApi = emptySplitApi.injectEndpoints({
       providesTags: ["Categories"],
     }),
 
-    checkCategoryExists: builder.query<boolean, { userId: string; label: string }>({
-      async queryFn({ userId, label }) {
+    checkCategoryExists: builder.query<
+      boolean,
+      { userId: string; label: string; type: string }
+    >({
+      async queryFn({ userId, label, type }) {
         try {
           const categoryDocs = await getDocs(
             query(
               collection(firestore, `users/${userId}/categories`),
-              where("label", "==", label)
+              where("label", "==", label),
+              where("type", "==", type)
             )
           );
           if (categoryDocs.empty) {

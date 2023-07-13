@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import classNames from "classnames";
+import useAppSelector from "hooks/useAppSelector";
 import TotalAmount from "../TotalAmount/TotalAmount";
 import Accounts from "../Accounts/Accounts";
 import AccountButtons from "../AccountButtons/AccountButtons";
@@ -8,17 +8,16 @@ import SelectedAccounts from "../SelectedAccounts/SelectedAccounts";
 import Skeleton from "../Skeleton/Skeleton";
 import { useGetAccountsQuery } from "app/services/accountApi";
 import { auth } from "app/config";
-import { RootState } from "app/store";
 import styles from "./Sidebar.module.scss";
 
 const Sidebar: React.FC = () => {
   const [currentUser] = useAuthState(auth);
 
-  const sidebarOpen = useSelector((state: RootState) => state.app.sidebarOpen);
+  const sidebarOpen = useAppSelector((state) => state.app.sidebarOpen);
 
-  const { data: accounts = [], isLoading } = useGetAccountsQuery(
-    currentUser?.uid as string
-  );
+  const { data: accounts = [], isLoading } = useGetAccountsQuery({
+    userId: currentUser?.uid!,
+  });
 
   const totalAmount = accounts
     ? accounts.reduce((acc, current) => acc + current.balance, 0)

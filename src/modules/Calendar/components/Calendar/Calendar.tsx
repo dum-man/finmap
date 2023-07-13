@@ -13,7 +13,9 @@ const Calendar: React.FC = () => {
 
   const [currentUser] = useAuthState(auth);
 
-  const { data: transactions = [] } = useGetTransactionsQuery(currentUser?.uid as string);
+  const { data: transactions = [] } = useGetTransactionsQuery({
+    userId: currentUser?.uid!,
+  });
 
   return (
     <div className={styles.wrapper}>

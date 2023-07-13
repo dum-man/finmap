@@ -78,22 +78,6 @@ export const MENU_VARIANTS: Variants = {
   },
 };
 
-export const MODAL_VARIANTS: Variants = {
-  hidden: {
-    scale: 0.5,
-  },
-  visible: {
-    scale: 1,
-  },
-  exit: {
-    scale: 0.5,
-    opacity: 0,
-    transition: {
-      duration: 0.1,
-    },
-  },
-};
-
 export const SELECT_VARIANTS: Variants = {
   hidden: {
     y: -8,

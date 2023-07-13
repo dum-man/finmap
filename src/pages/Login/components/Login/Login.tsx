@@ -1,14 +1,14 @@
 import { AuthLayout } from "layouts";
-import SetLanguageDropdown from "components/SetLanguageDropdown/SetLanguageDropdown";
+import { SetLanguageDropdown } from "components";
 import LoginForm from "../LoginForm/LoginForm";
-import ResetPasswordContainer from "../ResetPasswordContainer/ResetPasswordContainer";
+import ResetPassword from "modules/ResetPassword";
 
 const Login: React.FC = () => {
   return (
     <AuthLayout>
       <SetLanguageDropdown />
       <LoginForm />
-      <ResetPasswordContainer />
+      <ResetPassword />
     </AuthLayout>
   );
 };

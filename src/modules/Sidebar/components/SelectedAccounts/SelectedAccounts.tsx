@@ -1,18 +1,15 @@
-import { useSelector } from "react-redux";
 import { Trans, useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
+import useAppSelector from "hooks/useAppSelector";
 import { setFormattedAmount } from "utils/setFormattedAmount";
 import { getSelectedAccountsTotalSum } from "../../helpers/getSelectedAccountsTotalSum";
 import { VARIANTS } from "../../constants";
-import { RootState } from "app/store";
 import styles from "./SelectedAccounts.module.scss";
 
 const SelectedAccounts: React.FC = () => {
   const { t } = useTranslation();
 
-  const selectedAccounts = useSelector(
-    (state: RootState) => state.filter.selectedAccounts
-  );
+  const selectedAccounts = useAppSelector((state) => state.filter.selectedAccounts);
 
   let count = selectedAccounts.length;
   let name = t(selectedAccounts.length === 1 ? "account" : "selectedAccounts");

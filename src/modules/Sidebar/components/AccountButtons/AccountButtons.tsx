@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { BiEditAlt } from "react-icons/bi";
 import { GoPlus } from "react-icons/go";
+import useAppDispatch from "hooks/useAppDispatch";
 import { toggleCreateAccountOpen, toggleDeleteAccountOpen } from "app/slices/appSlice";
 import styles from "./AccountButtons.module.scss";
 
 const AccountButtons: React.FC = () => {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.wrapper}>

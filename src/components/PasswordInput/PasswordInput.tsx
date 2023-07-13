@@ -43,13 +43,15 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
           {placeholder}
         </motion.label>
       )}
-      <button
-        className={styles.showButton}
-        type="button"
-        onClick={() => setVisible((prev) => !prev)}
-      >
-        {visible ? <BiHide /> : <BiShow />}
-      </button>
+      <div className={styles.buttonWrapper}>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => setVisible((prev) => !prev)}
+        >
+          {visible ? <BiHide /> : <BiShow />}
+        </button>
+      </div>
     </div>
   );
 };

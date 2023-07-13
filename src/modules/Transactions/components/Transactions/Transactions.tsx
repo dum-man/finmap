@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
+import useAppSelector from "hooks/useAppSelector";
 import { Loader } from "ui";
 import Filtration from "../Filtration/Filtration";
 import Sorting from "../Sorting/Sorting";
@@ -10,20 +10,19 @@ import { useGetTransactionsQuery } from "app/services/transactionApi";
 import { sortTransactions } from "utils/sortTransactions";
 import { filterTranscations } from "utils/filterTranscations";
 import { auth } from "app/config";
-import { RootState } from "app/store";
 
 const Transactions: React.FC = () => {
   const [currentUser] = useAuthState(auth);
 
-  const { selectedAccounts, selectedOption, searchQuery, selectedDates } = useSelector(
-    (state: RootState) => state.filter
+  const { selectedAccounts, selectedOption, searchQuery, selectedDates } = useAppSelector(
+    (state) => state.filter
   );
 
-  const sortState = useSelector((state: RootState) => state.sort);
+  const sortState = useAppSelector((state) => state.sort);
 
-  const { data: transactions = [], isLoading } = useGetTransactionsQuery(
-    currentUser?.uid as string
-  );
+  const { data: transactions = [], isLoading } = useGetTransactionsQuery({
+    userId: currentUser?.uid!,
+  });
 
   const sortedTransactions = sortTransactions(sortState, transactions);
 

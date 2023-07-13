@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import useAppDispatch from "hooks/useAppDispatch";
 import { toggleChangePasswordOpen, toggleSetLanguageOpen } from "app/slices/appSlice";
 import styles from "./SettingsItems.module.scss";
 
 const SettingItems: React.FC = () => {
   const { t, i18n } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.wrapper}>

@@ -1,20 +1,20 @@
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import useAppSelector from "hooks/useAppSelector";
+import useAppDispatch from "hooks/useAppDispatch";
 import { SlidingMenu } from "layouts";
 import AccountItems from "../AccountItems/AccountItems";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import SettingsItems from "../SettingsItems/SettingsItems";
 import useOnClickOutside from "hooks/useClickOutside";
-import { RootState } from "app/store";
 import { toggleSettingsMenuOpen } from "app/slices/appSlice";
 import styles from "./SettingsMenu.module.scss";
 
 const SettingsMenu: React.FC = () => {
   const containerRef = useRef(null);
 
-  const settingsMenuOpen = useSelector((state: RootState) => state.app.settingsMenuOpen);
+  const dispatch = useAppDispatch();
 
-  const dispatch = useDispatch();
+  const settingsMenuOpen = useAppSelector((state) => state.app.settingsMenuOpen);
 
   const handleClose = () => {
     dispatch(toggleSettingsMenuOpen(false));

@@ -21,7 +21,9 @@ const AccountSelect: React.FC<AccountSelectProps> = ({
 }) => {
   const [currentUser] = useAuthState(auth);
 
-  const { data: accounts = [] } = useGetAccountsQuery(currentUser?.uid as string);
+  const { data: accounts = [] } = useGetAccountsQuery({
+    userId: currentUser?.uid!,
+  });
 
   const accountOptions = useMemo(
     () =>

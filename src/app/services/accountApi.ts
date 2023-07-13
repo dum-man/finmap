@@ -14,8 +14,8 @@ import { Account } from "types";
 
 export const accountApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    getAccounts: builder.query<Account[], string>({
-      async queryFn(userId) {
+    getAccounts: builder.query<Account[], { userId: string }>({
+      async queryFn({ userId }) {
         try {
           const accountsDocs = await getDocs(
             query(

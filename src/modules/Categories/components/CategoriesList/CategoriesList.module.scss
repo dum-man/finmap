@@ -3,15 +3,9 @@
 
 .categories {
   flex: 1;
-  overflow-y: auto;
-  margin-top: 10px;
-  padding: 0 20px;
-  padding-bottom: 10px;
+  overflow: auto;
   &::-webkit-scrollbar {
     display: none;
-  }
-  @media (max-width: $mobile) {
-    padding: 0 15px;
   }
 }
 

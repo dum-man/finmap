@@ -1,13 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
 import { RiMenuFoldLine, RiMenuUnfoldLine } from "react-icons/ri";
-import { RootState } from "app/store";
+import useAppSelector from "hooks/useAppSelector";
+import useAppDispatch from "hooks/useAppDispatch";
 import { toggleSidebarOpen } from "app/slices/appSlice";
 import styles from "./SidebarButton.module.scss";
 
 const SidebarButton: React.FC = () => {
-  const sidebarOpen = useSelector((state: RootState) => state.app.sidebarOpen);
+  const dispatch = useAppDispatch();
 
-  const dispatch = useDispatch();
+  const sidebarOpen = useAppSelector((state) => state.app.sidebarOpen);
 
   return (
     <button className={styles.button} onClick={() => dispatch(toggleSidebarOpen())}>

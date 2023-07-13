@@ -1,7 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
+import useAppSelector from "hooks/useAppSelector";
+import useAppDispatch from "hooks/useAppDispatch";
 import { setFormattedAmount } from "utils/setFormattedAmount";
 import { addSelectedAccount, removeSelectedAccount } from "app/slices/filterSlice";
 import { Account } from "types";
@@ -15,15 +16,15 @@ interface AccountsProps {
 const Accounts: React.FC<AccountsProps> = ({ accounts }) => {
   const { t } = useTranslation();
 
-  const selectedAccounts = useSelector(
+  const dispatch = useAppDispatch();
+
+  const selectedAccounts = useAppSelector(
     (state: RootState) => state.filter.selectedAccounts
   );
 
   const isAccountSelected = (account: Account) => {
     return selectedAccounts.includes(account);
   };
-
-  const dispatch = useDispatch();
 
   const handleSelectAccounts = (account: Account) => {
     if (isAccountSelected(account)) {

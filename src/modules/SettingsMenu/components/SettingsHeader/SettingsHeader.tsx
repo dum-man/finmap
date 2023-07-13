@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { signOut } from "firebase/auth";
 import { useTranslation } from "react-i18next";
 import toast from "react-hot-toast";
+import useAppDispatch from "hooks/useAppDispatch";
 import { auth } from "app/config";
 import { toggleSettingsMenuOpen } from "app/slices/appSlice";
 import styles from "./SettingsHeader.module.scss";
@@ -12,7 +12,7 @@ const SettingsHeader: React.FC = () => {
 
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSignOut = async () => {
     try {

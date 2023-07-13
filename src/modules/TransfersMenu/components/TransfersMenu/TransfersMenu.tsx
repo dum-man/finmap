@@ -1,30 +1,18 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
+import useAppSelector from "hooks/useAppSelector";
+import useAppDispatch from "hooks/useAppDispatch";
 import { SlidingMenu } from "layouts";
 import { CloseButton } from "ui";
 import Transfers from "../Transfers/Transfers";
-import Skeleton from "../Skeleton/Skeleton";
-import { useGetTransfersQuery } from "app/services/transferApi";
-import { auth } from "app/config";
-import { RootState } from "app/store";
 import { toggleTransfersMeunOpen } from "app/slices/appSlice";
 import styles from "./TransfersMenu.module.scss";
 
 const TransfersMenu: React.FC = () => {
-  const [currentUser] = useAuthState(auth);
-
   const { t } = useTranslation();
 
-  const { data: transfers = [], isLoading } = useGetTransfersQuery(
-    currentUser?.uid as string
-  );
+  const dispatch = useAppDispatch();
 
-  const transfersMeunOpen = useSelector(
-    (state: RootState) => state.app.transfersMeunOpen
-  );
-
-  const dispatch = useDispatch();
+  const transfersMeunOpen = useAppSelector((state) => state.app.transfersMeunOpen);
 
   const handleClose = () => {
     dispatch(toggleTransfersMeunOpen(false));
@@ -39,7 +27,7 @@ const TransfersMenu: React.FC = () => {
       <div className={styles.wrapper}>
         <h2 className={styles.title}>{t("transfers")}</h2>
         <CloseButton onClick={handleClose} />
-        {isLoading ? <Skeleton /> : <Transfers transfers={transfers} />}
+        <Transfers />
       </div>
     </SlidingMenu>
   );

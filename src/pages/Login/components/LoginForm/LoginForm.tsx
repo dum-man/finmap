@@ -1,14 +1,14 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
 } from "firebase/auth";
-import { useState } from "react";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import { FcGoogle } from "react-icons/fc";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import useAppDispatch from "hooks/useAppDispatch";
 import { EMAIL_FORMAT } from "app/constants";
 import {
   useCreateUserDocumentMutation,
@@ -24,10 +24,10 @@ import styles from "./LoginForm.module.scss";
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
 
+  const dispatch = useAppDispatch();
+
   const [checkUserExists] = useLazyCheckUserExistsQuery();
   const [createUserDocument] = useCreateUserDocumentMutation();
-
-  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -82,7 +82,7 @@ const LoginForm: React.FC = () => {
         throw new Error("Account creation failed");
       }
       const { uid, email } = data.user;
-      const userExists = await checkUserExists(uid);
+      const userExists = await checkUserExists({ userId: uid });
       if (!userExists.data) {
         await createUserDocument({ userId: uid, email }).unwrap();
       }

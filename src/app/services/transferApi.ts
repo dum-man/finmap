@@ -13,8 +13,8 @@ import { Transfer } from "types";
 
 const transferApi = emptySplitApi.injectEndpoints({
   endpoints: (builder) => ({
-    getTransfers: builder.query<Transfer[], string>({
-      async queryFn(userId) {
+    getTransfers: builder.query<Transfer[], { userId: string }>({
+      async queryFn({ userId }) {
         try {
           const accountsDocs = await getDocs(
             query(

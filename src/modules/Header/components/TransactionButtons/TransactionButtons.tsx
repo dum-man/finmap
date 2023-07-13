@@ -1,8 +1,8 @@
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { BiTransfer } from "react-icons/bi";
 import { FiMinus, FiPlus } from "react-icons/fi";
+import useAppDispatch from "hooks/useAppDispatch";
 import {
   toggleCreateExpenseOpen,
   toggleCreateIncomeOpen,
@@ -13,7 +13,7 @@ import styles from "./TransactionButtons.module.scss";
 const TransactionButtons: React.FC = () => {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <ul className={styles.transactionButtons}>

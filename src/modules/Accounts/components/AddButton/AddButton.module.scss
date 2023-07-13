@@ -1,11 +1,4 @@
-@import "assets/sass/variables.scss";
-
 .wrapper {
   width: 200px;
-  margin: 0 20px;
   margin-bottom: 10px;
-  @media (max-width: $mobile) {
-    margin: 0 15px;
-    margin-bottom: 10px;
-  }
 }

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
@@ -9,6 +8,7 @@ import toast from "react-hot-toast";
 import { BsCheckLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { RiDeleteBinLine } from "react-icons/ri";
+import useAppSelector from "hooks/useAppSelector";
 import { TextInput } from "components";
 import { Spinner } from "ui";
 import {
@@ -19,7 +19,6 @@ import {
 import { auth } from "app/config";
 import { VARIANTS } from "../../constants";
 import { Category } from "types";
-import { RootState } from "app/store";
 import styles from "./CreateCategoryForm.module.scss";
 
 interface CreateCategoryFormProps {
@@ -47,7 +46,7 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
 
   const [categoryCreating, setCategoryCreating] = useState(false);
 
-  const categoryType = useSelector((state: RootState) => state.app.categoryType);
+  const categoryType = useAppSelector((state) => state.app.categoryType);
 
   const handleChangeCategoryName = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setCategoryName(evt.target.value);
@@ -87,6 +86,7 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
       const categoryExists = await checkCategoryExists({
         userId: currentUser.uid,
         label: category.label,
+        type: category.type,
       }).unwrap();
       if (categoryExists) {
         throw new Error(`You already have "${category.label}" category`);

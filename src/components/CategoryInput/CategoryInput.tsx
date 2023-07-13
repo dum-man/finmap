@@ -71,6 +71,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
       const categoryExists = await checkCategoryExists({
         userId: currentUser.uid,
         label: category.label,
+        type: category.type,
       }).unwrap();
       if (categoryExists) {
         throw new Error(`You already have "${category.label}" category`);

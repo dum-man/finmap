@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
+import useAppDispatch from "hooks/useAppDispatch";
 import { auth } from "app/config";
 import {
   setCategoryType,
@@ -14,7 +14,7 @@ const AccountItems: React.FC = () => {
 
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSetIncomeCategory = () => {
     dispatch(toggleCategoriesOpen(true));

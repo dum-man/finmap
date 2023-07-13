@@ -21,7 +21,9 @@ interface ChartItemProps {
 const ChartItem: React.FC<ChartItemProps> = ({ type }) => {
   const [currentUser] = useAuthState(auth);
 
-  const { data: transactions = [] } = useGetTransactionsQuery(currentUser?.uid as string);
+  const { data: transactions = [] } = useGetTransactionsQuery({
+    userId: currentUser?.uid!,
+  });
 
   const filteredTransactions = getFilteredTransactions(transactions, type);
 

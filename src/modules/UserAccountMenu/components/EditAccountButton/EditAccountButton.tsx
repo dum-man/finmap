@@ -1,12 +1,12 @@
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import useAppDispatch from "hooks/useAppDispatch";
 import { toggleSetUsernameOpen } from "app/slices/appSlice";
 import styles from "./EditAccountButton.module.scss";
 
 const EditAccountButton: React.FC = () => {
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.wrapper}>

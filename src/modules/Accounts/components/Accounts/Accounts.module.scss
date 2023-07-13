@@ -1,23 +1,6 @@
-@import "assets/sass/variables.scss";
-
 .container {
-  position: relative;
-  width: 420px;
-  height: 500px;
+  height: 480px;
   display: flex;
   flex-direction: column;
-  padding-top: 15px;
-  overflow-x: hidden;
-  @media (max-width: $mobile) {
-    width: 320px;
-  }
-}
-
-.title {
-  margin-bottom: 20px;
-  padding: 0 20px;
-  font-size: 26px;
-  @media (max-width: $mobile) {
-    padding: 0 15px;
-  }
+  margin-bottom: -25px;
 }

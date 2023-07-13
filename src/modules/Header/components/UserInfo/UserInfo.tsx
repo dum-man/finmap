@@ -1,11 +1,11 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TiArrowSortedDown } from "react-icons/ti";
+import useAppDispatch from "hooks/useAppDispatch";
+import useAppSelector from "hooks/useAppSelector";
 import { auth } from "app/config";
 import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
-import { RootState } from "app/store";
 import finmapLogoShort from "assets/images/finmap-logo-short.svg";
 import styles from "./UserInfo.module.scss";
 
@@ -14,11 +14,9 @@ const UserInfo: React.FC = () => {
 
   const { t } = useTranslation();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const userAccountMenuOpen = useSelector(
-    (state: RootState) => state.app.userAccountMenuOpen
-  );
+  const userAccountMenuOpen = useAppSelector((state) => state.app.userAccountMenuOpen);
 
   return (
     <div className={styles.wrapper}>

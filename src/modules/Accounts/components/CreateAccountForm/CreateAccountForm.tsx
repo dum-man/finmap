@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import { useStep } from "usehooks-ts";
-import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { BsArrowLeft, BsArrowRight, BsCheck } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
@@ -16,7 +15,6 @@ import {
   useLazyCheckAccountExistsQuery,
 } from "app/services/accountApi";
 import { auth } from "app/config";
-import { setInputVariants } from "../../helpers";
 import { Account } from "types";
 import styles from "./CreateAccountForm.module.scss";
 
@@ -88,14 +86,9 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   };
 
   return (
-    <form className={styles.wrapper} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       {currentStep === 1 && (
-        <motion.div
-          className={styles.inputWrapper}
-          variants={setInputVariants(currentStep !== 1)}
-          initial="hidden"
-          animate="visible"
-        >
+        <div className={styles.inputWrapper}>
           <TextInput
             id="name"
             placeholder={t("name")}
@@ -115,15 +108,10 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
               <BsArrowRight />
             </button>
           </div>
-        </motion.div>
+        </div>
       )}
       {currentStep === 2 && (
-        <motion.div
-          className={styles.inputWrapper}
-          variants={setInputVariants(currentStep === 2)}
-          initial="hidden"
-          animate="visible"
-        >
+        <div className={styles.inputWrapper}>
           <AmountInput
             currency={false}
             placeholder={t("startingBalance")}
@@ -152,7 +140,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
               <Spinner variant="dark" />
             )}
           </div>
-        </motion.div>
+        </div>
       )}
     </form>
   );

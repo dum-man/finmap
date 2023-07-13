@@ -23,6 +23,7 @@
       "hooks/*": ["hooks/*"],
       "layouts/*": ["layouts/*"],
       "modules/*": ["modules/*"],
+      "components/*": ["components/*"],
       "test/*": ["test/*"],
       "types/*": ["types/*"],
       "ui/*": ["ui/*"],

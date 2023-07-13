@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RiExchangeLine } from "react-icons/ri";
+import useAppDispatch from "hooks/useAppDispatch";
 import { toggleSettingsMenuOpen, toggleTransfersMeunOpen } from "app/slices/appSlice";
 import styles from "./MenuButtons.module.scss";
 
 const MenuButtons: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   return (
     <ul className={styles.menuButtons}>

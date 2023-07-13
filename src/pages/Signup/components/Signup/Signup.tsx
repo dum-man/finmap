@@ -1,5 +1,5 @@
 import { AuthLayout } from "layouts";
-import SetLanguageDropdown from "components/SetLanguageDropdown/SetLanguageDropdown";
+import { SetLanguageDropdown } from "components";
 import SignupForm from "../SignupForm/SignupForm";
 
 const Signup: React.FC = () => {

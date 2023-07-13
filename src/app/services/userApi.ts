@@ -51,8 +51,8 @@ const userApi = emptySplitApi.injectEndpoints({
       },
     }),
 
-    checkUserExists: builder.query<boolean, string>({
-      async queryFn(userId) {
+    checkUserExists: builder.query<boolean, { userId: string }>({
+      async queryFn({ userId }) {
         try {
           const userDoc = await getDoc(doc(firestore, `users/${userId}`));
           if (userDoc.exists()) {

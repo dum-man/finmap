@@ -27,7 +27,9 @@ const CategorySelect: React.FC<CategorySelectProps> = ({
 
   const { t } = useTranslation();
 
-  const { data: categories = [] } = useGetCategoriesQuery(currentUser?.uid as string);
+  const { data: categories = [] } = useGetCategoriesQuery({
+    userId: currentUser?.uid!,
+  });
 
   const options = useMemo(() => {
     return categories.filter((category) => {
