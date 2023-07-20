@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -18,9 +17,6 @@
   text-transform: uppercase;
   border-radius: 6px;
   transition: box-shadow 0.2s;
-  &:focus-visible {
-    @include shared.focus-green;
-  }
   svg {
     transition: transform 0.2s;
   }
@@ -58,9 +54,6 @@
   transition: background-color 0.2s, box-shadow 0.2s;
   &:hover {
     background-color: $blue50;
-  }
-  &:focus-visible {
-    @include shared.focus-green;
   }
   svg {
     transform: scale(1.9);

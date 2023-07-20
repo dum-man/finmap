@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { CalendarProps } from "react-calendar";
-import classNames from "classnames";
 import { CalendarDatepicker } from "..";
 import { INPUT_LABEL_VARIANTS } from "app/constants";
 import { setFormattedDateTime } from "utils";
@@ -26,13 +25,7 @@ const DateInput: React.FC<DateInputProps> = ({ placeholder, date, ...restProps }
   return (
     <>
       <div className={styles.wrapper}>
-        <div
-          className={classNames(styles.input, {
-            [styles.focused]: datepickerOpen,
-          })}
-          tabIndex={0}
-          onClick={handleDatepickerOpen}
-        >
+        <div className={styles.input} tabIndex={0} onClick={handleDatepickerOpen}>
           {setFormattedDateTime(date)}
         </div>
         <motion.label

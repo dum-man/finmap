@@ -55,11 +55,7 @@ const Filtration: React.FC = React.memo(() => {
   return (
     <div className={styles.container}>
       {selectedDates ? (
-        <div
-          className={classNames(styles.datepicker, {
-            [styles.focused]: datepickerOpen,
-          })}
-        >
+        <div className={styles.datepicker}>
           <p>{setFormattedDatepickerDate(selectedDates)}</p>
           <button
             className={classNames(styles.iconButton, styles.closeButton)}

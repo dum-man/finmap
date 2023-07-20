@@ -1,5 +1,4 @@
 @use "assets/sass/input";
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -17,8 +16,4 @@
 
 .label {
   @include input.label;
-}
-
-.focused {
-  @include shared.focus-green;
 }

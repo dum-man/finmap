@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .transfersList {
@@ -53,9 +52,6 @@
   transition: box-shadow 0.2s;
   &:active {
     transform: scale(0.9);
-  }
-  &:focus-visible {
-    @include shared.focus-green;
   }
   &:disabled {
     cursor: not-allowed;

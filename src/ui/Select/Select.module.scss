@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @use "assets/sass/button";
 @import "assets/sass/variables.scss";
 
@@ -19,9 +18,6 @@
   transition: box-shadow 0.2s;
   user-select: none;
   cursor: pointer;
-  &:focus {
-    @include shared.focus-green;
-  }
 }
 
 .icons {

@@ -1,5 +1,4 @@
 @use "assets/sass/button";
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -32,9 +31,6 @@
   &:hover {
     text-decoration: underline;
   }
-  &:focus-visible {
-    @include shared.focus-green;
-  }
   @media (max-width: $tablet) {
     margin-bottom: 10px;
   }
@@ -52,9 +48,6 @@
   cursor: pointer;
   &:hover {
     text-decoration: underline;
-  }
-  &:focus-visible {
-    @include shared.focus-green;
   }
 }
 

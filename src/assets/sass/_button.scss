@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @import "./variables.scss";
 
 @mixin submit {
@@ -14,9 +13,6 @@
   background-color: $gray50;
   border-radius: 12px;
   transition: opacity 0.3s, transform 0.1s, box-shadow 0.2s;
-  &:focus-visible {
-    @include shared.focus-green;
-  }
   &:disabled {
     cursor: not-allowed;
   }
@@ -32,9 +28,6 @@
   padding: 5px;
   border-radius: 50%;
   transition: transform 0.1s, box-shadow 0.2s;
-  &:focus-visible {
-    @include shared.focus-green;
-  }
   &:disabled {
     cursor: not-allowed;
     opacity: 0.7;

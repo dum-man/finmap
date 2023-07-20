@@ -1,10 +1,9 @@
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .button {
   position: absolute;
-  top: 1px;
-  right: 1px;
+  top: 10px;
+  right: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,9 +12,6 @@
   border-radius: 50%;
   color: $gray400;
   transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
-  &:focus-visible {
-    @include shared.focus-green;
-  }
   &:hover {
     background-color: $gray50;
   }

@@ -1,6 +1,5 @@
 @use "assets/sass/input";
 @use "assets/sass/button";
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .container {
@@ -32,10 +31,6 @@
   @media (max-width: $laptop) {
     width: 100%;
   }
-}
-
-.focused {
-  @include shared.focus-green;
 }
 
 .selectWrapper {

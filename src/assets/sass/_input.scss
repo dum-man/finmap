@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @import "./variables.scss";
 
 @mixin input {
@@ -17,7 +16,8 @@
   border-radius: 12px;
   transition: box-shadow 0.2s;
   &:focus {
-    @include shared.focus-green;
+    outline: none;
+    box-shadow: 0 0 0 1px $green600;
   }
   &::placeholder {
     color: $gray600;

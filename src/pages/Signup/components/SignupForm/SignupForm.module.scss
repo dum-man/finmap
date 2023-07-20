@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .wrapper {
@@ -30,9 +29,6 @@
   transition: box-shadow 0.2s;
   &:hover {
     text-decoration: underline;
-  }
-  &:focus-visible {
-    @include shared.focus-green;
   }
   @media (max-width: $tablet) {
     margin-bottom: 10px;

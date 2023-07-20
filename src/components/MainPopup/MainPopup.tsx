@@ -1,6 +1,5 @@
 import FocusTrap from "focus-trap-react";
-import { IoClose } from "react-icons/io5";
-import { Popup } from "ui";
+import { CloseButton, Popup } from "ui";
 import styles from "./MainPopup.module.scss";
 
 interface MainPopupProps {
@@ -21,10 +20,7 @@ const MainPopup: React.FC<MainPopupProps> = ({ title, isOpen, onClose, children 
       >
         <div className={styles.container}>
           <h2 className={styles.title}>{title}</h2>
-          <button className={styles.button} type="button" onClick={onClose}>
-            <IoClose />
-            <span className="visually-hidden">Close</span>
-          </button>
+          <CloseButton onClick={onClose} />
           {children}
         </div>
       </FocusTrap>

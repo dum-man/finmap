@@ -1,4 +1,3 @@
-@use "assets/sass/shared";
 @import "assets/sass/variables.scss";
 
 .accountsList {
@@ -28,9 +27,6 @@
   color: inherit;
   border-radius: 6px;
   transition: box-shadow 0.2s;
-  &:focus-visible {
-    @include shared.focus-green;
-  }
 }
 
 .selected {
