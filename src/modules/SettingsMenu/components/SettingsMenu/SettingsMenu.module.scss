@@ -1,26 +1,45 @@
 @import "assets/sass/variables.scss";
 
-.menuContainer {
+.container {
   top: 70px;
   right: 25px;
-  width: 450px;
-  height: 500px;
-  display: flex;
   @media (max-width: $tablet) {
-    width: 360px;
     right: 15px;
   }
 }
 
 .wrapper {
-  flex: 1;
+  width: 450px;
+  height: 500px;
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
+  @media (max-width: $tablet) {
+    width: 360px;
+  }
 }
 
 .menuWrapper {
   flex: 1;
   display: flex;
   padding: 20px 0;
+}
+
+.animationEnter {
+  opacity: 0;
+  transform: translateX(500px);
+}
+
+.animationEnterActive {
+  transition: opacity 200ms, transform 200ms;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animationExit {
+  opacity: 1;
+}
+
+.animationExitActive {
+  opacity: 0;
+  transition: opacity 200ms;
 }

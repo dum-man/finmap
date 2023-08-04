@@ -1,11 +1,17 @@
 import { useTranslation } from "react-i18next";
 import useAppSelector from "hooks/useAppSelector";
 import useAppDispatch from "hooks/useAppDispatch";
-import { SlidingMenu } from "layouts";
-import { CloseButton } from "ui";
-import Transfers from "../Transfers/Transfers";
 import { toggleTransfersMeunOpen } from "app/slices/appSlice";
+import { Dropdown, CloseButton } from "ui";
+import Transfers from "../Transfers/Transfers";
 import styles from "./TransfersMenu.module.scss";
+
+const animation = {
+  enter: styles.animationEnter,
+  enterActive: styles.animationEnterActive,
+  exit: styles.animationExit,
+  exitActive: styles.animationExitActive,
+};
 
 const TransfersMenu: React.FC = () => {
   const { t } = useTranslation();
@@ -19,17 +25,18 @@ const TransfersMenu: React.FC = () => {
   };
 
   return (
-    <SlidingMenu
-      open={transfersMeunOpen}
+    <Dropdown
+      isOpen={transfersMeunOpen}
       onClose={handleClose}
-      className={styles.menuContainer}
+      className={styles.container}
+      animation={animation}
     >
       <div className={styles.wrapper}>
         <h2 className={styles.title}>{t("transfers")}</h2>
         <CloseButton onClick={handleClose} />
         <Transfers />
       </div>
-    </SlidingMenu>
+    </Dropdown>
   );
 };
 

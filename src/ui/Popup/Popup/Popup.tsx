@@ -1,5 +1,5 @@
 import useMount from "hooks/useMount";
-import Portal from "../Portal/Portal";
+import Portal from "ui/Portal/Portal";
 import Layout from "../Layout/Layout";
 
 interface PopupProps {

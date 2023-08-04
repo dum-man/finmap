@@ -1,17 +1,20 @@
-import { useRef } from "react";
 import useAppSelector from "hooks/useAppSelector";
 import useAppDispatch from "hooks/useAppDispatch";
-import { SlidingMenu } from "layouts";
+import { Dropdown } from "ui";
+import { toggleSettingsMenuOpen } from "app/slices/appSlice";
 import AccountItems from "../AccountItems/AccountItems";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import SettingsItems from "../SettingsItems/SettingsItems";
-import useOnClickOutside from "hooks/useClickOutside";
-import { toggleSettingsMenuOpen } from "app/slices/appSlice";
 import styles from "./SettingsMenu.module.scss";
 
-const SettingsMenu: React.FC = () => {
-  const containerRef = useRef(null);
+const animation = {
+  enter: styles.animationEnter,
+  enterActive: styles.animationEnterActive,
+  exit: styles.animationExit,
+  exitActive: styles.animationExitActive,
+};
 
+const SettingsMenu: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const settingsMenuOpen = useAppSelector((state) => state.app.settingsMenuOpen);
@@ -20,13 +23,12 @@ const SettingsMenu: React.FC = () => {
     dispatch(toggleSettingsMenuOpen(false));
   };
 
-  useOnClickOutside(containerRef, handleClose);
-
   return (
-    <SlidingMenu
-      open={settingsMenuOpen}
+    <Dropdown
+      isOpen={settingsMenuOpen}
       onClose={handleClose}
-      className={styles.menuContainer}
+      className={styles.container}
+      animation={animation}
     >
       <div className={styles.wrapper}>
         <SettingsHeader />
@@ -35,7 +37,7 @@ const SettingsMenu: React.FC = () => {
           <SettingsItems />
         </div>
       </div>
-    </SlidingMenu>
+    </Dropdown>
   );
 };
 

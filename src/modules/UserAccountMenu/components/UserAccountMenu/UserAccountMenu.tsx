@@ -1,11 +1,17 @@
 import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
-import { SlidingMenu } from "layouts";
+import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
+import { Dropdown } from "ui";
 import AccountType from "../AccountType/AccountType";
 import EditAccountButton from "../EditAccountButton/EditAccountButton";
-import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
-import { VARIANTS } from "../../constants";
 import styles from "./UserAccountMenu.module.scss";
+
+const animation = {
+  enter: styles.animationEnter,
+  enterActive: styles.animationEnterActive,
+  exit: styles.animationExit,
+  exitActive: styles.animationExitActive,
+};
 
 const UserAccountMenu: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -17,16 +23,18 @@ const UserAccountMenu: React.FC = () => {
   };
 
   return (
-    <SlidingMenu
-      open={userAccountMenuOpen}
+    <Dropdown
+      isOpen={userAccountMenuOpen}
       onClose={handleClose}
-      variants={VARIANTS}
-      className={styles.menuContainer}
+      className={styles.container}
+      animation={animation}
     >
-      <AccountType />
-      <span className={styles.divider} />
-      <EditAccountButton />
-    </SlidingMenu>
+      <div className={styles.wrapper}>
+        <AccountType />
+        <span className={styles.divider} />
+        <EditAccountButton />
+      </div>
+    </Dropdown>
   );
 };
 
