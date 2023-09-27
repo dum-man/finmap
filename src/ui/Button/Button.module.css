@@ -1,0 +1,12 @@
+.green {
+  background: var(--green-gradient);
+}
+
+.orange {
+  background: var(--orange-gradient);
+}
+
+.black {
+  color: var(--white);
+  background: var(--black-gradient);
+}

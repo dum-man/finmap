@@ -1,10 +1,10 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { render } from "test/customRender";
-import Signup from "./Signup";
+import SignUp from "./SignUp";
 
-describe("Component: Signup", () => {
+describe("Component: SignUp", () => {
   it("should render", async () => {
-    render(<Signup />);
+    render(<SignUp />);
     await waitFor(() => {
       expect(
         screen.getByRole("heading", {
@@ -15,7 +15,7 @@ describe("Component: Signup", () => {
   });
 
   it("should enter email", async () => {
-    render(<Signup />);
+    render(<SignUp />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/email/i);
     fireEvent.change(input, { target: { value: "test@mail.com" } });
     await waitFor(() => {
@@ -24,7 +24,7 @@ describe("Component: Signup", () => {
   });
 
   it("should enter password", async () => {
-    render(<Signup />);
+    render(<SignUp />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/registerPassword/);
     fireEvent.change(input, { target: { value: "test123" } });
     await waitFor(() => {
@@ -33,7 +33,7 @@ describe("Component: Signup", () => {
   });
 
   it("should enter confirm password", async () => {
-    render(<Signup />);
+    render(<SignUp />);
     const input = screen.getByPlaceholderText<HTMLInputElement>(/confirmPassword/i);
     fireEvent.change(input, { target: { value: "qwerty123" } });
     await waitFor(() => {

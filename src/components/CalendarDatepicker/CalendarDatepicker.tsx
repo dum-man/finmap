@@ -1,19 +1,19 @@
 import { CalendarProps } from "react-calendar";
-import { Datepicker, Popup } from "ui";
+import { DatePicker, Popup } from "ui";
 
-interface CalendarDatepickerProps extends CalendarProps {
+interface CalendarDatePickerProps extends CalendarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const CalendarDatepicker: React.FC<CalendarDatepickerProps> = (props) => {
+const CalendarDatePicker: React.FC<CalendarDatePickerProps> = (props) => {
   const { isOpen, onClose, ...restProps } = props;
 
   return (
     <Popup isOpen={isOpen} onClose={onClose}>
-      <Datepicker {...restProps} />
+      <DatePicker {...restProps} />
     </Popup>
   );
 };
 
-export default CalendarDatepicker;
+export default CalendarDatePicker;

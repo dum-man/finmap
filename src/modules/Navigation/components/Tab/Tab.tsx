@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import classNames from "classnames";
 import { TabType } from "types";
-import styles from "./Tab.module.scss";
+import styles from "./Tab.module.css";
 
 interface TabProps {
   tab: TabType;
@@ -15,7 +15,7 @@ const Tab: React.FC<TabProps> = ({ tab, isActive, onChange }) => {
   return (
     <li>
       <button
-        className={classNames(styles.button, { [styles.selected]: isActive })}
+        className={classNames(styles["button"], { [styles["selected"]]: isActive })}
         onClick={() => onChange(tab)}
       >
         {t(tab)}

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import Spinner from "../Spinner/Spinner";
-import styles from "./Button.module.scss";
+import styles from "./Button.module.css";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "green" | "orange" | "black";
@@ -13,7 +13,7 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   return (
     <button
-      className={classNames(styles.button, styles[variant])}
+      className={classNames("submit-button", styles[variant])}
       disabled={loading}
       {...restProps}
     >

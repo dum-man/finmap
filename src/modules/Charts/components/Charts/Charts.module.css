@@ -1,0 +1,14 @@
+.container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+@media (max-width: 992px) {
+  .container {
+    display: block;
+  }
+}

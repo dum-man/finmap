@@ -1,0 +1,13 @@
+.wrapper {
+  position: relative;
+  height: 55px;
+  margin-bottom: 15px;
+}
+
+.wrapper label {
+  cursor: pointer;
+}
+
+.input {
+  padding-top: 25px;
+}

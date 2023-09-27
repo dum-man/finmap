@@ -1,0 +1,28 @@
+.wrapper {
+  position: relative;
+  height: 55px;
+  margin-bottom: 15px;
+}
+
+.input {
+  padding-top: 15px;
+  padding-right: 45px;
+}
+
+.length {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray600);
+  transform: scale(0);
+  transition: transform 150ms;
+  user-select: none;
+}
+
+.length-visible {
+  transform: scale(1);
+}

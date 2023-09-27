@@ -1,8 +1,0 @@
-@import "assets/sass/variables.scss";
-
-.wrapper {
-  flex: 1;
-  @media (max-width: $tablet) {
-    overflow: auto;
-  }
-}

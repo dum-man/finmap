@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 type SortType = "UP" | "DOWN" | "DEFAULT";
 
 interface SortState {
-  transcationType: SortType;
+  transactionType: SortType;
   dateType: SortType;
   amountType: SortType;
 }
 
 const initialState: SortState = {
-  transcationType: "DEFAULT",
+  transactionType: "DEFAULT",
   dateType: "DEFAULT",
   amountType: "DEFAULT",
 };
@@ -18,22 +18,22 @@ export const sortSlice = createSlice({
   name: "sort",
   initialState,
   reducers: {
-    toggleTranscationType: (state) => {
+    toggleTransactionType: (state) => {
       state.dateType = "DEFAULT";
       state.amountType = "DEFAULT";
-      switch (state.transcationType) {
+      switch (state.transactionType) {
         case "UP":
-          state.transcationType = "DOWN";
+          state.transactionType = "DOWN";
           break;
         case "DOWN":
-          state.transcationType = "UP";
+          state.transactionType = "UP";
           break;
         default:
-          state.transcationType = "UP";
+          state.transactionType = "UP";
       }
     },
     toggleDateType: (state) => {
-      state.transcationType = "DEFAULT";
+      state.transactionType = "DEFAULT";
       state.amountType = "DEFAULT";
       switch (state.dateType) {
         case "UP":
@@ -47,7 +47,7 @@ export const sortSlice = createSlice({
       }
     },
     toggleAmountType: (state) => {
-      state.transcationType = "DEFAULT";
+      state.transactionType = "DEFAULT";
       state.dateType = "DEFAULT";
       switch (state.amountType) {
         case "UP":
@@ -63,7 +63,7 @@ export const sortSlice = createSlice({
   },
 });
 
-export const { toggleTranscationType, toggleDateType, toggleAmountType } =
+export const { toggleTransactionType, toggleDateType, toggleAmountType } =
   sortSlice.actions;
 
 export default sortSlice.reducer;

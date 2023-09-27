@@ -1,5 +1,5 @@
 import { Transaction } from "types";
-import { isDaysSame } from "utils";
+import { isDaysSame } from "utils/dateUtils";
 
 interface Event {
   title: string;
@@ -10,27 +10,29 @@ interface Event {
 }
 
 export const getTransactionEvents = (transactions: Transaction[]) => {
-  return transactions.reduce<Event[]>((acc, current) => {
-    const currentDate = current.createdAt.toDate();
+  return transactions.reduce<Event[]>((prevTransactions, currentTransaction) => {
+    const currentTransactionDate = currentTransaction.createdAt.toDate();
 
-    const prev = acc.find(
-      (item: Event) => isDaysSame(item.start, currentDate) && item.type === current.type
+    const existingTransaction = prevTransactions.find(
+      (item: Event) =>
+        isDaysSame(item.start, currentTransactionDate) &&
+        item.type === currentTransaction.type
     );
 
-    if (prev) {
-      prev.balance += current.amount;
-      return acc;
+    if (existingTransaction) {
+      existingTransaction.balance += currentTransaction.amount;
+      return prevTransactions;
     }
 
     const map = {
-      title: current.accountName,
-      balance: current.amount,
-      type: current.type,
-      start: currentDate,
-      end: currentDate,
+      title: currentTransaction.accountName,
+      balance: currentTransaction.amount,
+      type: currentTransaction.type,
+      start: currentTransactionDate,
+      end: currentTransactionDate,
     };
-    acc.push(map);
+    prevTransactions.push(map);
 
-    return acc;
+    return prevTransactions;
   }, []);
 };

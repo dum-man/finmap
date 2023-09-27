@@ -1,0 +1,7 @@
+.content {
+  position: absolute;
+  box-shadow: var(--box-shadow);
+  border-radius: 12px;
+  background-color: var(--white);
+  z-index: 1;
+}

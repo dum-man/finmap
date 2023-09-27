@@ -1,0 +1,37 @@
+.wrapper {
+  flex: 1;
+  padding: 10px;
+}
+
+.title {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray300);
+  text-transform: uppercase;
+}
+
+.button {
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 15px;
+  text-align: left;
+  border-radius: 12px;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  background-color: var(--blue50);
+}
+
+.current-language {
+  padding-left: 5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .button {
+    padding: 13px 10px;
+  }
+}

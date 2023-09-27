@@ -1,0 +1,53 @@
+.wrapper {
+  position: relative;
+}
+
+.total-sum {
+  position: absolute;
+  top: 135px;
+  right: 15%;
+  left: 15%;
+  text-align: center;
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.income {
+  color: var(--green500);
+}
+
+.expense {
+  color: var(--orange500);
+}
+
+.categories-list {
+  margin-top: 40px;
+}
+
+.category-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.color {
+  padding: 3px 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.percentage {
+  font-weight: 700;
+}
+
+@media (max-width: 992px) {
+  .wrapper {
+    width: 310px;
+    margin: 0 auto;
+  }
+
+  .wrapper:first-child {
+    margin-bottom: 30px;
+  }
+}

@@ -1,0 +1,109 @@
+.transaction-item {
+  display: grid;
+  grid-template-columns: 1fr repeat(5, 2fr);
+  align-items: center;
+  padding: 18px 0;
+}
+
+.transaction-item:not(:last-child) {
+  border-bottom: 0.5px solid var(--gray200);
+}
+
+.income {
+  color: var(--green500);
+  background-color: var(--greenAlpha300);
+}
+
+.expense {
+  color: var(--orange500);
+  background-color: var(--orangeAlpha300);
+}
+
+.type {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border-radius: 50%;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.date span:last-child {
+  font-size: 13px;
+  color: var(--gray700);
+}
+
+.amount {
+  background-color: transparent;
+}
+
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.account span:last-child {
+  font-size: 13px;
+  color: var(--gray700);
+}
+
+@media (max-width: 1200px) {
+  .transaction-item {
+    grid-template-columns: 1fr repeat(4, 2fr);
+  }
+
+  .comment {
+    display: none;
+  }
+}
+
+@media (max-width: 992px) {
+  .transaction-item {
+    grid-template-columns: 60px 1fr 1fr;
+    align-items: stretch;
+    grid-template-areas:
+      "type date amount"
+      "type account amount"
+      "type account category";
+  }
+
+  .type {
+    grid-area: type;
+    align-self: center;
+  }
+
+  .date {
+    grid-area: date;
+    color: var(--gray700);
+    font-size: 13px;
+  }
+
+  .date span:last-child {
+    display: none;
+  }
+
+  .amount {
+    grid-area: amount;
+    margin-top: auto;
+    margin-left: auto;
+  }
+
+  .account {
+    grid-area: account;
+    margin-bottom: auto;
+  }
+
+  .category {
+    grid-area: category;
+    margin-left: auto;
+    text-align: right;
+  }
+}

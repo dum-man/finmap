@@ -9,9 +9,9 @@ import { useCreateUserDocumentMutation } from "app/services/userApi";
 import { auth } from "app/config";
 import { EMAIL_FORMAT } from "app/constants";
 import { FIREBASE_REGISTER_ERROR } from "../../constants";
-import styles from "./SignupForm.module.scss";
+import styles from "./SignUpForm.module.css";
 
-const SignupForm: React.FC = () => {
+const SignUpForm: React.FC = () => {
   const { t } = useTranslation();
 
   const [createUserDocument] = useCreateUserDocumentMutation();
@@ -64,42 +64,41 @@ const SignupForm: React.FC = () => {
       } else {
         throw new Error(t("accountCreationFailed").toString());
       }
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(
-        t(
-          FIREBASE_REGISTER_ERROR[error.message as keyof typeof FIREBASE_REGISTER_ERROR]
-        ) || error.message
-      );
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(
+          t(
+            FIREBASE_REGISTER_ERROR[error.message as keyof typeof FIREBASE_REGISTER_ERROR]
+          ) || error.message
+        );
+      }
     }
     setUserCreating(false);
   };
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <h2 className={styles.title}>{t("registration")}</h2>
-        <Link className={styles.link} to="/login">
+      <div className={styles["wrapper"]}>
+        <h2 className={styles["title"]}>{t("registration")}</h2>
+        <Link className={styles["link"]} to="/login">
           {t("loginLink")}
         </Link>
       </div>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles["form"]} onSubmit={handleSubmit}>
         <TextInput
           type="email"
-          id="email"
-          placeholder={t("registerEmail")}
+          label={t("registerEmail")}
           value={email}
           onChange={onEmailChange}
         />
         <PasswordInput
-          id="password"
-          placeholder={t("registerPassword")}
+          label={t("registerPassword")}
           value={password}
           onChange={onPasswordChange}
         />
         <PasswordInput
-          id="confirmPassword"
-          placeholder={t("confirmPassword")}
+          label={t("confirmPassword")}
           value={confirmedPassword}
           onChange={onConfirmedPasswordChange}
         />
@@ -111,4 +110,4 @@ const SignupForm: React.FC = () => {
   );
 };
 
-export default SignupForm;
+export default SignUpForm;

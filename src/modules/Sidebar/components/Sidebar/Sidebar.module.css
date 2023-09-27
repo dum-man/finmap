@@ -1,0 +1,35 @@
+.container {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--blue100);
+  border-top-left-radius: 20px;
+  transition: transform 0.3s;
+}
+
+.close {
+  transform: translateX(-300px);
+}
+
+.open {
+  transform: translateX(0);
+}
+
+@media (max-width: 768px) {
+  .container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 300px;
+    height: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .close {
+    transform: unset;
+  }
+}

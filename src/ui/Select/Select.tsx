@@ -1,34 +1,34 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AnimatePresence, motion } from "framer-motion";
+import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
 import { BsCheckLg } from "react-icons/bs";
 import { IoCaretDown } from "react-icons/io5";
-// import { CgClose } from "react-icons/cg";
-import { SELECT_VARIANTS } from "app/constants";
-import styles from "./Select.module.scss";
+import { InputLabel } from "ui";
+import { SelectOption } from "types";
+import styles from "./Select.module.css";
 
-interface SelectOption {
-  id: string;
-  label: string;
-}
+const animation = {
+  enter: styles["animation-enter"],
+  enterActive: styles["animation-enter-active"],
+  exit: styles["animation-exit"],
+  exitActive: styles["animation-exit-active"],
+};
 
 interface SelectProps {
   value: SelectOption | null;
   onChange: (value: SelectOption) => void;
   options: SelectOption[];
-  placeholder?: string;
-  active?: boolean;
-  cancelable?: boolean;
+  label?: string;
+  position?: "left" | "right";
 }
 
 const Select: React.FC<SelectProps> = ({
   value,
   onChange,
   options,
-  placeholder = "Select option",
-  active,
-  // cancelable = true,
+  label,
+  position = "right",
 }) => {
   const { t } = useTranslation();
 
@@ -72,7 +72,7 @@ const Select: React.FC<SelectProps> = ({
       switch (evt.code) {
         case "Enter":
         case "Space":
-          setIsOpen((prev) => !prev);
+          handleToggleOpen();
           break;
         case "ArrowUp":
         case "ArrowDown": {
@@ -95,72 +95,71 @@ const Select: React.FC<SelectProps> = ({
     return () => currentRef.removeEventListener("keydown", handler);
   }, [isOpen, highlightedIndex, options]);
 
+  const optionsRef = useRef(null);
+
+  const [animationIn, setAnimationIn] = useState(false);
+
+  useEffect(() => {
+    setAnimationIn(isOpen);
+  }, [isOpen]);
+
+  const handleToggleOpen = () => {
+    setIsOpen((prevOpen) => !prevOpen);
+  };
+
   return (
     <div
       tabIndex={0}
-      className={styles.container}
+      className={styles["container"]}
       onBlur={() => setIsOpen(false)}
-      onClick={() => setIsOpen((prev) => !prev)}
+      onClick={handleToggleOpen}
     >
-      <div
-        className={classNames(styles.value, {
-          [styles.placeholder]: !value,
-          [styles.active]: active,
-        })}
-      >
-        <p className={classNames({ [styles.active]: active })}>
-          {value ? t(value.label) : placeholder}
-        </p>
+      <div className={styles["value"]}>
+        {label && <InputLabel id="select" label={label} isActive={Boolean(value)} />}
+        {value && <p>{t(value.label)}</p>}
       </div>
-      <div className={styles.icons}>
-        {/* {cancelable && value && (
-          <button
-            className={styles.closeButton}
-            type="button"
-            onClick={(evt) => {
-              evt.stopPropagation();
-            }}
-          >
-            <CgClose />
-          </button>
-        )} */}
+      <span className={styles["icon"]}>
         <IoCaretDown />
-      </div>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className={styles.optionsWrapper}
-            variants={SELECT_VARIANTS}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            {options.length ? (
-              <ul className={styles.options}>
-                {options.map((option, index) => (
-                  <li
-                    key={option.id}
-                    className={classNames(styles.option, {
-                      [styles.selected]: isOptionSelected(option),
-                      [styles.highlighted]: index === highlightedIndex,
-                    })}
-                    ref={isOptionSelected(option) ? selectedOptionRef : null}
-                    onMouseEnter={() => setHighlightedIndex(index)}
-                    onClick={(evt) => handleSelectOption(evt, option)}
-                  >
-                    <p>{t(option.label)}</p>
-                    {isOptionSelected(option) && (
-                      <BsCheckLg className={styles.selectedIcon} />
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className={styles.noOptions}>{t("noOptions")}</p>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      </span>
+      <CSSTransition
+        classNames={animation}
+        nodeRef={optionsRef}
+        in={animationIn}
+        timeout={200}
+        mountOnEnter
+        unmountOnExit
+      >
+        <div
+          className={classNames(styles["options-wrapper"], {
+            [styles["left"]]: position === "left",
+          })}
+          ref={optionsRef}
+        >
+          {options.length ? (
+            <ul className={styles["options"]}>
+              {options.map((option, index) => (
+                <li
+                  key={option.id}
+                  className={classNames(styles["option"], {
+                    [styles["selected"]]: isOptionSelected(option),
+                    [styles["highlighted"]]: index === highlightedIndex,
+                  })}
+                  ref={isOptionSelected(option) ? selectedOptionRef : null}
+                  onMouseEnter={() => setHighlightedIndex(index)}
+                  onClick={(evt) => handleSelectOption(evt, option)}
+                >
+                  <p>{t(option.label)}</p>
+                  {isOptionSelected(option) && (
+                    <BsCheckLg className={styles["selected-icon"]} />
+                  )}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles["no-options"]}>{t("noOptions")}</p>
+          )}
+        </div>
+      </CSSTransition>
     </div>
   );
 };

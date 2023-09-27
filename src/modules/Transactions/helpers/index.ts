@@ -1,15 +1,11 @@
 import dayjs from "dayjs";
-import { DatepickerDate } from "types";
-
-export const setFormattedTime = (date: Date | string | null) => {
-  return dayjs(date).format("HH:mm");
-};
+import { DatePickerDate } from "types";
 
 const setFormattedDate = (date: Date | string | null) => {
   return dayjs(date).format("D MMM YYYY");
 };
 
-export const setFormattedDatepickerDate = (date: DatepickerDate) => {
+export const setFormattedDatePickerDate = (date: DatePickerDate) => {
   if (Array.isArray(date)) {
     const [startDate, endDate] = date;
     return `${setFormattedDate(startDate).toString()} - ${setFormattedDate(

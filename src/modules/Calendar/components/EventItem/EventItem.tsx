@@ -1,6 +1,6 @@
 import classNames from "classnames";
-import { setFormattedAmount } from "utils/setFormattedAmount";
-import styles from "./EventItem.module.scss";
+// import { setFormattedAmount } from "utils/sumUtils/setFormattedAmount";
+import styles from "./EventItem.module.css";
 
 interface Event {
   title: string;
@@ -19,13 +19,13 @@ const EventItem: React.FC<EventItemProps> = ({ event }) => {
 
   return (
     <div
-      className={classNames(styles.event, {
-        [styles.income]: type === "income",
-        [styles.expense]: type === "expense",
+      className={classNames(styles["event"], {
+        [styles["income"]]: type === "income",
+        [styles["expense"]]: type === "expense",
       })}
     >
-      {type === "income" && <div>+ {setFormattedAmount(balance)}</div>}
-      {type === "expense" && <div>- {setFormattedAmount(balance)}</div>}
+      {/* {type === "income" && <div>+ {setFormattedAmount(balance)}</div>}
+      {type === "expense" && <div>- {setFormattedAmount(balance)}</div>} */}
     </div>
   );
 };

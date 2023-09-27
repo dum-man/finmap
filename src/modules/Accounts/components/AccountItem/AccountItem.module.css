@@ -1,0 +1,45 @@
+.account-item {
+  padding: 5px 0;
+}
+
+.account-item:not(:last-child) {
+  border-bottom: 1px solid var(--gray200);
+}
+
+.account-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 10px;
+  font-size: 16px;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+}
+
+.account-wrapper:hover {
+  background-color: var(--blue50);
+}
+
+.account-wrapper p {
+  margin-right: auto;
+}
+
+.currency {
+  font-size: 18px;
+  color: var(--gray700);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon-button {
+  font-size: 20px;
+  color: var(--gray700);
+}
+
+.delete-button {
+  color: red;
+}

@@ -1,0 +1,9 @@
+.transfers-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 15px;
+}
+
+.transfers-list::-webkit-scrollbar {
+  display: none;
+}

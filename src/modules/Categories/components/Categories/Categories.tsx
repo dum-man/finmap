@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AnimatePresence } from "framer-motion";
 import useAppDispatch from "hooks/useAppDispatch";
 import useAppSelector from "hooks/useAppSelector";
 import { toggleCategoriesOpen } from "app/slices/appSlice";
@@ -9,7 +8,7 @@ import AddButton from "../AddButton/AddButton";
 import CategoriesList from "../CategoriesList/CategoriesList";
 import CreateCategoryForm from "../CreateCategoryForm/CreateCategoryForm";
 import { Category } from "types";
-import styles from "./Categories.module.scss";
+import styles from "./Categories.module.css";
 
 const Categories: React.FC = () => {
   const { t } = useTranslation();
@@ -40,20 +39,18 @@ const Categories: React.FC = () => {
       isOpen={categoriesOpen}
       onClose={handleClose}
     >
-      <div className={styles.container}>
-        <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-          {formVisible ? (
-            <CreateCategoryForm
-              categoryName={categoryName}
-              setCategoryName={setCategoryName}
-              editingCategory={editingCategory}
-              setEditingCategory={setEditingCategory}
-              setFormVisible={setFormVisible}
-            />
-          ) : (
-            <AddButton setFormVisible={setFormVisible} />
-          )}
-        </AnimatePresence>
+      <div className={styles["container"]}>
+        {formVisible ? (
+          <CreateCategoryForm
+            categoryName={categoryName}
+            setCategoryName={setCategoryName}
+            editingCategory={editingCategory}
+            setEditingCategory={setEditingCategory}
+            setFormVisible={setFormVisible}
+          />
+        ) : (
+          <AddButton setFormVisible={setFormVisible} />
+        )}
         <CategoriesList onSelectCategory={handleSelectCategory} />
       </div>
     </MainPopup>

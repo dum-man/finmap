@@ -28,10 +28,13 @@ export const categoryApi = emptySplitApi.injectEndpoints({
             data: categoriesData,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       providesTags: ["Categories"],
@@ -59,10 +62,13 @@ export const categoryApi = emptySplitApi.injectEndpoints({
             data: true,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
     }),
@@ -78,10 +84,13 @@ export const categoryApi = emptySplitApi.injectEndpoints({
             data: category,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       invalidatesTags: ["Categories"],
@@ -95,10 +104,13 @@ export const categoryApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       invalidatesTags: ["Categories"],

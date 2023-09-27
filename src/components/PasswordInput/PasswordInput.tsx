@@ -1,55 +1,52 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useId, useState } from "react";
 import classNames from "classnames";
 import { BiHide, BiShow } from "react-icons/bi";
-import { INPUT_LABEL_VARIANTS } from "app/constants";
-import styles from "./PasswordInput.module.scss";
+import { InputLabel } from "ui";
+import styles from "./PasswordInput.module.css";
 
 interface PasswordInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  placeholder: string;
+  label: string;
   value: string;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({
-  id,
-  placeholder,
-  value,
-  ...restProps
-}) => {
-  const [visible, setVisible] = useState(false);
+const PasswordInput: React.FC<PasswordInputProps> = ({ label, value, ...restProps }) => {
+  const inputId = useId();
+
+  const [isActive, setIsActive] = useState(Boolean(value.length));
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleFocus = () => {
+    if (!isActive) {
+      setIsActive(true);
+    }
+  };
+
+  const handleBlur = () => {
+    if (!value.length) {
+      setIsActive(false);
+    }
+  };
 
   return (
-    <div className={styles.inputWrapper}>
+    <div className={styles["wrapper"]}>
+      <InputLabel id={inputId} label={label} isActive={isActive} />
       <input
-        className={classNames(styles.input, {
-          [styles.active]: !!value,
-        })}
-        id={id}
-        type={visible ? "text" : "password"}
-        placeholder={placeholder}
+        id={inputId}
+        className={classNames("input", styles["input"])}
+        type={isVisible ? "text" : "password"}
         maxLength={30}
         value={value}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...restProps}
       />
-      {!!value && (
-        <motion.label
-          className={styles.label}
-          htmlFor={id}
-          variants={INPUT_LABEL_VARIANTS}
-          initial="hidden"
-          animate="visible"
-        >
-          {placeholder}
-        </motion.label>
-      )}
-      <div className={styles.buttonWrapper}>
+      <div className={styles["button-wrapper"]}>
         <button
-          className={styles.button}
+          className={styles["button"]}
           type="button"
-          onClick={() => setVisible((prev) => !prev)}
+          onClick={() => setIsVisible((prevVisible) => !prevVisible)}
         >
-          {visible ? <BiHide /> : <BiShow />}
+          {isVisible ? <BiHide /> : <BiShow />}
         </button>
       </div>
     </div>

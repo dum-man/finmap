@@ -5,13 +5,13 @@ import { toggleSettingsMenuOpen } from "app/slices/appSlice";
 import AccountItems from "../AccountItems/AccountItems";
 import SettingsHeader from "../SettingsHeader/SettingsHeader";
 import SettingsItems from "../SettingsItems/SettingsItems";
-import styles from "./SettingsMenu.module.scss";
+import styles from "./SettingsMenu.module.css";
 
 const animation = {
-  enter: styles.animationEnter,
-  enterActive: styles.animationEnterActive,
-  exit: styles.animationExit,
-  exitActive: styles.animationExitActive,
+  enter: styles["animation-enter"],
+  enterActive: styles["animation-enter-active"],
+  exit: styles["animation-exit"],
+  exitActive: styles["animation-exit-active"],
 };
 
 const SettingsMenu: React.FC = () => {
@@ -27,12 +27,12 @@ const SettingsMenu: React.FC = () => {
     <Dropdown
       isOpen={settingsMenuOpen}
       onClose={handleClose}
-      className={styles.container}
+      className={styles["container"]}
       animation={animation}
     >
-      <div className={styles.wrapper}>
+      <div className={styles["wrapper"]}>
         <SettingsHeader />
-        <div className={styles.menuWrapper}>
+        <div className={styles["menu-wrapper"]}>
           <AccountItems />
           <SettingsItems />
         </div>

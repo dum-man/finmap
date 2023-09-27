@@ -1,0 +1,17 @@
+.wrapper {
+  padding: 8px;
+}
+
+.edit-button {
+  width: 100%;
+  padding: 15px;
+  font-size: 15px;
+  color: var(--green500);
+  text-align: left;
+  border-radius: 12px;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.edit-button:hover {
+  background-color: var(--blue100);
+}

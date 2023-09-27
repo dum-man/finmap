@@ -1,36 +1,52 @@
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import classNames from "classnames";
 import useAppSelector from "hooks/useAppSelector";
+import { useGetAccountsQuery } from "app/services/accountApi";
+import { auth } from "app/config";
+import { CURRENCY_OPTIONS } from "app/constants";
+import { Select } from "ui";
+import { SelectOption } from "types";
 import TotalAmount from "../TotalAmount/TotalAmount";
 import Accounts from "../Accounts/Accounts";
 import AccountButtons from "../AccountButtons/AccountButtons";
 import SelectedAccounts from "../SelectedAccounts/SelectedAccounts";
 import Skeleton from "../Skeleton/Skeleton";
-import { useGetAccountsQuery } from "app/services/accountApi";
-import { auth } from "app/config";
-import styles from "./Sidebar.module.scss";
+import { formatSelectOption } from "../../helpers";
+import styles from "./Sidebar.module.css";
 
 const Sidebar: React.FC = () => {
   const [currentUser] = useAuthState(auth);
-
-  const sidebarOpen = useAppSelector((state) => state.app.sidebarOpen);
 
   const { data: accounts = [], isLoading } = useGetAccountsQuery({
     userId: currentUser?.uid!,
   });
 
-  const totalAmount = accounts
-    ? accounts.reduce((acc, current) => acc + current.balance, 0)
-    : 0;
+  const sidebarOpen = useAppSelector((state) => state.app.sidebarOpen);
+
+  const [selectedCurrency, setSelectedCurrency] = useState<SelectOption>(() =>
+    formatSelectOption(CURRENCY_OPTIONS[0])
+  );
+
+  const handleSetSelectedCurrency = (option: SelectOption) => {
+    setSelectedCurrency(formatSelectOption(option));
+  };
 
   return (
     <section
-      className={classNames(styles.container, {
-        [styles.open]: sidebarOpen,
-        [styles.close]: !sidebarOpen,
+      className={classNames(styles["container"], {
+        [styles["open"]]: sidebarOpen,
+        [styles["close"]]: !sidebarOpen,
       })}
     >
-      <TotalAmount totalAmount={totalAmount} />
+      <TotalAmount currencyCode={selectedCurrency.id}>
+        <Select
+          value={selectedCurrency}
+          onChange={handleSetSelectedCurrency}
+          options={CURRENCY_OPTIONS}
+          position="left"
+        />
+      </TotalAmount>
       <AccountButtons />
       {isLoading ? <Skeleton /> : <Accounts accounts={accounts} />}
       <SelectedAccounts />

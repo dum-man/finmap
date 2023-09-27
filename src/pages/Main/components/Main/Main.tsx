@@ -15,14 +15,14 @@ import SetUsername from "modules/SetUsername";
 import SettingsMenu from "modules/SettingsMenu";
 import TransfersMenu from "modules/TransfersMenu";
 import UserAccountMenu from "modules/UserAccountMenu";
-import styles from "./Main.module.scss";
+import styles from "./Main.module.css";
 
 const Main: React.FC = () => {
   return (
     <AppLayout>
       <h1 className="visually-hidden">Finmap</h1>
       <Header />
-      <div className={styles.wrapper}>
+      <div className={styles["wrapper"]}>
         <Sidebar />
         <Board />
       </div>

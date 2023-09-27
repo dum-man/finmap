@@ -9,6 +9,7 @@ export interface Account {
   group: "base" | "user";
   name: string;
   balance: number;
+  currency: Currency;
   createdAt: Timestamp;
 }
 
@@ -16,10 +17,12 @@ export interface Transaction {
   id: string;
   type: "income" | "expense";
   amount: number;
+  currency: Currency;
   category: string;
   accountId: string;
   accountName: string;
   accountAmount: number;
+  accountCurrency: Currency;
   comment: string | null;
   createdAt: Timestamp;
 }
@@ -27,15 +30,29 @@ export interface Transaction {
 export interface Transfer {
   id: string;
   amount: number;
+  currency: Currency;
   comment: string | null;
   createdAt: Timestamp;
   toAccount: Omit<Account, "createdAt" | "group">;
   fromAccount: Omit<Account, "createdAt" | "group">;
 }
 
+export interface Amount {
+  value: string;
+  currency: CurrencyOption;
+}
+
+export interface CurrencyOption extends SelectOption {
+  id: Currency;
+}
+
+export type Currency = "usd" | "rub" | "kzt";
+
 export interface SelectOption {
   id: string;
   label: string;
+  group?: string;
+  currency?: Currency;
 }
 
 export interface Category {
@@ -46,10 +63,10 @@ export interface Category {
   createdAt: Timestamp;
 }
 
-export type DatepickerDate = Date | null | [Date | null, Date | null];
+export type DatePickerDate = Date | null | [Date | null, Date | null];
 
 export interface SortState {
-  transcationType: string;
+  transactionType: string;
   dateType: string;
   amountType: string;
 }

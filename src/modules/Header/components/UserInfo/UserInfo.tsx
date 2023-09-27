@@ -7,7 +7,7 @@ import useAppSelector from "hooks/useAppSelector";
 import { auth } from "app/config";
 import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
 import finmapLogoShort from "assets/images/finmap-logo-short.svg";
-import styles from "./UserInfo.module.scss";
+import styles from "./UserInfo.module.css";
 
 const UserInfo: React.FC = () => {
   const [currentUser] = useAuthState(auth);
@@ -19,19 +19,19 @@ const UserInfo: React.FC = () => {
   const userAccountMenuOpen = useAppSelector((state) => state.app.userAccountMenuOpen);
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.avatar}>
+    <div className={styles["wrapper"]}>
+      <div className={styles["avatar"]}>
         <img src={finmapLogoShort} alt="finmap logo" />
       </div>
       <div>
-        <p className={styles.name}>Finmap</p>
+        <p className={styles["name"]}>Finmap</p>
         <button
-          className={styles.account}
+          className={styles["account"]}
           onClick={() => dispatch(toggleUserAccountMenuOpen(true))}
         >
           {currentUser?.displayName || t("accountType")}
           <TiArrowSortedDown
-            className={classNames({ [styles.rotate]: userAccountMenuOpen })}
+            className={classNames({ [styles["rotate"]]: userAccountMenuOpen })}
             size={18}
           />
         </button>

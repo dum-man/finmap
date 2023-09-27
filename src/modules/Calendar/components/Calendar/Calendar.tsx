@@ -5,7 +5,7 @@ import EventItem from "../EventItem/EventItem";
 import { getTransactionEvents } from "../../helpers";
 import { useGetTransactionsQuery } from "app/services/transactionApi";
 import { auth } from "app/config";
-import styles from "./Calendar.module.scss";
+import styles from "./Calendar.module.css";
 import "./calendar.css";
 
 const Calendar: React.FC = () => {
@@ -18,7 +18,7 @@ const Calendar: React.FC = () => {
   });
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles["wrapper"]}>
       <h2 className="visually-hidden">Calendar</h2>
       <ReactBigCalendar
         localizer={localizer}

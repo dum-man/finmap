@@ -56,7 +56,6 @@
   "dateError": "Дата должна быть указана",
   "insufficientFunds": "Недостаточно средств",
   "transfers": "Переводы",
-  "cancel": "Отменить",
   "transfersNotFound": "Переводы не найдены",
   "transfersNotFoundMessage": "Попробуйте сделать первый перевод",
   "accountsNotFound": "Cчета не найдены",
@@ -86,7 +85,7 @@
   "addCategory": "Добавить категорию",
   "categoryNameError": "Название категории должно быть указано",
   "categorySelectedError": "Категория должна быть выбрана",
-  "totalAmountOnAccounts": "Общая сумма на счетах",
+  "totalAmountOnAccounts": "Общая сумма на {{currencySymbol}} счетах",
   "myAccounts": "Мои счета",
   "actions": "Действия",
   "analytics": "Аналитика",
@@ -126,5 +125,6 @@
   "noTransactionsFoundMessage": "Попробуйте совершить первую транзакцию",
   "noSuchTransactions": "Такие транзакции не найдены",
   "noSuchTransactionsMessage": "У вас нет транзакции с выбранными параметрами",
-  "accountNotExist": "Аккаунт не существует"
+  "accountNotExist": "Аккаунт не существует",
+  "noAccounts": "Ваши счета будут отображены здесь"
 }

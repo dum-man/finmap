@@ -1,12 +1,4 @@
-import {
-  collection,
-  doc,
-  getDocs,
-  increment,
-  orderBy,
-  query,
-  writeBatch,
-} from "firebase/firestore";
+import { collection, doc, getDocs, orderBy, query, writeBatch } from "firebase/firestore";
 import { emptySplitApi } from "./emptySplitApi";
 import { firestore } from "app/config";
 import { Transfer } from "types";
@@ -27,10 +19,13 @@ const transferApi = emptySplitApi.injectEndpoints({
             data: accountsData,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       providesTags: ["Transfers"],
@@ -44,13 +39,13 @@ const transferApi = emptySplitApi.injectEndpoints({
           batch.update(
             doc(firestore, `users/${userId}/accounts/${transfer.fromAccount.id}`),
             {
-              balance: increment(-transfer.amount),
+              balance: transfer.fromAccount.balance,
             }
           );
           batch.update(
             doc(firestore, `users/${userId}/accounts/${transfer.toAccount.id}`),
             {
-              balance: increment(transfer.amount),
+              balance: transfer.toAccount.balance,
             }
           );
           await batch.commit();
@@ -58,41 +53,13 @@ const transferApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
-        }
-      },
-      invalidatesTags: ["Accounts", "Transfers"],
-    }),
-
-    cancelTransfer: builder.mutation<null, { userId: string; transfer: Transfer }>({
-      async queryFn({ userId, transfer }) {
-        try {
-          const batch = writeBatch(firestore);
-          batch.delete(doc(firestore, `users/${userId}/transfers/${transfer.id}`));
-          batch.update(
-            doc(firestore, `users/${userId}/accounts/${transfer.fromAccount.id}`),
-            {
-              balance: increment(transfer.amount),
-            }
-          );
-          batch.update(
-            doc(firestore, `users/${userId}/accounts/${transfer.toAccount.id}`),
-            {
-              balance: increment(-transfer.amount),
-            }
-          );
-          await batch.commit();
-          return {
-            data: null,
-          };
-        } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       invalidatesTags: ["Accounts", "Transfers"],
@@ -100,8 +67,4 @@ const transferApi = emptySplitApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetTransfersQuery,
-  useCreateTransferMutation,
-  useCancelTransferMutation,
-} = transferApi;
+export const { useGetTransfersQuery, useCreateTransferMutation } = transferApi;

@@ -1,0 +1,88 @@
+.container {
+  display: flex;
+  gap: 5px;
+  padding: 0 30px;
+  margin-bottom: 10px;
+}
+
+.date-picker {
+  width: 295px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 0 15px;
+  background-color: var(--blue50);
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.date-picker p {
+  font-weight: 700;
+}
+
+.select-wrapper {
+  width: 295px;
+  height: 40px;
+  display: flex;
+  gap: 5px;
+}
+
+.select-wrapper div>p {
+  font-weight: bold;
+  padding-top: 0;
+}
+
+.icon-button {
+  font-size: 18px;
+  color: var(--gray600);
+}
+
+.close-button {
+  margin-left: auto;
+  font-size: 20px;
+}
+
+.calendar-button {
+  background-color: var(--blue50);
+  padding: 11px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+}
+
+.input-wrapper {
+  flex: 1;
+  position: relative;
+  margin-bottom: 1px;
+}
+
+.input {
+  height: 40px;
+  padding-left: 35px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 27%;
+  left: 10px;
+  font-size: 18px;
+  color: var(--gray600);
+}
+
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column;
+    padding: 0 15px;
+    margin-bottom: 5px;
+  }
+
+  .date-picker {
+    width: 100%;
+  }
+
+  .select-wrapper {
+    width: 100%;
+  }
+}

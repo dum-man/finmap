@@ -29,10 +29,13 @@ export const transactionApi = emptySplitApi.injectEndpoints({
             data: transactionsData,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       providesTags: ["Transactions"],
@@ -60,10 +63,13 @@ export const transactionApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       invalidatesTags: ["Accounts", "Transactions"],

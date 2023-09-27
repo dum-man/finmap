@@ -1,7 +1,7 @@
 import { BsCheck } from "react-icons/bs";
 import { LANGUAGES } from "app/constants";
 import { LANGUAGE_FlAGS } from "../../constants";
-import styles from "./Languages.module.scss";
+import styles from "./Languages.module.css";
 
 interface LanguagesProps {
   selectedLanguage: string;
@@ -13,12 +13,12 @@ const Languages: React.FC<LanguagesProps> = ({
   setSelectedLanguage,
 }) => {
   return (
-    <ul className={styles.languagesList}>
+    <ul className={styles["languages-list"]}>
       {Object.keys(LANGUAGES).map((lng) => (
         <li key={lng}>
           <button
             key={lng}
-            className={styles.languageItem}
+            className={styles["language-item"]}
             onClick={() => setSelectedLanguage(lng)}
           >
             <span>{LANGUAGE_FlAGS[lng as keyof typeof LANGUAGE_FlAGS]}</span>

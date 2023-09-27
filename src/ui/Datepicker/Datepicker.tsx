@@ -1,21 +1,21 @@
 import Calendar, { CalendarProps } from "react-calendar";
 import { HiChevronDoubleLeft } from "react-icons/hi";
 import { IoIosArrowBack } from "react-icons/io";
-import styles from "./Datepicker.module.scss";
-import "./datepicker.css";
+import styles from "./DatePicker.module.css";
+import "./datePicker.css";
 
-interface DatepickerProps extends CalendarProps {}
+interface DatePickerProps extends CalendarProps {}
 
-const Datepicker: React.FC<DatepickerProps> = (props) => {
+const DatePicker: React.FC<DatePickerProps> = (props) => {
   return (
     <Calendar
       prevLabel={<IoIosArrowBack />}
       prev2Label={<HiChevronDoubleLeft />}
-      nextLabel={<IoIosArrowBack className={styles.rotate} />}
-      next2Label={<HiChevronDoubleLeft className={styles.rotate} />}
+      nextLabel={<IoIosArrowBack className={styles["rotate"]} />}
+      next2Label={<HiChevronDoubleLeft className={styles["rotate"]} />}
       {...props}
     />
   );
 };
 
-export default Datepicker;
+export default DatePicker;

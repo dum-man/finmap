@@ -21,6 +21,7 @@ const userApi = emptySplitApi.injectEndpoints({
               group: "base",
               name,
               balance: 0,
+              currency: "usd",
               createdAt: Timestamp.now(),
             };
             batch.set(doc(firestore, `users/${userId}/accounts/${account.id}`), account);
@@ -43,10 +44,13 @@ const userApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
     }),
@@ -65,10 +69,13 @@ const userApi = emptySplitApi.injectEndpoints({
             };
           }
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
     }),
@@ -83,10 +90,13 @@ const userApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
     }),

@@ -1,0 +1,145 @@
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 1.5em;
+  height: 100%;
+  max-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: var(--blue50);
+  border-radius: 12px;
+  outline: none;
+  transition: box-shadow 0.2s;
+  user-select: none;
+  cursor: pointer;
+}
+
+.container:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px var(--green600);
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: var(--gray700);
+}
+
+.value {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  color: var(--blackAlpha900);
+  overflow: hidden;
+}
+
+.value p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 15px;
+}
+
+.value label {
+  cursor: pointer;
+}
+
+.options-wrapper {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.4em);
+  z-index: 100;
+  min-width: 130px;
+  width: 100%;
+  min-height: 70px;
+  max-height: 205px;
+  display: flex;
+  padding: 10px;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+}
+
+.left {
+  right: auto;
+  left: 0;
+}
+
+.options {
+  overflow-y: auto;
+  flex: 1;
+  list-style: none;
+}
+
+.options::-webkit-scrollbar {
+  display: none;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  border-radius: 12px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.option.highlighted {
+  background-color: var(--blue50);
+}
+
+.option.selected {
+  font-weight: 700;
+}
+
+.option p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.no-options {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: var(--gray600);
+}
+
+.placeholder {
+  color: var(--gray600);
+}
+
+.selected-icon {
+  color: var(--green500);
+}
+
+.animation-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.animation-enter-active {
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animation-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.animation-exit-active {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}

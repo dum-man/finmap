@@ -1,16 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { DEFAULT_DATE_OPTION } from "app/constants";
-import { Account, DatepickerDate, SelectOption } from "types";
+import { Account, DatePickerDate, SelectOption } from "types";
 
 interface FilterState {
-  selectedAccounts: Account[];
+  selectedAccountIds: string[];
   selectedOption: SelectOption;
   searchQuery: string;
-  selectedDates: DatepickerDate;
+  selectedDates: DatePickerDate;
 }
 
 const initialState: FilterState = {
-  selectedAccounts: [],
+  selectedAccountIds: [],
   selectedOption: DEFAULT_DATE_OPTION,
   searchQuery: "",
   selectedDates: null,
@@ -21,11 +21,11 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     addSelectedAccount: (state, { payload: account }: PayloadAction<Account>) => {
-      state.selectedAccounts.push(account);
+      state.selectedAccountIds.push(account.id);
     },
     removeSelectedAccount: (state, { payload: account }: PayloadAction<Account>) => {
-      state.selectedAccounts = state.selectedAccounts.filter(
-        (acc) => acc.id !== account.id
+      state.selectedAccountIds = state.selectedAccountIds.filter(
+        (id) => id !== account.id
       );
     },
     setSelectedOption: (state, { payload: option }: PayloadAction<SelectOption>) => {
@@ -34,7 +34,7 @@ export const filterSlice = createSlice({
     setSearchQuery: (state, { payload: query }: PayloadAction<string>) => {
       state.searchQuery = query;
     },
-    setSelectedDates: (state, { payload: dates }: PayloadAction<DatepickerDate>) => {
+    setSelectedDates: (state, { payload: dates }: PayloadAction<DatePickerDate>) => {
       state.selectedDates = dates;
     },
   },

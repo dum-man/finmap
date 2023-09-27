@@ -1,0 +1,42 @@
+.container {
+  top: 70px;
+  left: 25px;
+}
+
+.wrapper {
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.divider {
+  display: block;
+  border-bottom: 1px solid var(--gray200);
+}
+
+.animation-enter {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.animation-enter-active {
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animation-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.animation-exit-active {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+}
+
+@media (max-width: 480px) {
+  .container {
+    left: 15px;
+  }
+}

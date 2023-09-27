@@ -4,13 +4,13 @@ import { toggleUserAccountMenuOpen } from "app/slices/appSlice";
 import { Dropdown } from "ui";
 import AccountType from "../AccountType/AccountType";
 import EditAccountButton from "../EditAccountButton/EditAccountButton";
-import styles from "./UserAccountMenu.module.scss";
+import styles from "./UserAccountMenu.module.css";
 
 const animation = {
-  enter: styles.animationEnter,
-  enterActive: styles.animationEnterActive,
-  exit: styles.animationExit,
-  exitActive: styles.animationExitActive,
+  enter: styles["animation-enter"],
+  enterActive: styles["animation-enter-active"],
+  exit: styles["animation-exit"],
+  exitActive: styles["animation-exit-active"],
 };
 
 const UserAccountMenu: React.FC = () => {
@@ -26,12 +26,12 @@ const UserAccountMenu: React.FC = () => {
     <Dropdown
       isOpen={userAccountMenuOpen}
       onClose={handleClose}
-      className={styles.container}
+      className={styles["container"]}
       animation={animation}
     >
-      <div className={styles.wrapper}>
+      <div className={styles["wrapper"]}>
         <AccountType />
-        <span className={styles.divider} />
+        <span className={styles["divider"]} />
         <EditAccountButton />
       </div>
     </Dropdown>

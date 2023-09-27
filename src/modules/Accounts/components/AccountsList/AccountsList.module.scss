@@ -1,9 +1,0 @@
-@import "assets/sass/variables.scss";
-
-.accountsList {
-  flex: 1;
-  overflow: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}

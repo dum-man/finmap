@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
-import { Timestamp } from "firebase/firestore";
-import { motion } from "framer-motion";
+import classNames from "classnames";
 import toast from "react-hot-toast";
 import { BsCheckLg } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { Timestamp } from "firebase/firestore";
 import useAppSelector from "hooks/useAppSelector";
 import { TextInput } from "components";
 import { Spinner } from "ui";
@@ -17,9 +17,8 @@ import {
   useLazyCheckCategoryExistsQuery,
 } from "app/services/categoryApi";
 import { auth } from "app/config";
-import { VARIANTS } from "../../constants";
 import { Category } from "types";
-import styles from "./CreateCategoryForm.module.scss";
+import styles from "./CreateCategoryForm.module.css";
 
 interface CreateCategoryFormProps {
   categoryName: string;
@@ -92,9 +91,11 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
         throw new Error(`You already have "${category.label}" category`);
       }
       await createCategory({ userId: currentUser.uid, category }).unwrap();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
     setCategoryCreating(false);
     onCloseForm();
@@ -114,9 +115,11 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
         userId: currentUser.uid,
         categoryId: editingCategory.id,
       }).unwrap();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
     onCloseForm();
   };
@@ -128,48 +131,44 @@ const CreateCategoryForm: React.FC<CreateCategoryFormProps> = ({
   };
 
   return (
-    <motion.form
-      className={styles.wrapper}
-      variants={VARIANTS}
-      initial="hidden"
-      animate="visible"
-      onSubmit={handleCreateOrEditCategory}
-    >
+    <form className={styles["wrapper"]} onSubmit={handleCreateOrEditCategory}>
       <TextInput
-        id="categoryName"
-        placeholder={t("categoryName")}
+        label={t("categoryName")}
         maxLength={20}
         value={categoryName}
         onChange={handleChangeCategoryName}
       />
-      <div className={styles.buttons}>
+      <div className={styles["buttons"]}>
         {!categoryCreating ? (
-          <button className={styles.iconButton} type="submit">
-            <BsCheckLg className={styles.submitIcon} />
+          <button
+            className={classNames("icon-button", styles["icon-button"])}
+            type="submit"
+          >
+            <BsCheckLg className={styles["submit-icon"]} />
           </button>
         ) : (
           <Spinner variant="dark" />
         )}
         <button
-          className={styles.iconButton}
+          className={classNames("icon-button", styles["icon-button"])}
           type="button"
           disabled={categoryCreating || isDeleting}
           onClick={onCloseForm}
         >
           <IoClose />
         </button>
-        {!!editingCategory && (
+        {Boolean(editingCategory) && (
           <button
-            className={styles.iconButton}
+            className={classNames("icon-button", styles["icon-button"])}
             type="button"
             disabled={isDeleting}
             onClick={handleDeleteCategory}
           >
-            <RiDeleteBinLine className={styles.deleteIcon} />
+            <RiDeleteBinLine className={styles["delete-icon"]} />
           </button>
         )}
       </div>
-    </motion.form>
+    </form>
   );
 };
 

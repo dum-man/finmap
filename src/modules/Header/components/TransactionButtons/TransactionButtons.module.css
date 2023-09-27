@@ -1,0 +1,71 @@
+.transaction-buttons {
+  display: flex;
+  gap: 25px;
+}
+
+.button {
+  width: 130px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.button:active {
+  transform: scale(0.9);
+}
+
+.button-income {
+  color: var(--green400);
+  background-color: var(--greenAlpha300);
+}
+
+.button-income:hover {
+  background-color: var(--greenAlpha400);
+}
+
+.button-expense {
+  color: var(--orange400);
+  background-color: var(--orangeAlpha300);
+}
+
+.button-expense:hover {
+  background-color: var(--orangeAlpha400);
+}
+
+.button-transfer {
+  color: var(--white);
+  background-color: var(--whiteAlpha300);
+}
+
+.button-transfer:hover {
+  background-color: var(--whiteAlpha400);
+}
+
+@media (max-width: 992px) {
+  .button {
+    width: 100px;
+  }
+
+  .button span {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .transaction-buttons {
+    flex-basis: 100%;
+    justify-content: center;
+    order: 2;
+    gap: 15px;
+    margin: 0 auto;
+  }
+
+  .button {
+    width: 80px;
+  }
+}

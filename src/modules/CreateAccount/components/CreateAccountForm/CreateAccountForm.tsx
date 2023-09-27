@@ -12,6 +12,7 @@ import {
 } from "app/services/accountApi";
 import useAmountInput from "hooks/useAmountInput";
 import { auth } from "app/config";
+import { CURRENCY_OPTIONS } from "app/constants";
 import { Account } from "types";
 
 interface CreateAccountFormProps {
@@ -27,7 +28,10 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   const [createAccount] = useCreateAccountMutation();
 
   const [accountName, setAccountName] = useState("");
-  const [accountBalance, onBalanceChange] = useAmountInput("0");
+  const { amount, handleChangeAmount, handleChangeCurrency } = useAmountInput({
+    value: "0",
+    currency: CURRENCY_OPTIONS[0],
+  });
 
   const [accountCreating, setAccountCreating] = useState(false);
 
@@ -45,7 +49,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       toast.error(t("accountError"));
       return;
     }
-    if (!accountBalance) {
+    if (!amount.value) {
       toast.error(t("balanceError"));
       return;
     }
@@ -53,7 +57,8 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       id: uuidv4(),
       group: "user",
       name: accountName,
-      balance: parseFloat(accountBalance),
+      balance: parseFloat(amount.value),
+      currency: amount.currency.id,
       createdAt: Timestamp.now(),
     };
     setAccountCreating(true);
@@ -67,9 +72,11 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       }
       await createAccount({ userId: currentUser.uid, account }).unwrap();
       onClose();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
     setAccountCreating(false);
   };
@@ -77,16 +84,17 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   return (
     <form onSubmit={handleSubmit}>
       <TextInput
-        id="name"
-        placeholder={t("name")}
+        label={t("name")}
         maxLength={20}
         value={accountName}
         onChange={onAccountNameChange}
       />
       <AmountInput
-        placeholder={t("startingBalance")}
-        value={accountBalance}
-        onValueChange={onBalanceChange}
+        label={t("startingBalance")}
+        value={amount.value}
+        onValueChange={handleChangeAmount}
+        currency={amount.currency}
+        onCurrencyChange={handleChangeCurrency}
       />
       <Button type="submit" loading={accountCreating}>
         {t("save")}

@@ -1,0 +1,17 @@
+.icon-button {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  background-color: var(--black800);
+  width: 35px;
+  height: 35px;
+  color: var(--white);
+  font-size: 20px;
+  transition: opacity 0.2s, visibility 0.2s;
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}

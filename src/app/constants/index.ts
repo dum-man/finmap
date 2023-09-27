@@ -1,10 +1,40 @@
-import { Variants } from "framer-motion";
-import { SelectOption } from "types";
+import { CurrencyOption, SelectOption } from "types";
 
 export const EMAIL_FORMAT = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 export const DEFAULT_DATE_OPTION: SelectOption = { id: "5", label: "allTime" };
+
 export const DATEPICKER_DATE_OPTION: SelectOption = { id: "0", label: "selectDates" };
+
+export const CURRENCY_OPTIONS: CurrencyOption[] = [
+  { id: "usd", label: "USD ($)" },
+  { id: "rub", label: "RUB (₽)" },
+  { id: "kzt", label: "KZT (₸)" },
+];
+
+export const CURRENCY_SYMBOLS = {
+  usd: "$",
+  rub: "₽",
+  kzt: "₸",
+};
+
+export const CURRENCIES_RATE = {
+  usd: {
+    usd: 1,
+    rub: 0.0103,
+    kzt: 0.0021,
+  },
+  rub: {
+    usd: 96.3,
+    rub: 1,
+    kzt: 0.2,
+  },
+  kzt: {
+    usd: 473.5,
+    rub: 4.92,
+    kzt: 1,
+  },
+};
 
 export const DEFAULT_ACCOUNTS = ["Bank account", "Savings", "Cash"];
 
@@ -32,90 +62,5 @@ export const LANGUAGES = {
   },
   kz: {
     nativeName: "Қазақ",
-  },
-};
-
-export const INPUT_LABEL_VARIANTS: Variants = {
-  hidden: {
-    y: 10,
-  },
-  visible: {
-    y: 0,
-    transition: {
-      duration: 0.1,
-    },
-  },
-};
-
-export const INPUT_LENGTH_VARIANTS: Variants = {
-  hidden: {
-    scale: 0,
-  },
-  visible: {
-    scale: 1,
-  },
-  exit: {
-    scale: 0,
-    transition: {
-      duration: 0.2,
-    },
-  },
-};
-
-export const MENU_VARIANTS: Variants = {
-  hidden: {
-    x: 200,
-  },
-  visible: {
-    x: 0,
-  },
-  exit: {
-    scale: 0.3,
-    opacity: 0,
-    transition: {
-      duration: 0.1,
-    },
-  },
-};
-
-export const SELECT_VARIANTS: Variants = {
-  hidden: {
-    y: -8,
-    opacity: 0,
-  },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    y: -8,
-    opacity: 0,
-    transition: {
-      ease: "easeInOut",
-      duration: 0.2,
-    },
-  },
-};
-
-export const LANGUAGE_VARIANTS: Variants = {
-  hidden: {
-    y: -70,
-    scale: 0.3,
-  },
-  visible: {
-    y: 0,
-    scale: 1,
-  },
-  exit: {
-    y: -70,
-    scale: 0.3,
-    opacity: 0,
-    transition: {
-      duration: 0.1,
-    },
   },
 };

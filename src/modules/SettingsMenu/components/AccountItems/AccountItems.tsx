@@ -7,7 +7,7 @@ import {
   toggleAccountsOpen,
   toggleCategoriesOpen,
 } from "app/slices/appSlice";
-import styles from "./AccountItems.module.scss";
+import styles from "./AccountItems.module.css";
 
 const AccountItems: React.FC = () => {
   const [currentUser] = useAuthState(auth);
@@ -27,24 +27,24 @@ const AccountItems: React.FC = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h3 className={styles.title}>{currentUser?.displayName || t("accountType")}</h3>
+    <div className={styles["wrapper"]}>
+      <h3 className={styles["title"]}>{currentUser?.displayName || t("accountType")}</h3>
       <ul>
         <li>
           <button
-            className={styles.button}
+            className={styles["button"]}
             onClick={() => dispatch(toggleAccountsOpen(true))}
           >
             {t("accounts")}
           </button>
         </li>
         <li>
-          <button className={styles.button} onClick={handleSetIncomeCategory}>
+          <button className={styles["button"]} onClick={handleSetIncomeCategory}>
             {t("incomeCategories")}
           </button>
         </li>
         <li>
-          <button className={styles.button} onClick={handleSetExpenseCategory}>
+          <button className={styles["button"]} onClick={handleSetExpenseCategory}>
             {t("expenseCategories")}
           </button>
         </li>

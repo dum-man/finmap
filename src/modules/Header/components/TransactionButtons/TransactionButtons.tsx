@@ -8,7 +8,7 @@ import {
   toggleCreateIncomeOpen,
   toggleCreateTransferOpen,
 } from "app/slices/appSlice";
-import styles from "./TransactionButtons.module.scss";
+import styles from "./TransactionButtons.module.css";
 
 const TransactionButtons: React.FC = () => {
   const { t } = useTranslation();
@@ -16,10 +16,10 @@ const TransactionButtons: React.FC = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <ul className={styles.transactionButtons}>
+    <ul className={styles["transaction-buttons"]}>
       <li>
         <button
-          className={classNames(styles.button, styles.buttonIncome)}
+          className={classNames(styles["button"], styles["button-income"])}
           onClick={() => dispatch(toggleCreateIncomeOpen(true))}
         >
           <FiPlus />
@@ -28,7 +28,7 @@ const TransactionButtons: React.FC = () => {
       </li>
       <li>
         <button
-          className={classNames(styles.button, styles.buttonExpense)}
+          className={classNames(styles["button"], styles["button-expense"])}
           onClick={() => dispatch(toggleCreateExpenseOpen(true))}
         >
           <FiMinus />
@@ -37,7 +37,7 @@ const TransactionButtons: React.FC = () => {
       </li>
       <li>
         <button
-          className={classNames(styles.button, styles.buttonTransfer)}
+          className={classNames(styles["button"], styles["button-transfer"])}
           onClick={() => dispatch(toggleCreateTransferOpen(true))}
         >
           <BiTransfer />

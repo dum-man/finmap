@@ -1,47 +1,49 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { CalendarProps } from "react-calendar";
-import { CalendarDatepicker } from "..";
-import { INPUT_LABEL_VARIANTS } from "app/constants";
-import { setFormattedDateTime } from "utils";
-import styles from "./DateInput.module.scss";
+import classNames from "classnames";
+import { CalendarDatePicker } from "components";
+import { InputLabel } from "ui";
+import { setFormattedDateTime } from "utils/dateUtils";
+import styles from "./DateInput.module.css";
 
 interface DateInputProps extends CalendarProps {
-  placeholder: string;
+  label: string;
   date: Date;
 }
 
-const DateInput: React.FC<DateInputProps> = ({ placeholder, date, ...restProps }) => {
-  const [datepickerOpen, setDatepickerOpen] = useState(false);
+const DateInput: React.FC<DateInputProps> = ({ label, date, ...restProps }) => {
+  const [datePickerOpen, setDatePickerOpen] = useState(false);
 
-  const handleDatepickerOpen = () => {
-    setDatepickerOpen(true);
+  const handleDatePickerOpen = () => {
+    setDatePickerOpen(true);
   };
 
-  const handleDatepickerClose = () => {
-    setDatepickerOpen(false);
+  const handleDatePickerClose = () => {
+    setDatePickerOpen(false);
   };
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <div className={styles.input} tabIndex={0} onClick={handleDatepickerOpen}>
+      <div className={styles["wrapper"]}>
+        <InputLabel
+          id="datePicker"
+          label={label}
+          isActive={Boolean(date)}
+          onClick={handleDatePickerOpen}
+        />
+        <div
+          className={classNames("input", styles["input"])}
+          tabIndex={0}
+          onClick={handleDatePickerOpen}
+        >
           {setFormattedDateTime(date)}
         </div>
-        <motion.label
-          className={styles.label}
-          variants={INPUT_LABEL_VARIANTS}
-          initial="hidden"
-          animate="visible"
-        >
-          {placeholder}
-        </motion.label>
       </div>
-      <CalendarDatepicker
-        isOpen={datepickerOpen}
+      <CalendarDatePicker
+        isOpen={datePickerOpen}
         value={date}
-        onClickDay={handleDatepickerClose}
-        onClose={handleDatepickerClose}
+        onClickDay={handleDatePickerClose}
+        onClose={handleDatePickerClose}
         {...restProps}
       />
     </>

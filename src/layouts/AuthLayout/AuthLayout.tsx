@@ -1,7 +1,7 @@
 import { Trans, useTranslation } from "react-i18next";
 import heroImage from "assets/images/hero-image.webp";
 import finmapLogo from "assets/images/finmap-logo.svg";
-import styles from "./AuthLayout.module.scss";
+import styles from "./AuthLayout.module.css";
 
 interface AuthLayoutProps {
   children: React.ReactNode;
@@ -10,31 +10,25 @@ interface AuthLayoutProps {
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   const { t } = useTranslation();
   return (
-    <main className={styles.main}>
+    <main className={styles["main"]}>
       <h1 className="visually-hidden">Welcome to Finmap</h1>
-      <section className={styles.heroSection}>
+      <section className={styles["hero-section"]}>
         <h2 className="visually-hidden">Finmap benefits</h2>
-        <img src={finmapLogo} width={195} height={55} alt="finmap logo" />
-        <p className={styles.lead}>
+        <img src={finmapLogo} height={55} alt="finmap logo" />
+        <p className={styles["lead"]}>
           <Trans>{t("hero")}</Trans>
         </p>
-        <div className={styles.blur} />
+        <div className={styles["blur"]} />
         <img
-          className={styles.heroImage}
+          className={styles["hero-image"]}
           src={heroImage}
-          width={485}
+          height={355}
           alt="laptop with financial analytics"
         />
       </section>
-      <section className={styles.authSection}>
-        <img
-          className={styles.logo}
-          src={finmapLogo}
-          width={195}
-          height={55}
-          alt="finmap logo"
-        />
-        <div className={styles.wrapper}>{children}</div>
+      <section className={styles["auth-section"]}>
+        <img className={styles["logo"]} src={finmapLogo} height={55} alt="finmap logo" />
+        <div className={styles["wrapper"]}>{children}</div>
       </section>
     </main>
   );

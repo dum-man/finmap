@@ -1,0 +1,16 @@
+.wrapper {
+  text-align: center;
+}
+
+.wrapper svg {
+  font-size: 70px;
+  color: var(--green600);
+}
+
+.wrapper p {
+  margin-bottom: 10px;
+}
+
+.wrapper p:first-of-type {
+  font-size: 22px;
+}

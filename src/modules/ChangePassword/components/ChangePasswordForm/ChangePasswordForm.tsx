@@ -43,22 +43,23 @@ const ChangePasswordForm: React.FC<ChangePasswordFormProps> = ({ setSuccess }) =
     try {
       await updatePassword(newPassword);
       setSuccess(true);
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <PasswordInput
-        id="oldPassword"
-        placeholder={t("oldPassword")}
+        label={t("oldPassword")}
         value={oldPassword}
         onChange={onOldPasswordChange}
       />
       <PasswordInput
-        id="newPassword"
-        placeholder={t("newPassword")}
+        label={t("newPassword")}
         value={newPassword}
         onChange={onNewPasswordChange}
       />

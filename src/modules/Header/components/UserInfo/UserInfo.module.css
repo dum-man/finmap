@@ -1,0 +1,57 @@
+.wrapper {
+  position: relative;
+  width: 250px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  background: var(--green-gradient);
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.account {
+  position: relative;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 1px 10px;
+  color: var(--gray400);
+  font-size: 14px;
+  border-radius: 6px;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.account svg {
+  transition: transform 0.2s;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+@media (hover: hover) {
+  .account:hover {
+    background-color: var(--whiteAlpha900);
+  }
+}
+
+@media (hover: none) {
+  .account:active {
+    background-color: var(--whiteAlpha900);
+  }
+}

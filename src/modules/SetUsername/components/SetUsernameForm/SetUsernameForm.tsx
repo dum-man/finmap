@@ -56,17 +56,18 @@ const SetUsernameForm: React.FC<SetUsernameFormProps> = ({ onClose }) => {
         displayName: formattedUsername,
       }).unwrap();
       onClose();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <TextInput
-        id="username"
-        placeholder={t("username")}
+        label={t("username")}
         maxLength={20}
         value={userName}
         onChange={onUsernameChange}

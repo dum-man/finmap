@@ -1,0 +1,50 @@
+.container {
+  top: 70px;
+  right: 25px;
+}
+
+.wrapper {
+  width: 350px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-bottom: 0;
+  font-size: 12px;
+}
+
+.title {
+  padding: 15px;
+  padding-bottom: 10px;
+  font-size: 26px;
+}
+
+.animation-enter {
+  opacity: 0;
+  transform: translateX(500px);
+}
+
+.animation-enter-active {
+  transition: opacity 200ms, transform 200ms;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animation-exit {
+  opacity: 1;
+}
+
+.animation-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+@media (max-width: 480px) {
+  .container {
+    right: 15px;
+  }
+
+  .wrapper {
+    width: 320px;
+  }
+}

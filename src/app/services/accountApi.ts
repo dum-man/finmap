@@ -28,10 +28,13 @@ export const accountApi = emptySplitApi.injectEndpoints({
             data: accountsData,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       providesTags: ["Accounts"],
@@ -55,10 +58,13 @@ export const accountApi = emptySplitApi.injectEndpoints({
             data: true,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
     }),
@@ -71,10 +77,13 @@ export const accountApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       invalidatesTags: ["Accounts"],
@@ -88,10 +97,13 @@ export const accountApi = emptySplitApi.injectEndpoints({
             data: null,
           };
         } catch (error: any) {
-          console.log(error.message);
-          return {
-            error: error.message,
-          };
+          if (error instanceof Error) {
+            console.log(error.message);
+            return {
+              error: error.message,
+            };
+          }
+          return error;
         }
       },
       invalidatesTags: ["Accounts"],

@@ -6,56 +6,59 @@ import useAppSelector from "hooks/useAppSelector";
 import {
   toggleAmountType,
   toggleDateType,
-  toggleTranscationType,
+  toggleTransactionType,
 } from "app/slices/sortSlice";
-import styles from "./Sorting.module.scss";
+import styles from "./Sorting.module.css";
 
 const Sorting: React.FC = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
-  const { transcationType, dateType, amountType } = useAppSelector((state) => state.sort);
+  const { transactionType, dateType, amountType } = useAppSelector((state) => state.sort);
 
   return (
-    <div className={styles.wrapper}>
-      <ul className={styles.sortList}>
-        <li className={styles.sortItem}>
+    <div className={styles["wrapper"]}>
+      <ul className={styles["sort-list"]}>
+        <li className={styles["sort-item"]}>
           <button
-            className={styles.button}
-            onClick={() => dispatch(toggleTranscationType())}
+            className={styles["button"]}
+            onClick={() => dispatch(toggleTransactionType())}
           >
             {t("type")}
             <HiArrowDown
               className={classNames({
-                [styles.rotate]: transcationType === "UP",
+                [styles["rotate"]]: transactionType === "UP",
               })}
             />
           </button>
         </li>
-        <li className={styles.sortItem}>
-          <button className={styles.button} onClick={() => dispatch(toggleDateType())}>
+        <li className={styles["sort-item"]}>
+          <button className={styles["button"]} onClick={() => dispatch(toggleDateType())}>
             {t("date")}
             <HiArrowDown
               className={classNames({
-                [styles.rotate]: dateType === "UP",
+                [styles["rotate"]]: dateType === "UP",
               })}
             />
           </button>
         </li>
-        <li className={styles.sortItem}>
-          <button className={styles.button} onClick={() => dispatch(toggleAmountType())}>
+        <li className={styles["sort-item"]}>
+          <button
+            className={styles["button"]}
+            onClick={() => dispatch(toggleAmountType())}
+          >
             {t("amount")}
             <HiArrowDown
               className={classNames({
-                [styles.rotate]: amountType === "UP",
+                [styles["rotate"]]: amountType === "UP",
               })}
             />
           </button>
         </li>
-        <li className={styles.sortItem}>{t("account/balance")}</li>
-        <li className={styles.sortItem}>{t("category")}</li>
-        <li className={styles.sortItem}>{t("comment")}</li>
+        <li className={styles["sort-item"]}>{t("account/balance")}</li>
+        <li className={styles["sort-item"]}>{t("category")}</li>
+        <li className={styles["sort-item"]}>{t("comment")}</li>
       </ul>
     </div>
   );

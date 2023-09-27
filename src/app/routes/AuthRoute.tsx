@@ -16,7 +16,7 @@ const AuthRoute = ({ children }: AuthRouteProps) => {
   }
 
   if (currentUser) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return <Suspense fallback={<MainLoader />}>{children}</Suspense>;

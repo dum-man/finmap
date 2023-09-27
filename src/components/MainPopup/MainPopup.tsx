@@ -1,6 +1,6 @@
 import FocusTrap from "focus-trap-react";
 import { CloseButton, Popup } from "ui";
-import styles from "./MainPopup.module.scss";
+import styles from "./MainPopup.module.css";
 
 interface MainPopupProps {
   title: string;
@@ -18,8 +18,8 @@ const MainPopup: React.FC<MainPopupProps> = ({ title, isOpen, onClose, children 
           allowOutsideClick: true,
         }}
       >
-        <div className={styles.container}>
-          <h2 className={styles.title}>{title}</h2>
+        <div className={styles["container"]}>
+          <h2 className={styles["title"]}>{title}</h2>
           <CloseButton onClick={onClose} />
           {children}
         </div>

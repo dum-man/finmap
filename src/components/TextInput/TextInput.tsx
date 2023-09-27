@@ -1,65 +1,59 @@
-import { HTMLInputTypeAttribute, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { HTMLInputTypeAttribute, useId, useState } from "react";
 import classNames from "classnames";
-import { INPUT_LABEL_VARIANTS, INPUT_LENGTH_VARIANTS } from "app/constants";
-import styles from "./TextInput.module.scss";
+import { InputLabel } from "ui";
+import styles from "./TextInput.module.css";
 
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   type?: HTMLInputTypeAttribute;
-  id: string;
-  placeholder: string;
+  label: string;
   value: string;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
   type,
-  id,
-  placeholder,
+  label,
   maxLength,
   value,
   ...restProps
 }) => {
-  const [lengthVisible, setLengthVisible] = useState(false);
+  const inputId = useId();
+
+  const [isActive, setIsActive] = useState(Boolean(value.length));
+
+  const handleFocus = () => {
+    if (!isActive) {
+      setIsActive(true);
+    }
+  };
+
+  const handleBlur = () => {
+    if (!value.length) {
+      setIsActive(false);
+    }
+  };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles["wrapper"]}>
+      <InputLabel id={inputId} label={label} isActive={isActive} />
       <input
-        className={classNames(styles.input, {
-          [styles.active]: !!value,
-        })}
-        id={id}
+        id={inputId}
+        className={classNames("input", styles["input"])}
         type={type}
-        placeholder={placeholder}
         maxLength={maxLength}
         value={value}
-        onFocus={() => setLengthVisible(true)}
-        onBlur={() => setLengthVisible(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...restProps}
       />
-      {!!value && (
-        <motion.label
-          className={styles.label}
-          htmlFor={id}
-          variants={INPUT_LABEL_VARIANTS}
-          initial="hidden"
-          animate="visible"
+      {maxLength && (
+        <span
+          className={classNames(styles["length"], {
+            [styles["length-visible"]]: isActive,
+          })}
         >
-          {placeholder}
-        </motion.label>
+          {maxLength - value.length}
+        </span>
       )}
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {lengthVisible && (
-          <motion.span
-            className={styles.inputLength}
-            variants={INPUT_LENGTH_VARIANTS}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            {maxLength ? maxLength - value.length : null}
-          </motion.span>
-        )}
-      </AnimatePresence>
     </div>
   );
 };

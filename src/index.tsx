@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import App from "./App";
 import AppProviders from "./app/providers/AppProviders";
 import "./app/i18n";
-import "./assets/sass/global.scss";
+import "./assets/styles/global.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(

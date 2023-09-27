@@ -37,16 +37,18 @@ const DeleteAccountForm: React.FC<DeleteAccountFormProps> = ({ onClose }) => {
         accountId: selectedAccount.id,
       }).unwrap();
       onClose();
-    } catch (error: any) {
-      console.log(error.message);
-      toast(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast(error.message);
+      }
     }
   };
 
   return (
     <form onSubmit={handleDeleteAccount}>
       <AccountSelect
-        placeholder={t("selectAccount")}
+        label={t("selectAccount")}
         value={selectedAccount}
         onChange={onChangeAccount}
       />

@@ -1,55 +1,64 @@
+import { useId, useState } from "react";
 import {
   NumberFormatValues,
   NumericFormat,
   NumericFormatProps,
 } from "react-number-format";
-import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
-import { INPUT_LABEL_VARIANTS } from "app/constants";
-import styles from "./AmountInput.module.scss";
+import { InputLabel, Select } from "ui";
+import { CURRENCY_OPTIONS } from "app/constants";
+import { CurrencyOption } from "types";
+import styles from "./AmountInput.module.css";
 
 interface AmountInputProps extends NumericFormatProps {
-  currency?: boolean;
-  placeholder: string;
+  label: string;
   value: string;
   onValueChange: (values: NumberFormatValues) => void;
+  currency: CurrencyOption;
+  onCurrencyChange: (currency: any) => void;
 }
 
 const AmountInput: React.FC<AmountInputProps> = ({
-  currency = true,
-  placeholder,
+  label,
   value,
   onValueChange,
+  currency,
+  onCurrencyChange,
   ...restProps
 }) => {
+  const inputId = useId();
+
+  const [isActive, setIsActive] = useState(Boolean(value.length));
+
+  const handleFocus = () => {
+    if (!isActive) {
+      setIsActive(true);
+    }
+  };
+
+  const handleBlur = () => {
+    if (!value.length) {
+      setIsActive(false);
+    }
+  };
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles["wrapper"]}>
+      <InputLabel id={inputId} label={label} isActive={isActive} />
       <NumericFormat
-        className={classNames(styles.input, { [styles.active]: !!value })}
-        id="amount"
-        placeholder={placeholder}
+        className={classNames("input", styles["input"])}
+        id={inputId}
         thousandSeparator=" "
         decimalScale={2}
         maxLength={13}
         allowNegative={false}
         value={parseFloat(value)}
         onValueChange={onValueChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         {...restProps}
       />
-      <AnimatePresence initial={false}>
-        {!!value && (
-          <motion.label
-            className={styles.label}
-            htmlFor="amount"
-            variants={INPUT_LABEL_VARIANTS}
-            initial="hidden"
-            animate="visible"
-          >
-            {placeholder}
-          </motion.label>
-        )}
-      </AnimatePresence>
-      {currency && <span className={styles.currency}>USD ($)</span>}
+      <Select value={currency} onChange={onCurrencyChange} options={CURRENCY_OPTIONS} />
     </div>
   );
 };

@@ -56,7 +56,6 @@
   "dateError": "Date must be specified",
   "insufficientFunds": "Insufficient Funds",
   "transfers": "Transfers",
-  "cancel": "Cancel",
   "transfersNotFound": "No transfers found",
   "transfersNotFoundMessage": "Try to make your first transfer",
   "accountsNotFound": "No accounts found",
@@ -86,7 +85,7 @@
   "addCategory": "Add category",
   "categoryNameError": "Category name must be specified",
   "categorySelectedError": "Category must be selected",
-  "totalAmountOnAccounts": "Total amount on accounts",
+  "totalAmountOnAccounts": "Total amount on {{currencySymbol}} accounts",
   "myAccounts": "My accounts",
   "actions": "Actions",
   "analytics": "Analytics",
@@ -126,5 +125,6 @@
   "noTransactionsFoundMessage": "Try to make your first transaction",
   "noSuchTransactions": "No such transactions",
   "noSuchTransactionsMessage": "No transactions with selected parameters",
-  "accountNotExist": "Account doesn't exist"
+  "accountNotExist": "Account doesn't exist",
+  "noAccounts": "Your accounts will appear here"
 }

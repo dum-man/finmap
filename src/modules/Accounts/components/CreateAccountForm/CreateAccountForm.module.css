@@ -1,0 +1,41 @@
+.input-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.input-wrapper>div:first-child {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.buttons {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-button {
+  font-size: 24px;
+  color: var(--gray700);
+}
+
+.submit-icon {
+  color: var(--green500);
+  transform: scale(1.5);
+}
+
+@media (max-width: 480px) {
+  .input-wrapper {
+    gap: 10px;
+  }
+
+  .buttons {
+    width: 70px;
+    gap: 5px;
+  }
+}

@@ -1,0 +1,11 @@
+.event {
+  text-align: right;
+}
+
+.income {
+  color: var(--green500);
+}
+
+.expense {
+  color: var(--orange500);
+}

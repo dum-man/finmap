@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
-import styles from "./Layout.module.scss";
+import styles from "./Layout.module.css";
 
 interface LayoutProps {
   isOpen: boolean;
@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({ isOpen, className, animation, children 
       mountOnEnter
       unmountOnExit
     >
-      <div className={classNames(styles.content, className)} ref={contentRef}>
+      <div className={classNames(styles["content"], className)} ref={contentRef}>
         {children}
       </div>
     </CSSTransition>

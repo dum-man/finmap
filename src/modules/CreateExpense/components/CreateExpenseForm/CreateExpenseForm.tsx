@@ -17,6 +17,8 @@ import { Button } from "ui";
 import { useGetAccountsQuery } from "app/services/accountApi";
 import { useCreateTransactionMutation } from "app/services/transactionApi";
 import { auth } from "app/config";
+import { setCurrencySymbol } from "utils/sumUtils";
+import { convertCurrency } from "utils/sumUtils";
 import { Transaction } from "types";
 
 interface CreateExpenseFormProps {
@@ -37,6 +39,7 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
     handleChangeFromAccount,
     handleChangeCategory,
     handleChangeAmount,
+    handleChangeCurrency,
     handleChangeDate,
     handleChangeComment,
   } = useTransactionForm();
@@ -67,21 +70,26 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
       toast.error(t("dateError"));
       return;
     }
-    const formattedAmount = parseFloat(amount);
+    const convertedAmount = convertCurrency(amount.value, {
+      accountCurrency: currentAccount.currency,
+      currency: amount.currency.id,
+    });
     const formattedComment = comment.trim();
 
-    if (currentAccount.balance - formattedAmount < 0) {
+    if (currentAccount.balance - convertedAmount < 0) {
       toast.error(t("insufficientFunds"));
       return;
     }
     const transaction: Transaction = {
       id: uuidv4(),
       type: "expense",
-      amount: -formattedAmount,
+      amount: -convertedAmount,
+      currency: amount.currency.id,
       category: category.label,
       accountId: fromAccount.id,
       accountName: fromAccount.label,
-      accountAmount: currentAccount.balance - formattedAmount,
+      accountAmount: currentAccount.balance - convertedAmount,
+      accountCurrency: fromAccount.currency!,
       comment: formattedComment ? formattedComment : null,
       createdAt: Timestamp.fromDate(date),
     };
@@ -91,23 +99,27 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
         transaction,
       }).unwrap();
       onClose();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <AccountSelect
-        placeholder={t("fromAccount")}
+        label={t("fromAccount")}
         value={fromAccount}
         onChange={handleChangeFromAccount}
       />
       <AmountInput
-        placeholder={`${t("sum")}, $`}
-        value={amount}
+        label={`${t("sum")}, ${setCurrencySymbol(amount.currency.id)}`}
+        value={amount.value}
         onValueChange={handleChangeAmount}
+        currency={amount.currency}
+        onCurrencyChange={handleChangeCurrency}
       />
       <>
         {categoryInputVisible ? (
@@ -125,10 +137,9 @@ const CreateExpenseForm: React.FC<CreateExpenseFormProps> = ({ onClose }) => {
           />
         )}
       </>
-      <DateInput placeholder={t("expenseDate")} date={date} onChange={handleChangeDate} />
+      <DateInput label={t("expenseDate")} date={date} onChange={handleChangeDate} />
       <TextInput
-        id="comment"
-        placeholder={t("leaveComment")}
+        label={t("leaveComment")}
         maxLength={60}
         value={comment}
         onChange={handleChangeComment}

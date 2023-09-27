@@ -1,0 +1,42 @@
+.skeleton {
+  background-color: var(--blue200);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.wrapper {
+  padding: 0 25px;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 4px 0;
+}
+
+.name {
+  width: 110px;
+  height: 15px;
+  border-radius: 8px;
+}
+
+.amount {
+  width: 70px;
+  height: 15px;
+  border-radius: 8px;
+}
+
+.account-item:nth-child(2n) span:first-child {
+  width: 90px;
+}
+
+.account-item:nth-child(2n) span:last-child {
+  width: 60px;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}

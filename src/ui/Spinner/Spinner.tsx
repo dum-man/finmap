@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import styles from "./Spinner.module.scss";
+import styles from "./Spinner.module.css";
 
 interface SpinnerProps {
   variant?: "light" | "dark";
@@ -8,9 +8,9 @@ interface SpinnerProps {
 const Spinner: React.FC<SpinnerProps> = ({ variant = "light" }) => {
   return (
     <span
-      className={classNames(styles.spinner, {
-        [styles.light]: variant === "light",
-        [styles.dark]: variant === "dark",
+      className={classNames(styles["spinner"], {
+        [styles["light"]]: variant === "light",
+        [styles["dark"]]: variant === "dark",
       })}
     />
   );

@@ -1,0 +1,19 @@
+.label {
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray600);
+  user-select: none;
+  z-index: 10;
+  transition: transform 150ms ease-out, font-size 150ms ease-out;
+  cursor: text;
+}
+
+.active {
+  transform: translateY(-20%);
+  font-size: 0.75em;
+}

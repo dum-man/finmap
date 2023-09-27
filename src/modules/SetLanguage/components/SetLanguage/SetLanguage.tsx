@@ -14,7 +14,7 @@ const SetLanguage: React.FC = () => {
 
   const setLanguageOpen = useAppSelector((state) => state.app.setLanguageOpen);
 
-  const [selectedLanguage, setSelectedLanguage] = useState(() => i18n.resolvedLanguage);
+  const [selectedLanguage, setSelectedLanguage] = useState(i18n.resolvedLanguage);
 
   const handleClose = () => {
     dispatch(toggleSetLanguageOpen(false));
@@ -27,8 +27,10 @@ const SetLanguage: React.FC = () => {
         await i18n.changeLanguage(selectedLanguage);
       }
       handleClose();
-    } catch (error: any) {
-      console.log(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
     }
   };
 

@@ -1,0 +1,47 @@
+.container {
+  top: 70px;
+  right: 25px;
+}
+
+.wrapper {
+  width: 450px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-wrapper {
+  flex: 1;
+  display: flex;
+  padding: 20px 0;
+}
+
+.animation-enter {
+  opacity: 0;
+  transform: translateX(500px);
+}
+
+.animation-enter-active {
+  transition: opacity 200ms, transform 200ms;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animation-exit {
+  opacity: 1;
+}
+
+.animation-exit-active {
+  opacity: 0;
+  transition: opacity 200ms;
+}
+
+@media (max-width: 768px) {
+  .container {
+    right: 15px;
+  }
+
+  .wrapper {
+    width: 360px;
+  }
+}

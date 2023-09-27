@@ -1,36 +1,41 @@
 import { useReducer } from "react";
 import { NumberFormatValues } from "react-number-format";
-import { SelectOption } from "types";
+import { CURRENCY_OPTIONS } from "app/constants";
+import { Amount, CurrencyOption, SelectOption } from "types";
 
 enum FormActionTypes {
   TO_ACCOUNT = "TO_ACCOUNT",
   FROM_ACCOUNT = "FROM_ACCOUNT",
   CATEGORY = "CATEGORY",
   AMOUNT = "AMOUNT",
+  CURRENCY = "CURRENCY",
   DATE = "DATE",
   COMMENT = "COMMENT",
 }
 
 interface FormAction {
   type: FormActionTypes;
-  payload: string | Date | SelectOption;
+  payload: string | Date | SelectOption | Amount;
 }
 
 interface FormState {
   toAccount: SelectOption | null;
   fromAccount: SelectOption | null;
   category: SelectOption | null;
-  amount: string;
+  amount: Amount;
   date: Date;
   comment: string;
 }
 
 const useTransactionForm = () => {
-  const initialFormState = {
+  const initialFormState: FormState = {
     toAccount: null,
     fromAccount: null,
     category: null,
-    amount: "",
+    amount: {
+      value: "",
+      currency: CURRENCY_OPTIONS[0],
+    },
     date: new Date(),
     comment: "",
   };
@@ -55,7 +60,18 @@ const useTransactionForm = () => {
       case FormActionTypes.AMOUNT:
         return {
           ...state,
-          amount: action.payload as string,
+          amount: {
+            ...state.amount,
+            value: action.payload as string,
+          },
+        };
+      case FormActionTypes.CURRENCY:
+        return {
+          ...state,
+          amount: {
+            ...state.amount,
+            currency: action.payload as CurrencyOption,
+          },
         };
       case FormActionTypes.DATE:
         return {
@@ -102,6 +118,13 @@ const useTransactionForm = () => {
     });
   };
 
+  const handleChangeCurrency = (currency: CurrencyOption) => {
+    formDispatch({
+      type: FormActionTypes.CURRENCY,
+      payload: currency,
+    });
+  };
+
   const handleChangeDate = (date: Date) => {
     formDispatch({
       type: FormActionTypes.DATE,
@@ -121,6 +144,7 @@ const useTransactionForm = () => {
     handleChangeToAccount,
     handleChangeFromAccount,
     handleChangeAmount,
+    handleChangeCurrency,
     handleChangeCategory,
     handleChangeDate,
     handleChangeComment,

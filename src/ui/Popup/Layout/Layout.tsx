@@ -1,20 +1,20 @@
 import { useRef, useState, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import classNames from "classnames";
-import styles from "./Layout.module.scss";
+import styles from "./Layout.module.css";
 
 const overlayAnimation = {
-  enter: styles.overlayEnter,
-  enterActive: styles.overlayEnterActive,
-  exit: styles.overlayExit,
-  exitActive: styles.overlayExitActive,
+  enter: styles["overlay-enter"],
+  enterActive: styles["overlay-enter-active"],
+  exit: styles["overlay-exit"],
+  exitActive: styles["overlay-exit-active"],
 };
 
 const contentAnimation = {
-  enter: styles.contentEnter,
-  enterActive: styles.contentEnterActive,
-  exit: styles.contentExit,
-  exitActive: styles.contentExitActive,
+  enter: styles["content-enter"],
+  enterActive: styles["content-enter-active"],
+  exit: styles["content-exit"],
+  exitActive: styles["content-exit-active"],
 };
 
 interface LayoutProps {
@@ -35,7 +35,7 @@ const Layout: React.FC<LayoutProps> = ({ onClose, isOpen, children }) => {
 
   return (
     <div
-      className={styles.container}
+      className={styles["container"]}
       role="dialog"
       onClick={(evt) => evt.stopPropagation()}
     >
@@ -48,7 +48,7 @@ const Layout: React.FC<LayoutProps> = ({ onClose, isOpen, children }) => {
         unmountOnExit
       >
         <div
-          className={classNames(styles.overlay)}
+          className={classNames(styles["overlay"])}
           ref={overlayRef}
           role="button"
           tabIndex={0}
@@ -63,7 +63,7 @@ const Layout: React.FC<LayoutProps> = ({ onClose, isOpen, children }) => {
         mountOnEnter
         unmountOnExit
       >
-        <div className={styles.content} ref={contentRef}>
+        <div className={styles["content"]} ref={contentRef}>
           {children}
         </div>
       </CSSTransition>

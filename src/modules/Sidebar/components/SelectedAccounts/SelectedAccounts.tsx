@@ -1,37 +1,73 @@
+import { useEffect, useRef, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Trans, useTranslation } from "react-i18next";
-import { AnimatePresence, motion } from "framer-motion";
+import { CSSTransition } from "react-transition-group";
 import useAppSelector from "hooks/useAppSelector";
-import { setFormattedAmount } from "utils/setFormattedAmount";
-import { getSelectedAccountsTotalSum } from "../../helpers/getSelectedAccountsTotalSum";
-import { VARIANTS } from "../../constants";
-import styles from "./SelectedAccounts.module.scss";
+import { useGetAccountsQuery } from "app/services/accountApi";
+import { auth } from "app/config";
+import { getAmountsByCurrencyCode, setFormattedAndGroupedAmounts } from "../../helpers";
+import styles from "./SelectedAccounts.module.css";
+
+const animation = {
+  enter: styles["animation-enter"],
+  enterActive: styles["animation-enter-active"],
+  exit: styles["animation-exit"],
+  exitActive: styles["animation-exit-active"],
+};
 
 const SelectedAccounts: React.FC = () => {
   const { t } = useTranslation();
 
-  const selectedAccounts = useAppSelector((state) => state.filter.selectedAccounts);
+  const [currentUser] = useAuthState(auth);
 
-  let count = selectedAccounts.length;
-  let name = t(selectedAccounts.length === 1 ? "account" : "selectedAccounts");
+  const { data: accounts = [] } = useGetAccountsQuery({ userId: currentUser?.uid! });
+
+  const selectedAccountIds = useAppSelector((state) => state.filter.selectedAccountIds);
+
+  const selectedAccounts = accounts.filter((account) =>
+    selectedAccountIds.includes(account.id)
+  );
+
+  const contentRef = useRef(null);
+
+  const [animationIn, setAnimationIn] = useState(false);
+
+  useEffect(() => {
+    setAnimationIn(Boolean(selectedAccounts.length));
+  }, [selectedAccounts.length]);
+
+  const count = selectedAccounts.length;
+  const name = t(selectedAccounts.length === 1 ? "account" : "selectedAccounts");
+
+  const formattedAndGroupedAmounts = setFormattedAndGroupedAmounts(
+    getAmountsByCurrencyCode(selectedAccounts)
+  );
 
   return (
-    <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-      {!!selectedAccounts.length && (
-        <motion.div variants={VARIANTS} initial="hidden" animate="visible" exit="exit">
-          <span className={styles.divider} />
-          <div className={styles.wrapper}>
-            <p>
-              <Trans i18nKey="selectedAccountsTotalSum" count={count} name={name}>
-                Total for {{ count }} {{ name }}
-              </Trans>
-            </p>
-            <span className={styles.amount}>
-              {setFormattedAmount(getSelectedAccountsTotalSum(selectedAccounts))}
-            </span>
+    <CSSTransition
+      classNames={animation}
+      nodeRef={contentRef}
+      in={animationIn}
+      timeout={200}
+      mountOnEnter
+      unmountOnExit
+    >
+      <div ref={contentRef}>
+        <span className={styles["divider"]} />
+        <div className={styles["wrapper"]}>
+          <p>
+            <Trans i18nKey="selectedAccountsTotalSum" count={count} name={name}>
+              {{ count }} {{ name }}
+            </Trans>
+          </p>
+          <div className={styles["amount-wrapper"]}>
+            {formattedAndGroupedAmounts.map((amount) => {
+              return amount;
+            })}
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
+      </div>
+    </CSSTransition>
   );
 };
 

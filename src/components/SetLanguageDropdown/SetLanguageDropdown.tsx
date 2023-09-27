@@ -1,72 +1,73 @@
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AnimatePresence, motion } from "framer-motion";
 import classNames from "classnames";
 import { BsCheck } from "react-icons/bs";
 import { TiArrowSortedDown } from "react-icons/ti";
-import useOnClickOutside from "hooks/useClickOutside";
-import { LANGUAGES, LANGUAGE_VARIANTS } from "app/constants";
-import styles from "./SetLanguageDropdown.module.scss";
+import { Dropdown } from "ui";
+import { LANGUAGES } from "app/constants";
+import styles from "./SetLanguageDropdown.module.css";
+
+const animation = {
+  enter: styles["animation-enter"],
+  enterActive: styles["animation-enter-active"],
+  exit: styles["animation-exit"],
+  exitActive: styles["animation-exit-active"],
+};
 
 const SetLanguageDropdown: React.FC = () => {
   const { i18n } = useTranslation();
 
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const containerRef = useRef(null);
   const parentRef = useRef(null);
 
-  const handleClickOutside = () => {
-    setOpen(false);
+  const handleClose = () => {
+    setIsOpen(false);
   };
-
-  useOnClickOutside(containerRef, handleClickOutside);
 
   const onLanguageClick = async (lng: string) => {
     try {
       if (lng !== i18n.resolvedLanguage) {
         await i18n.changeLanguage(lng);
       }
-      setOpen(false);
-    } catch (error: any) {
-      console.log(error.message);
+      setIsOpen(false);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
     }
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles["wrapper"]}>
       <button
-        className={styles.openButton}
+        className={styles["open-button"]}
         ref={parentRef}
-        onClick={() => setOpen((prev) => !prev)}
+        onClick={() => setIsOpen((prevOpen) => !prevOpen)}
       >
         {i18n.resolvedLanguage}
-        <TiArrowSortedDown className={classNames({ [styles.rotate]: open })} />
+        <TiArrowSortedDown className={classNames({ [styles["rotate"]]: isOpen })} />
       </button>
-      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
-        {open && (
-          <motion.ul
-            className={styles.languages}
-            variants={LANGUAGE_VARIANTS}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            ref={containerRef}
-          >
-            {Object.keys(LANGUAGES).map((lng) => (
-              <li key={lng}>
-                <button
-                  className={styles.languageButton}
-                  onClick={() => onLanguageClick(lng)}
-                >
-                  <span>{lng}</span>
-                  {i18n.resolvedLanguage === lng && <BsCheck />}
-                </button>
-              </li>
-            ))}
-          </motion.ul>
-        )}
-      </AnimatePresence>
+      <Dropdown
+        isOpen={isOpen}
+        onClose={handleClose}
+        className={styles["languages-container"]}
+        animation={animation}
+      >
+        <ul className={styles["languages"]}>
+          {Object.keys(LANGUAGES).map((lng) => (
+            <li key={lng}>
+              <button
+                className={styles["language-button"]}
+                onClick={() => onLanguageClick(lng)}
+              >
+                <span>{lng}</span>
+                {i18n.resolvedLanguage === lng && <BsCheck />}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </Dropdown>
     </div>
   );
 };

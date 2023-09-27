@@ -6,7 +6,7 @@ import DateInput from "./DateInput/DateInput";
 import PasswordInput from "./PasswordInput/PasswordInput";
 import TextInput from "./TextInput/TextInput";
 import SetLanguageDropdown from "./SetLanguageDropdown/SetLanguageDropdown";
-import CalendarDatepicker from "./CalendarDatepicker/CalendarDatepicker";
+import CalendarDatePicker from "./CalendarDatePicker/CalendarDatePicker";
 import MainPopup from "./MainPopup/MainPopup";
 
 export {
@@ -18,6 +18,6 @@ export {
   PasswordInput,
   TextInput,
   SetLanguageDropdown,
-  CalendarDatepicker,
+  CalendarDatePicker,
   MainPopup,
 };

@@ -4,19 +4,20 @@ import { useTranslation } from "react-i18next";
 import { uuidv4 } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import { useStep } from "usehooks-ts";
+import classNames from "classnames";
 import toast from "react-hot-toast";
-import { BsArrowLeft, BsArrowRight, BsCheck } from "react-icons/bs";
+import { BsArrowRight, BsCheck } from "react-icons/bs";
 import { IoClose } from "react-icons/io5";
 import { AmountInput, TextInput } from "components";
-import { Spinner } from "ui";
 import useAmountInput from "hooks/useAmountInput";
 import {
   useCreateAccountMutation,
   useLazyCheckAccountExistsQuery,
 } from "app/services/accountApi";
 import { auth } from "app/config";
+import { CURRENCY_OPTIONS } from "app/constants";
 import { Account } from "types";
-import styles from "./CreateAccountForm.module.scss";
+import styles from "./CreateAccountForm.module.css";
 
 interface CreateAccountFormProps {
   onClose: () => void;
@@ -33,7 +34,10 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   const [createAccount] = useCreateAccountMutation();
 
   const [accountName, setAccountName] = useState("");
-  const [accountBalance, onBalanceChange] = useAmountInput("0");
+  const { amount, handleChangeAmount, handleChangeCurrency } = useAmountInput({
+    value: "0",
+    currency: CURRENCY_OPTIONS[0],
+  });
 
   const [accountCreating, setAccountCreating] = useState(false);
 
@@ -55,7 +59,7 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       toast.error(t("accountError"));
       return;
     }
-    if (!accountBalance) {
+    if (!amount.value) {
       toast.error(t("balanceError"));
       return;
     }
@@ -63,7 +67,8 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       id: uuidv4(),
       group: "user",
       name: accountName,
-      balance: parseFloat(accountBalance),
+      balance: parseFloat(amount.value),
+      currency: amount.currency.id,
       createdAt: Timestamp.now(),
     };
     setAccountCreating(true);
@@ -78,9 +83,11 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
       }
       await createAccount({ userId: currentUser.uid, account }).unwrap();
       onClose();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
     setAccountCreating(false);
   };
@@ -88,21 +95,24 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
   return (
     <form onSubmit={handleSubmit}>
       {currentStep === 1 && (
-        <div className={styles.inputWrapper}>
+        <div className={styles["input-wrapper"]}>
           <TextInput
-            id="name"
-            placeholder={t("name")}
+            label={t("name")}
             maxLength={20}
             value={accountName}
             onChange={onAccountNameChange}
           />
-          <div className={styles.buttons}>
-            <button type="button" className={styles.iconButton} onClick={onClose}>
+          <div className={styles["buttons"]}>
+            <button
+              type="button"
+              className={classNames("icon-button", styles["icon-button"])}
+              onClick={onClose}
+            >
               <IoClose />
             </button>
             <button
               type="button"
-              className={styles.iconButton}
+              className={classNames("icon-button", styles["icon-button"])}
               onClick={() => goToNextStep()}
             >
               <BsArrowRight />
@@ -111,35 +121,21 @@ const CreateAccountForm: React.FC<CreateAccountFormProps> = ({ onClose }) => {
         </div>
       )}
       {currentStep === 2 && (
-        <div className={styles.inputWrapper}>
+        <div className={styles["input-wrapper"]}>
           <AmountInput
-            currency={false}
-            placeholder={t("startingBalance")}
-            value={accountBalance}
-            onValueChange={onBalanceChange}
+            label={t("startingBalance")}
+            value={amount.value}
+            onValueChange={handleChangeAmount}
+            currency={amount.currency}
+            onCurrencyChange={handleChangeCurrency}
           />
-          <div className={styles.buttons}>
-            {!accountCreating ? (
-              <>
-                <button
-                  type="button"
-                  className={styles.iconButton}
-                  onClick={() => goToPrevStep()}
-                >
-                  <BsArrowLeft />
-                </button>
-                <button
-                  type="submit"
-                  className={styles.iconButton}
-                  disabled={accountCreating}
-                >
-                  <BsCheck className={styles.submitIcon} />
-                </button>
-              </>
-            ) : (
-              <Spinner variant="dark" />
-            )}
-          </div>
+          <button
+            type="submit"
+            className={classNames("icon-button", styles["icon-button"])}
+            disabled={accountCreating}
+          >
+            <BsCheck className={styles["submit-icon"]} />
+          </button>
         </div>
       )}
     </form>

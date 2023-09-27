@@ -2,7 +2,7 @@ import { MutableRefObject, createContext, useRef } from "react";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 import classNames from "classnames";
 import { FaArrowUp } from "react-icons/fa";
-import styles from "./ScrollToTop.module.scss";
+import styles from "./ScrollToTop.module.css";
 
 export const Context = createContext<MutableRefObject<HTMLLIElement | null> | null>(null);
 
@@ -23,8 +23,8 @@ const ScrollToTop: React.FC<ScrollToTopProps> = ({ children }) => {
     <Context.Provider value={firstTransactionRef}>
       {!!entry && (
         <button
-          className={classNames(styles.button, {
-            [styles.hidden]: isVisible,
+          className={classNames("icon-button", styles["icon-button"], {
+            [styles["hidden"]]: isVisible,
           })}
           onClick={handleScrollToTop}
         >

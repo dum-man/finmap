@@ -56,7 +56,6 @@
   "dateError": "Күні көрсетілуі керек",
   "insufficientFunds": "Қаражат жеткіліксіз",
   "transfers": "Аудармалар",
-  "cancel": "Болдырмау",
   "transfersNotFound": "Аудармалар табылмады",
   "transfersNotFoundMessage": "Бірінші аударманы жасауға тырысыңыз",
   "accountsNotFound": "Есептік жазбалар табылмады",
@@ -86,7 +85,7 @@
   "addCategory": "Санат қосу",
   "categoryNameError": "Санат атауы көрсетілуі керек",
   "categorySelectedError": "Санат таңдалуы керек",
-  "totalAmountOnAccounts": "Шоттардағы жалпы сома",
+  "totalAmountOnAccounts": "{{currencySymbol}} шоттардағы жалпы сома",
   "myAccounts": "Менің шоттарым",
   "actions": "Әрекеттер",
   "analytics": "Аналитика",
@@ -126,5 +125,6 @@
   "noTransactionsFoundMessage": "Бірінші транзакцияны жасауға тырысыңыз",
   "noSuchTransactions": "Мұндай транзакциялар табылмады",
   "noSuchTransactionsMessage": "Сізде таңдалған параметрлермен транзакция жоқ",
-  "accountNotExist": "Есептік жазба жоқ"
+  "accountNotExist": "Есептік жазба жоқ",
+  "noAccounts": "Есептік жазбаларыңыз осы жерде көрсетіледі"
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import { BiEditAlt, BiUser } from "react-icons/bi";
 import { RiBankLine } from "react-icons/ri";
 import useAppSelector from "hooks/useAppSelector";
@@ -9,7 +10,7 @@ import { Loader } from "ui/index";
 import { auth } from "app/config";
 import NotFound from "../NotFound/NotFound";
 import { Category } from "types";
-import styles from "./CategoriesList.module.scss";
+import styles from "./CategoriesList.module.css";
 
 interface CategoriesListProps {
   onSelectCategory: (category: Category) => void;
@@ -40,19 +41,19 @@ const CategoriesList: React.FC<CategoriesListProps> = React.memo(
     }
 
     return (
-      <ul className={styles.categories}>
+      <ul className={styles["categories-list"]}>
         {transactionCategories.map((category) => (
-          <li key={category.id} className={styles.categoryItem}>
-            <div className={styles.wrapper}>
+          <li key={category.id} className={styles["category-item"]}>
+            <div className={styles["category-wrapper"]}>
               {category.group === "base" ? (
-                <RiBankLine className={styles.icon} />
+                <RiBankLine className={styles["icon"]} />
               ) : (
-                <BiUser className={styles.icon} />
+                <BiUser className={styles["icon"]} />
               )}
               <p>{category.group === "base" ? t(category.label) : category.label}</p>
               {category.group === "user" && (
                 <button
-                  className={styles.iconButton}
+                  className={classNames("icon-button", styles["icon-button"])}
                   onClick={() => onSelectCategory(category)}
                 >
                   <BiEditAlt />

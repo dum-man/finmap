@@ -9,6 +9,7 @@ import useTransactionForm from "hooks/useTransactionForm";
 import { useCreateTransferMutation } from "app/services/transferApi";
 import { useGetAccountsQuery } from "app/services/accountApi";
 import { auth } from "app/config";
+import { convertCurrency, setCurrencySymbol } from "utils/sumUtils";
 import { Transfer } from "types";
 
 interface CreateTransferFormProps {
@@ -29,6 +30,7 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
     handleChangeToAccount,
     handleChangeFromAccount,
     handleChangeAmount,
+    handleChangeCurrency,
     handleChangeDate,
     handleChangeComment,
   } = useTransactionForm();
@@ -59,63 +61,74 @@ const CreateTransferForm: React.FC<CreateTransferFormProps> = ({ onClose }) => {
       toast.error(t("sumError"));
       return;
     }
-    const formattedAmount = parseFloat(amount);
+
+    const convertedFromAccountAmount = convertCurrency(amount.value, {
+      accountCurrency: fromAccountData.currency,
+      currency: amount.currency.id,
+    });
+
+    const convertedToAccountAmount = convertCurrency(amount.value, {
+      accountCurrency: toAccountData.currency,
+      currency: amount.currency.id,
+    });
     const formattedComment = comment.trim();
 
-    if (fromAccountData.balance - formattedAmount < 0) {
+    if (fromAccountData.balance - convertedFromAccountAmount < 0) {
       toast.error(t("insufficientFunds"));
       return;
     }
     const transfer: Transfer = {
       id: uuidv4(),
-      amount: formattedAmount,
+      amount: convertedFromAccountAmount,
+      currency: amount.currency.id,
       comment: formattedComment ? formattedComment : null,
       createdAt: Timestamp.fromDate(date),
       fromAccount: {
         id: fromAccountData.id,
         name: fromAccountData.name,
-        balance: fromAccountData.balance - formattedAmount,
+        balance: fromAccountData.balance - convertedFromAccountAmount,
+        currency: fromAccount?.currency!,
       },
       toAccount: {
         id: toAccountData.id,
         name: toAccountData.name,
-        balance: toAccountData.balance + formattedAmount,
+        balance: toAccountData.balance + convertedToAccountAmount,
+        currency: toAccount?.currency!,
       },
     };
     try {
       await createTransfer({ userId: currentUser.uid, transfer }).unwrap();
       onClose();
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <DateInput
-        placeholder={t("transferDate")}
-        date={date}
-        onChange={handleChangeDate}
-      />
+      <DateInput label={t("transferDate")} date={date} onChange={handleChangeDate} />
       <AccountSelect
-        placeholder={t("fromAccount")}
+        label={t("fromAccount")}
         value={fromAccount}
         onChange={handleChangeFromAccount}
       />
       <AccountSelect
-        placeholder={t("toAccount")}
+        label={t("toAccount")}
         value={toAccount}
         onChange={handleChangeToAccount}
       />
       <AmountInput
-        placeholder={`${t("sum")}, $`}
-        value={amount}
+        label={`${t("sum")}, ${setCurrencySymbol(amount.currency.id)}`}
+        value={amount.value}
         onValueChange={handleChangeAmount}
+        currency={amount.currency}
+        onCurrencyChange={handleChangeCurrency}
       />
       <TextInput
-        id="comment"
-        placeholder={t("leaveComment")}
+        label={t("leaveComment")}
         maxLength={60}
         value={comment}
         onChange={handleChangeComment}

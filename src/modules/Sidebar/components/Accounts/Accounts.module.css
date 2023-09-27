@@ -1,0 +1,48 @@
+.not-found {
+  padding: 0 25px;
+  overflow-y: auto;
+  color: var(--gray700);
+}
+
+.accounts-list {
+  margin-left: -5px;
+  padding: 0 25px;
+  padding-top: 1px;
+  overflow-y: auto;
+  font-size: 14px;
+  color: var(--gray700);
+}
+
+.accounts-list::-webkit-scrollbar {
+  display: none;
+}
+
+.account-item {
+  margin-bottom: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.account-item-button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  color: inherit;
+  border-radius: 6px;
+  transition: box-shadow 0.2s;
+}
+
+.selected::before {
+  content: "";
+  width: 4px;
+  height: 25px;
+  margin-right: 5px;
+  border-radius: 6px;
+  background-color: var(--green500);
+}
+
+.selected button {
+  font-weight: 700;
+}

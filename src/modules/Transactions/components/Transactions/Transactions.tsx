@@ -7,16 +7,15 @@ import NotFound from "../NotFound/NotFound";
 import ScrollToTop from "../ScrollToTop/ScrollToTop";
 import TransactionsList from "../TransactionsList/TransactionsList";
 import { useGetTransactionsQuery } from "app/services/transactionApi";
-import { sortTransactions } from "utils/sortTransactions";
-import { filterTranscations } from "utils/filterTranscations";
+import { sortTransactions } from "utils/transactionUtils/sortTransactions";
+import { filterTransactions } from "utils/transactionUtils/filterTransactions";
 import { auth } from "app/config";
 
 const Transactions: React.FC = () => {
   const [currentUser] = useAuthState(auth);
 
-  const { selectedAccounts, selectedOption, searchQuery, selectedDates } = useAppSelector(
-    (state) => state.filter
-  );
+  const { selectedAccountIds, selectedOption, searchQuery, selectedDates } =
+    useAppSelector((state) => state.filter);
 
   const sortState = useAppSelector((state) => state.sort);
 
@@ -26,9 +25,8 @@ const Transactions: React.FC = () => {
 
   const sortedTransactions = sortTransactions(sortState, transactions);
 
-  const filteredTransactions = filterTranscations(sortedTransactions, {
-    selectedAccounts,
-    /// todo
+  const filteredTransactions = filterTransactions(sortedTransactions, {
+    selectedAccountIds,
     filterOption: selectedOption?.label!,
     searchQuery,
     selectedDates,
@@ -42,7 +40,9 @@ const Transactions: React.FC = () => {
     <>
       <Filtration />
       {!transactions.length || !filteredTransactions.length ? (
-        <NotFound noMatches={!!transactions.length && !filteredTransactions.length} />
+        <NotFound
+          noMatches={Boolean(transactions.length) && !filteredTransactions.length}
+        />
       ) : (
         <>
           <Sorting />

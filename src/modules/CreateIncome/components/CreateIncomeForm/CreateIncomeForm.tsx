@@ -17,6 +17,8 @@ import useTransactionForm from "hooks/useTransactionForm";
 import { useGetAccountsQuery } from "app/services/accountApi";
 import { useCreateTransactionMutation } from "app/services/transactionApi";
 import { auth } from "app/config";
+import { setCurrencySymbol } from "utils/sumUtils";
+import { convertCurrency } from "utils/sumUtils";
 import { Transaction } from "types";
 
 interface CreateIncomeFormProps {
@@ -37,6 +39,7 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
     handleChangeToAccount,
     handleChangeCategory,
     handleChangeAmount,
+    handleChangeCurrency,
     handleChangeDate,
     handleChangeComment,
   } = useTransactionForm();
@@ -67,17 +70,22 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
       toast.error(t("dateError"));
       return;
     }
-    const formattedAmount = parseFloat(amount);
+    const convertedAmount = convertCurrency(amount.value, {
+      accountCurrency: currentAccount.currency,
+      currency: amount.currency.id,
+    });
     const formattedComment = comment.trim();
 
     const transaction: Transaction = {
       id: uuidv4(),
       type: "income",
-      amount: formattedAmount,
+      amount: convertedAmount,
+      currency: amount.currency.id,
       category: category.label,
       accountId: toAccount.id,
       accountName: toAccount.label,
-      accountAmount: currentAccount.balance + formattedAmount,
+      accountAmount: currentAccount.balance + convertedAmount,
+      accountCurrency: toAccount.currency!,
       comment: formattedComment ? formattedComment : null,
       createdAt: Timestamp.fromDate(date),
     };
@@ -87,23 +95,27 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
         transaction,
       }).unwrap();
       onClose();
-    } catch (error: any) {
-      toast.error(error.message);
-      console.log(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+        console.log(error.message);
+      }
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <AccountSelect
-        placeholder={t("toAccount")}
+        label={t("toAccount")}
         value={toAccount}
         onChange={handleChangeToAccount}
       />
       <AmountInput
-        placeholder={`${t("sum")}, $`}
-        value={amount}
+        label={`${t("sum")}, ${setCurrencySymbol(amount.currency.id)}`}
+        value={amount.value}
         onValueChange={handleChangeAmount}
+        currency={amount.currency}
+        onCurrencyChange={handleChangeCurrency}
       />
       <>
         {categoryInputVisible ? (
@@ -121,11 +133,10 @@ const CreateIncomeForm: React.FC<CreateIncomeFormProps> = ({ onClose }) => {
           />
         )}
       </>
-      <DateInput placeholder={t("incomeDate")} date={date} onChange={handleChangeDate} />
+      <DateInput label={t("incomeDate")} date={date} onChange={handleChangeDate} />
       <TextInput
-        id="comment"
         name="transactionComment"
-        placeholder={t("leaveComment")}
+        label={t("leaveComment")}
         maxLength={60}
         value={comment}
         onChange={handleChangeComment}

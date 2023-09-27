@@ -11,7 +11,7 @@ export interface AppState {
   createIncomeOpen: boolean;
   createExpenseOpen: boolean;
   createTransferOpen: boolean;
-  transfersMeunOpen: boolean;
+  transfersMenuOpen: boolean;
   settingsMenuOpen: boolean;
   accountsOpen: boolean;
   categoriesOpen: boolean;
@@ -30,7 +30,7 @@ const initialState: AppState = {
   createIncomeOpen: false,
   createExpenseOpen: false,
   createTransferOpen: false,
-  transfersMeunOpen: false,
+  transfersMenuOpen: false,
   settingsMenuOpen: false,
   accountsOpen: false,
   categoriesOpen: false,
@@ -70,8 +70,8 @@ export const appSlice = createSlice({
     toggleCreateTransferOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
       state.createTransferOpen = isOpen;
     },
-    toggleTransfersMeunOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
-      state.transfersMeunOpen = isOpen;
+    toggleTransfersMenuOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
+      state.transfersMenuOpen = isOpen;
     },
     toggleSettingsMenuOpen: (state, { payload: isOpen }: PayloadAction<boolean>) => {
       state.settingsMenuOpen = isOpen;
@@ -104,7 +104,7 @@ export const {
   toggleCreateIncomeOpen,
   toggleCreateExpenseOpen,
   toggleCreateTransferOpen,
-  toggleTransfersMeunOpen,
+  toggleTransfersMenuOpen,
   toggleSettingsMenuOpen,
   toggleAccountsOpen,
   toggleCategoriesOpen,

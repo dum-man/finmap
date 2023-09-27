@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 30px;
+  padding-bottom: 15px;
+  overflow-x: auto;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 15px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tabs {
+    justify-content: space-between;
+    gap: 5px;
+  }
+}

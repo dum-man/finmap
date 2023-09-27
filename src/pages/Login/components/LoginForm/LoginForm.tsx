@@ -7,6 +7,7 @@ import {
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import classNames from "classnames";
 import { FcGoogle } from "react-icons/fc";
 import useAppDispatch from "hooks/useAppDispatch";
 import { EMAIL_FORMAT } from "app/constants";
@@ -19,7 +20,7 @@ import { PasswordInput, TextInput } from "components";
 import { auth } from "app/config";
 import { Button, Spinner } from "ui";
 import { FIREBASE_LOGIN_ERRORS } from "../../constants";
-import styles from "./LoginForm.module.scss";
+import styles from "./LoginForm.module.css";
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
@@ -63,12 +64,14 @@ const LoginForm: React.FC = () => {
     try {
       setSignInWithEmailLoading(true);
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(
-        t(FIREBASE_LOGIN_ERRORS[error.message as keyof typeof FIREBASE_LOGIN_ERRORS]) ||
-          error.message
-      );
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(
+          t(FIREBASE_LOGIN_ERRORS[error.message as keyof typeof FIREBASE_LOGIN_ERRORS]) ||
+            error.message
+        );
+      }
     }
     setSignInWithEmailLoading(false);
   };
@@ -86,37 +89,37 @@ const LoginForm: React.FC = () => {
       if (!userExists.data) {
         await createUserDocument({ userId: uid, email }).unwrap();
       }
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
     setSignInWithGoogleLoading(false);
   };
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <h2 className={styles.title}>{t("login")}</h2>
-        <Link className={styles.link} to="/signup">
+      <div className={styles["wrapper"]}>
+        <h2 className={styles["title"]}>{t("login")}</h2>
+        <Link className={styles["link"]} to="/signup">
           {t("registerLink")}
         </Link>
       </div>
       <form onSubmit={handleSubmit}>
         <TextInput
           type="email"
-          id="email"
-          placeholder={t("email")}
+          label={t("email")}
           value={email}
           onChange={onEmailChange}
         />
         <PasswordInput
-          id="password"
-          placeholder={t("password")}
+          label={t("password")}
           value={password}
           onChange={onPasswordChange}
         />
         <button
-          className={styles.resetButton}
+          className={styles["reset-button"]}
           type="button"
           onClick={() => dispatch(toggleResetPasswordOpen(true))}
         >
@@ -126,7 +129,7 @@ const LoginForm: React.FC = () => {
           {t("enterButton")}
         </Button>
         <button
-          className={styles.googleButton}
+          className={classNames("submit-button", styles["google-button"])}
           type="button"
           disabled={signInWithGoogleLoading}
           onClick={handleSignInWithGoogle}

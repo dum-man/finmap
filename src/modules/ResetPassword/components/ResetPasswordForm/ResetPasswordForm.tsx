@@ -6,7 +6,7 @@ import { TextInput } from "components";
 import { Button } from "ui";
 import { auth } from "app/config";
 import { EMAIL_FORMAT } from "app/constants";
-import styles from "./ResetPasswordForm.module.scss";
+import styles from "./ResetPasswordForm.module.css";
 
 interface ResetPasswordFormProps {
   setSuccess: (success: React.SetStateAction<boolean>) => void;
@@ -38,22 +38,23 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ setSuccess }) => 
     try {
       await sendPasswordResetEmail(formattedEmail);
       setSuccess(true);
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+        toast.error(error.message);
+      }
     }
   };
 
   return (
     <>
-      <p className={styles.prompt}>
+      <p className={styles["prompt"]}>
         <Trans i18nKey="emailForReset"></Trans>
       </p>
       <form onSubmit={onSubmit}>
         <TextInput
           type="email"
-          id="email"
-          placeholder={t("email")}
+          label={t("email")}
           value={email}
           onChange={onEmailChange}
         />
