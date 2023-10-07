@@ -5,7 +5,7 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { IoClose, IoSearch } from "react-icons/io5";
 import useAppSelector from "hooks/useAppSelector";
 import useAppDispatch from "hooks/useAppDispatch";
-import { CalendarDatePicker } from "components";
+import { CalendarDatepicker } from "components";
 import { Select } from "ui";
 import { setFormattedDatePickerDate } from "../../helpers";
 import { DATE_FILTER_OPTIONS } from "../../constants";
@@ -102,7 +102,7 @@ const Filtration: React.FC = React.memo(() => {
           onChange={handleSearchQueryChange}
         />
       </div>
-      <CalendarDatePicker
+      <CalendarDatepicker
         selectRange
         isOpen={datePickerOpen}
         onClose={handleDatePickerClose}

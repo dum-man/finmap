@@ -2,7 +2,7 @@ import Popup from "./Popup/Popup/Popup";
 import Dropdown from "./Dropdown/Dropdown/Dropdown";
 import Button from "./Button/Button";
 import CloseButton from "./CloseButton/CloseButton";
-import DatePicker from "./DatePicker/DatePicker";
+import Datepicker from "./Datepicker/Datepicker";
 import Loader from "./Loader/Loader";
 import MainLoader from "./MainLoader/MainLoader";
 import Select from "./Select/Select";
@@ -14,7 +14,7 @@ export {
   Dropdown,
   Button,
   CloseButton,
-  DatePicker,
+  Datepicker,
   Loader,
   MainLoader,
   Select,

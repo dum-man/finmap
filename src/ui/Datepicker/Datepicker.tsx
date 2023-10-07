@@ -1,8 +1,8 @@
 import Calendar, { CalendarProps } from "react-calendar";
 import { HiChevronDoubleLeft } from "react-icons/hi";
 import { IoIosArrowBack } from "react-icons/io";
-import styles from "./DatePicker.module.css";
-import "./datePicker.css";
+import styles from "./Datepicker.module.css";
+import "./datepicker.css";
 
 interface DatePickerProps extends CalendarProps {}
 

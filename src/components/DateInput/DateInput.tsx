@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CalendarProps } from "react-calendar";
 import classNames from "classnames";
-import { CalendarDatePicker } from "components";
+import { CalendarDatepicker } from "components";
 import { InputLabel } from "ui";
 import { setFormattedDateTime } from "utils/dateUtils";
 import styles from "./DateInput.module.css";
@@ -39,7 +39,7 @@ const DateInput: React.FC<DateInputProps> = ({ label, date, ...restProps }) => {
           {setFormattedDateTime(date)}
         </div>
       </div>
-      <CalendarDatePicker
+      <CalendarDatepicker
         isOpen={datePickerOpen}
         value={date}
         onClickDay={handleDatePickerClose}
