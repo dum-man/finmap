@@ -1,14 +1,14 @@
 import { AuthLayout } from "layouts";
 import { SetLanguageDropdown } from "components";
-import SignUpForm from "../SignUpForm/SignUpForm";
+import SignupForm from "../SignupForm/SignupForm";
 
-const SignUp: React.FC = () => {
+const Signup: React.FC = () => {
   return (
     <AuthLayout>
       <SetLanguageDropdown />
-      <SignUpForm />
+      <SignupForm />
     </AuthLayout>
   );
 };
 
-export default SignUp;
+export default Signup;

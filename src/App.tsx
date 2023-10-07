@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ProtectedRoute from "app/routes/ProtectedRoute";
 import AuthRoute from "app/routes/AuthRoute";
-import SignUp from "pages/SignUp";
+import Signup from "pages/Signup";
 import Login from "pages/Login";
 
 const Main = lazy(() => import("pages/Main"));
@@ -32,7 +32,7 @@ const App: React.FC = () => {
         path="/signup"
         element={
           <AuthRoute>
-            <SignUp />
+            <Signup />
           </AuthRoute>
         }
       />

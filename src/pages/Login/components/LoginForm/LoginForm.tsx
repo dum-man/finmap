@@ -102,7 +102,7 @@ const LoginForm: React.FC = () => {
     <>
       <div className={styles["wrapper"]}>
         <h2 className={styles["title"]}>{t("login")}</h2>
-        <Link className={styles["link"]} to="/signup">
+        <Link className={styles["link"]} to="/Signup">
           {t("registerLink")}
         </Link>
       </div>

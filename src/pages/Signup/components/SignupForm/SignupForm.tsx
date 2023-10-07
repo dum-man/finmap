@@ -9,9 +9,9 @@ import { useCreateUserDocumentMutation } from "app/services/userApi";
 import { auth } from "app/config";
 import { EMAIL_FORMAT } from "app/constants";
 import { FIREBASE_REGISTER_ERROR } from "../../constants";
-import styles from "./SignUpForm.module.css";
+import styles from "./SignupForm.module.css";
 
-const SignUpForm: React.FC = () => {
+const SignupForm: React.FC = () => {
   const { t } = useTranslation();
 
   const [createUserDocument] = useCreateUserDocumentMutation();
@@ -110,4 +110,4 @@ const SignUpForm: React.FC = () => {
   );
 };
 
-export default SignUpForm;
+export default SignupForm;
